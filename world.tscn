@@ -8,14 +8,14 @@
 
 [node name="World2D" type="Node2D" parent="." unique_id=1774144915]
 script = ExtResource("1_f3sb7")
-
-[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
+Size = Vector2(250, 200)
+Color = Color(0.00043500573, 0.25947353, 0.8342753, 1)
 
 [node name="Env" type="WorldEnvironment" parent="World2D" unique_id=349935157]
 environment = ExtResource("3_tlwt5")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="World2D" unique_id=908008577]
-color = Color(0, 0, 0, 1)
+[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
+motion_mode = 1
 
 [node name="UICanvas" type="CanvasLayer" parent="." unique_id=1127600123]
 

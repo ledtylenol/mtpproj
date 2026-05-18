@@ -4,13 +4,21 @@
 [ext_resource type="Script" uid="uid://biox2uth4wope" path="res://entities/player/PlayerCamera.cs" id="2_abrql"]
 [ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="3_sglur"]
 [ext_resource type="Script" uid="uid://b5x2uk1wva4tp" path="res://entities/player/states/PlayerIdle.cs" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://d0qldrwcc75fg" path="res://entities/player/states/PlayerMove.cs" id="5_8fjmc"]
+[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="5_fkugw"]
 
-[node name="Entity" type="CharacterBody2D" unique_id=1452586366]
+[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("StateMachine")]
 script = ExtResource("1_sglur")
+MoveSpeed = 100.0
+Acceleration = 250.0
+Friction = 400.0
+StateMachine = NodePath("StateMachine")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
 top_level = true
+zoom = Vector2(0.5, 0.5)
+process_callback = 0
 script = ExtResource("2_abrql")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1336918116 node_paths=PackedStringArray("InitialState")]
@@ -18,6 +26,14 @@ script = ExtResource("3_sglur")
 InitialState = NodePath("Idle")
 metadata/_custom_type_script = "uid://yttbfrfstie3"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=848894305]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=848894305 node_paths=PackedStringArray("Player")]
 script = ExtResource("4_bls4j")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://b5x2uk1wva4tp"
+
+[node name="Move" type="Node" parent="StateMachine" unique_id=1648529115]
+script = ExtResource("5_8fjmc")
+metadata/_custom_type_script = "uid://d0qldrwcc75fg"
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=860649556]
+texture = ExtResource("5_fkugw")

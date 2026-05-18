@@ -24,7 +24,9 @@ public partial class StateMachine : Node
 				state.Transitioned += Transition;
 			}
 		}
+		CurrentState = InitialState;
 		InitialState.OnEnter();
+
 	}
 
 	public void Tick(double delta)

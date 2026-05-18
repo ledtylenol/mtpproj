@@ -6,7 +6,20 @@ using System;
 public abstract partial class PlayerState : State
 {
 	[Export]
-	private Player Player { get; set; }
+	protected Player Player { get; set; }
+
+	protected Vector2 Direction
+	{
+		get => Player.Direction;
+		set => Player.Direction = value;
+	}
+
+	protected Vector2 Velocity
+	{
+
+		get => Player.Velocity;
+		set => Player.Velocity = value;
+	}
 
 	public override void _Ready()
 	{
