@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cfluv02nb8mov"]
+
+[ext_resource type="Script" uid="uid://cf7vmc4ae5sv3" path="res://World2d.cs" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="2_fj7yv"]
+[ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="3_tlwt5"]
+
+[node name="World" type="Node" unique_id=499391976]
+
+[node name="World2D" type="Node2D" parent="." unique_id=1774144915]
+script = ExtResource("1_f3sb7")
+
+[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
+
+[node name="Env" type="WorldEnvironment" parent="World2D" unique_id=349935157]
+environment = ExtResource("3_tlwt5")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="World2D" unique_id=908008577]
+color = Color(0, 0, 0, 1)
+
+[node name="UICanvas" type="CanvasLayer" parent="." unique_id=1127600123]
+
+[node name="UI" type="Control" parent="UICanvas" unique_id=455808819]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

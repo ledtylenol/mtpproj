@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b4dsuri8lsncp"]
+
+[ext_resource type="Script" uid="uid://b4gvw7wkagbro" path="res://entities/player/Player.cs" id="1_sglur"]
+[ext_resource type="Script" uid="uid://biox2uth4wope" path="res://entities/player/PlayerCamera.cs" id="2_abrql"]
+[ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="3_sglur"]
+[ext_resource type="Script" uid="uid://b5x2uk1wva4tp" path="res://entities/player/states/PlayerIdle.cs" id="4_bls4j"]
+
+[node name="Entity" type="CharacterBody2D" unique_id=1452586366]
+script = ExtResource("1_sglur")
+metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
+top_level = true
+script = ExtResource("2_abrql")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1336918116 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("3_sglur")
+InitialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://yttbfrfstie3"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=848894305]
+script = ExtResource("4_bls4j")
+metadata/_custom_type_script = "uid://b5x2uk1wva4tp"
