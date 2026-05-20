@@ -6,11 +6,12 @@
 [ext_resource type="Script" uid="uid://b5x2uk1wva4tp" path="res://entities/player/states/PlayerIdle.cs" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://d0qldrwcc75fg" path="res://entities/player/states/PlayerMove.cs" id="5_8fjmc"]
 [ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="5_fkugw"]
+[ext_resource type="Script" uid="uid://c0h3f8j2fra4m" path="res://entities/player/Cursor.cs" id="7_qiwj3"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("StateMachine")]
 script = ExtResource("1_sglur")
 MoveSpeed = 100.0
-Acceleration = 250.0
+Acceleration = 800.0
 Friction = 400.0
 StateMachine = NodePath("StateMachine")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
@@ -37,3 +38,15 @@ metadata/_custom_type_script = "uid://d0qldrwcc75fg"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=860649556]
 texture = ExtResource("5_fkugw")
+
+[node name="Cursor" type="Node2D" parent="." unique_id=1007855764 node_paths=PackedStringArray("Player")]
+script = ExtResource("7_qiwj3")
+Player = NodePath("..")
+Width = 1.0
+NormRadius = 6.0
+LineLength = 15.0
+Dash = 1.0
+Color = Color(0, 0.5500002, 1, 1)
+ShiftSpeed = 45.0
+ShiftPower = 0.1
+metadata/_custom_type_script = "uid://c0h3f8j2fra4m"

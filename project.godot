@@ -13,6 +13,7 @@ config_version=5
 config/name="proiect_mtp"
 run/main_scene="uid://cfluv02nb8mov"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+run/max_fps=260
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,11 +23,12 @@ Global="*uid://hvhpx2dqjh3f"
 
 [display]
 
-window/size/viewport_width=192
+window/size/viewport_width=198
 window/size/viewport_height=108
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -34,7 +36,7 @@ project/assembly_name="proiect_mtp"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdfxr/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [input]
 
