@@ -15,6 +15,12 @@ public partial class PlayerMove : PlayerState
 
 	public override void PhysicsTick(double delta)
 	{
+		if (Player.Dead)
+		{
+			EmitSignalTransitioned("dead");
+			return;
+		}
+
 		Player.ProcessInputs();
 		if (Direction.IsZeroApprox())
 		{
@@ -28,5 +34,6 @@ public partial class PlayerMove : PlayerState
 	public override void Tick(double delta)
 	{
 	}
+
 
 }

@@ -4,21 +4,21 @@ using System;
 [GlobalClass]
 public partial class Health : Node
 {
-	private float _Health;
+	private int _Health;
 	[Export]
-	public float CurrentHealth
+	public int CurrentHealth
 	{
 		get => _Health;
 		set
 		{
-			_Health = Mathf.Clamp(value, 0f, MaxHealth);
+			_Health = Mathf.Clamp(value, 0, MaxHealth);
 
 		}
 	}
 
-	private float _MaxHealth;
+	private int _MaxHealth;
 	[Export]
-	public float MaxHealth
+	public int MaxHealth
 	{
 		get => _MaxHealth;
 		set
@@ -27,6 +27,8 @@ public partial class Health : Node
 			CurrentHealth = Mathf.Min(CurrentHealth, value);
 		}
 	}
+	[Export]
+	public float IFrames { get; set; }
 
 	[Signal]
 	public delegate void MaxHealthChangedEventHandler(Entity entity, float oldHealth, float newHealth);
@@ -40,7 +42,23 @@ public partial class Health : Node
 	[Signal]
 	public delegate void HealedEventHandler(Entity entity, HitBox source, float damage);
 
+	[Signal]
+	public delegate void DiedEventHandler(Entity entity);
+
+	[Signal]
+	public delegate void AlreadyDeadEventHandler(Entity entity);
+
+	public override void _Ready()
+	{
+		CurrentHealth = MaxHealth;
+		base._Ready();
+	}
 	public void Hit(HurtBox hurtBox, HitBox source)
 	{
+		if (CurrentHealth == 0) { EmitSignalAlreadyDead((Entity)Owner); return; }
+		CurrentHealth -= source.Damage;
+		EmitSignalDamaged((Entity)Owner, source, source.Damage);
+		if (CurrentHealth == 0) EmitSignalDied((Entity)Owner);
 	}
+
 }

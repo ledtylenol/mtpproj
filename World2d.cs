@@ -36,6 +36,7 @@ public partial class World2d : Node2D
 {
 
 	public Color[] Colors = [new(0f, 0f, 0f), new(0.5f, 0.5f, 0.5f), new(1f, 1f, 1f)];
+
 	private Vector2 _Size;
 	[Export]
 	public Vector2 Size
@@ -65,6 +66,18 @@ public partial class World2d : Node2D
 	}
 
 	public Sploch[] Splotches { get; set; }
+
+	[Export]
+	public Label Label { get; set; }
+
+	[Export]
+	public Player Player { get; set; }
+
+	[Export]
+	public Health PlayerHealth { get; set; }
+	[Signal]
+	public delegate void PlayerDiedEventHandler(Player Player);
+	private int x = 0;
 	public override void _Ready()
 	{
 		if (Engine.IsEditorHint()) return;
@@ -73,6 +86,7 @@ public partial class World2d : Node2D
 		var global = GetNode<Global>("/root/Global");
 		global.World = this;
 		UpdatePlayArea();
+		PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
 	}
 
 	public void ClearTexture()
@@ -87,7 +101,11 @@ public partial class World2d : Node2D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Engine.IsEditorHint()) return;
 		base._PhysicsProcess(delta);
+		x++;
+		Label.Text = $"{x:D9}";
+
 	}
 	public override void _Draw()
 	{
@@ -97,6 +115,7 @@ public partial class World2d : Node2D
 		Rect2 r = new(-Size / 2f, Size);
 		DrawRect(r, Color, filled: false, width: 1f);
 	}
+
 
 
 }

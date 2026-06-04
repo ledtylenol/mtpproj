@@ -4,9 +4,24 @@ using System;
 [GlobalClass]
 public partial class Player : Entity
 {
+	[Export]
+	private ExplosionStats DeathExplosionStats { get; set; }
+	[Export]
+	private Health Health { get; set; }
 
+	[Export]
+	ShakeOnHit Shake { get; set; }
+	[Signal]
+	public delegate void DiedEventHandler();
 
 	public Vector2 Direction { get; set; }
+	public bool Dead { get; set; } = false;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		Health.Died += Die;
+	}
 	public void ProcessInputs()
 	{
 		Direction = Input.GetVector("a", "d", "w", "s");
@@ -16,10 +31,28 @@ public partial class Player : Entity
 	{
 		base._PhysicsProcess(delta);
 		StateMachine.PhysicsTick(delta);
+		if (Input.IsActionJustPressed("light"))
+		{
+			var pos = GetGlobalMousePosition();
+			var expl = new Explosion(DeathExplosionStats)
+			{
+				Position = pos
+			};
+
+			GetNode<Global>("/root/Global").World.AddChild(expl);
+		}
 	}
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 		StateMachine.Tick(delta);
+	}
+
+	private void Die(Entity _entity)
+	{
+		Dead = true;
+		Shake.Active = false;
+
+		EmitSignalDied();
 	}
 }

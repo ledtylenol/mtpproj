@@ -15,6 +15,12 @@ public partial class HitBox : Area2D
 	[Export]
 	public bool Pierce { get; set; } = false;
 
+	[Export]
+	public int Damage { get; set; } = 1;
+
+	[Export]
+	public bool Active { get; set; } = true;
+
 	private int HitsLeft { get; set; }
 
 	[Signal]
@@ -31,12 +37,18 @@ public partial class HitBox : Area2D
 	}
 	public IEnumerable<HurtBox> Collide()
 	{
-		var areas = GetOverlappingAreas().Where(area => area is HurtBox).Select(area => area as HurtBox);
+		var areas = GetOverlappingAreas().Where(area => area is HurtBox hb && hb.Owner != Entity).Select(area => area as HurtBox);
 
 		return areas;
 	}
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		Hit();
+	}
 	public void Hit()
 	{
+		if (!Active) return;
 		var collisions = new Queue<HurtBox>(Collide());
 		if (collisions.Count == 0) return;
 		if (HitLimit > 0)
@@ -45,10 +57,14 @@ public partial class HitBox : Area2D
 			{
 				var col = collisions.Dequeue();
 				if (col.Hit(this))
+				{
 					EmitSignalHitSucceeded(this, col);
+					HitsLeft--;
+				}
 				else
+				{
 					EmitSignalHitFailed(this, col);
-				HitsLeft--;
+				}
 			}
 		}
 		else

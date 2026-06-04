@@ -13,6 +13,7 @@ public partial class StateMachine : Node
 	public override void _Ready()
 	{
 		base._Ready();
+		if (InitialState is null) { QueueFree(); return; }
 		// manually control flow of state machine instead of relying on the scene tree
 		SetProcess(false);
 		SetPhysicsProcess(false);

@@ -26,7 +26,7 @@ Global="*uid://hvhpx2dqjh3f"
 window/size/viewport_width=198
 window/size/viewport_height=108
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0
 
@@ -37,6 +37,10 @@ project/assembly_name="proiect_mtp"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdfxr/plugin.cfg", "res://addons/shaker/plugin.cfg")
+
+[gui]
+
+theme/custom_font="uid://dv4cnc2c61i0b"
 
 [input]
 

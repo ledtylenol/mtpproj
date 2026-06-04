@@ -8,6 +8,7 @@ public abstract partial class PlayerState : State
 	[Export]
 	protected Player Player { get; set; }
 
+
 	protected Vector2 Direction
 	{
 		get => Player.Direction;
@@ -25,6 +26,6 @@ public abstract partial class PlayerState : State
 	{
 		base._Ready();
 		Player ??= Owner as Player;
-		GD.Print($"{Player.Name}");
 	}
+
 }

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://ddx7qvb36ublv"
+path="res://.godot/imported/windup.sfxr-4c79dfbc99ea2d419a9a5757702588b9.sample"
+
+[deps]
+
+source_file="res://entities/explosion/windup.sfxr"
+dest_files=["res://.godot/imported/windup.sfxr-4c79dfbc99ea2d419a9a5757702588b9.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
