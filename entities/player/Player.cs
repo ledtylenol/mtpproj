@@ -31,16 +31,6 @@ public partial class Player : Entity
 	{
 		base._PhysicsProcess(delta);
 		StateMachine.PhysicsTick(delta);
-		if (Input.IsActionJustPressed("light"))
-		{
-			var pos = GetGlobalMousePosition();
-			var expl = new Explosion(DeathExplosionStats)
-			{
-				Position = pos
-			};
-
-			GetNode<Global>("/root/Global").World.AddChild(expl);
-		}
 	}
 	public override void _Process(double delta)
 	{

@@ -10,20 +10,62 @@
 [ext_resource type="Texture2D" uid="uid://bkiomqdsxl5am" path="res://addons/shaker/assets/Play.svg" id="5_pkg7o"]
 [ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="7_ioo17"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dwbse"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_tlwt5"]
-font_size = 7
+font_size = 20
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwbse"]
 atlas = ExtResource("5_036b0")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwbse"]
+
 [node name="World" type="Node" unique_id=499391976]
+
+[node name="UI" type="Control" parent="." unique_id=455808819]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -257.0
+offset_top = -144.0
+offset_right = -637.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_aqk2v")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1794936921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1645529886]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=797975768]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1495614928]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1274"
+label_settings = SubResource("LabelSettings_tlwt5")
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1228785792]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_stretch_ratio = 0.3
+offset_transform_enabled = true
+texture = SubResource("AtlasTexture_dwbse")
 
 [node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label")]
 script = ExtResource("1_f3sb7")
-Size = Vector2(250, 200)
+Size = Vector2(250, 287.5)
 Color = Color(0.00043500573, 0.25947353, 0.8342753, 1)
 Label = NodePath("../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
 
@@ -54,43 +96,3 @@ texture = ExtResource("5_pkg7o")
 [node name="StateMachine" type="Node" parent="World2D/Entity2" unique_id=1201628048]
 script = ExtResource("7_ioo17")
 metadata/_custom_type_script = "uid://yttbfrfstie3"
-
-[node name="UI" type="Control" parent="." unique_id=455808819]
-layout_mode = 3
-anchor_left = -1.0
-anchor_top = -1.0
-anchor_right = -0.63131315
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_aqk2v")
-metadata/_edit_use_anchors_ = true
-
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1794936921]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1645529886]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=797975768]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1495614928]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1274"
-label_settings = SubResource("LabelSettings_tlwt5")
-autowrap_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1228785792]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_stretch_ratio = 0.3
-offset_transform_enabled = true
-texture = SubResource("AtlasTexture_dwbse")

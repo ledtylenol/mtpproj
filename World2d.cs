@@ -83,7 +83,7 @@ public partial class World2d : Node2D
 		if (Engine.IsEditorHint()) return;
 		ClearTexture();
 
-		var global = GetNode<Global>("/root/Global");
+		var global = Global.Single;
 		global.World = this;
 		UpdatePlayArea();
 		PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
@@ -113,7 +113,9 @@ public partial class World2d : Node2D
 		GD.Print($"DARAW RECT OF SIZE {Size} WITH COLOR {Color}");
 
 		Rect2 r = new(-Size / 2f, Size);
+		Rect2 outerRect = new(-(Vector2)GetWindow().Size / 2f + new Vector2(0.5f, 0.5f), (Vector2)GetWindow().Size - new Vector2(0.5f, 0.5f));
 		DrawRect(r, Color, filled: false, width: 1f);
+		DrawRect(outerRect, Color, filled: false, width: 1f);
 	}
 
 

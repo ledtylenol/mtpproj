@@ -116,7 +116,6 @@ metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
 top_level = true
-zoom = Vector2(0.5, 0.5)
 process_callback = 0
 script = ExtResource("2_abrql")
 

@@ -48,7 +48,7 @@ public partial class PlayerDeath : PlayerState
 		for (int i = 0; i < GD.Randi() % 3 + ExplosionCount; i++)
 		{
 			var subt = CreateTween();
-			subt.TweenCallback(Callable.From(SpawnExplosion));
+			subt.TweenCallback(SpawnExplosion(i));
 			deathTween.TweenSubtween(subt).SetDelay(delay);
 		}
 
@@ -56,24 +56,33 @@ public partial class PlayerDeath : PlayerState
 		deathTween.TweenProperty(ShakerNode, "intensity", 0.0f, 0.5f);
 	}
 
-	private void SpawnExplosion()
+	private Callable SpawnExplosion(int i)
 	{
-		var x = (float)GD.RandRange(-50f, 50f);
-		var y = (float)GD.RandRange(-50f, 50f);
-
-		var pos = new Vector2(x, y);
-		var explosion = new Explosion(ExplosionStats)
+		//Unholy partial application of doom and despair
+		return Callable.From(() =>
 		{
-			Position = pos
-		};
+			float iReal = (float)i / ExplosionCount;
+			float posOffset = iReal * 50f;
 
-		AddChild(explosion);
+			var x = (float)GD.RandRange(-posOffset, posOffset);
+			var y = (float)GD.RandRange(-posOffset, posOffset);
+
+			var pos = new Vector2(x, y);
+			var explosion = new Explosion(ExplosionStats)
+			{
+				Position = pos,
+				Scale = new Vector2(1f + iReal, 1f + iReal)
+			};
+
+			Player.AddChild(explosion);
+		}
+		);
 	}
 	private void SpawnFinalExplosion()
 	{
 		var explosion = new Explosion(FinalExplosionStats);
 
-		AddChild(explosion);
+		Player.AddChild(explosion);
 	}
 
 }

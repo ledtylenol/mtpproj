@@ -93,6 +93,11 @@ public partial class Explosion(ExplosionStats explosionStats) : Entity
 		Shape.Radius = ExplosionStats.Radius(Ratio) - ExplosionStats.OuterWidth(Ratio) / 2f;
 		WindUpPlayer.PitchScale = 1f - InitRatio * InitRatio / 1.2f;
 		WindUpPlayer.VolumeLinear = 1f - InitRatio * InitRatio;
+		if (Ratio > ExplosionStats.ActiveWidthThreshold && Active)
+		{
+			Active = false;
+			HitBox.Active = false;
+		}
 	}
 	public void Activate()
 	{

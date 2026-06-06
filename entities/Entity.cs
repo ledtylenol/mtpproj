@@ -29,7 +29,7 @@ public partial class Entity : CharacterBody2D
 		}
 		else
 		{
-			var global = GetNode<Global>("/root/Global");
+			var global = Global.Single;
 			var PlayArea = global.World.PlayArea;
 			var translatedPos = Position;
 			var x = translatedPos.X;

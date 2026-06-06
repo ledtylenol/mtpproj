@@ -24,6 +24,8 @@ public partial class ExplosionStats : Resource
 	[Export]
 	public float Duration { get; set; }
 
+	public const float ActiveWidthThreshold = 0.9f;
+
 	[Export]
 	public int Damage { get; set; }
 
