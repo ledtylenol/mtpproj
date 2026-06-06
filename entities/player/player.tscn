@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="16_3wlsy"]
 [ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="16_yqrof"]
 [ext_resource type="AudioStream" uid="uid://7hjocghwsnup" path="res://entities/player/sounds/hit.sfxr" id="17_3wlsy"]
+[ext_resource type="Script" uid="uid://bi5pc8pccxgwf" path="res://components/PlayerBulletShooter.cs" id="19_mtric"]
+[ext_resource type="PackedScene" uid="uid://dlgx0vnvtlki3" path="res://entities/bullets/player_bullet/player_bullet.tscn" id="20_mtric"]
 
 [sub_resource type="Curve" id="Curve_we0b7"]
 _limits = [0.0, 10.0, 0.0, 1.0]
@@ -103,11 +105,15 @@ random_pitch = 1.2086668
 streams_count = 1
 stream_0/stream = ExtResource("17_3wlsy")
 
-[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Health", "Shake", "StateMachine")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2kln"]
+size = Vector2(10, 6)
+
+[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Health", "Shake", "Sprite", "StateMachine")]
 script = ExtResource("1_sglur")
 DeathExplosionStats = SubResource("Resource_eyb6c")
 Health = NodePath("Health")
 Shake = NodePath("ShakeOnHit")
+Sprite = NodePath("PlayerSprite")
 MoveSpeed = 100.0
 Acceleration = 800.0
 Friction = 400.0
@@ -129,8 +135,10 @@ script = ExtResource("4_bls4j")
 Player = NodePath("../..")
 metadata/_custom_type_script = "uid://b5x2uk1wva4tp"
 
-[node name="Move" type="Node" parent="StateMachine" unique_id=1648529115]
+[node name="Move" type="Node" parent="StateMachine" unique_id=1648529115 node_paths=PackedStringArray("Shooter", "Player")]
 script = ExtResource("5_8fjmc")
+Shooter = NodePath("../../BulletShooter")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://d0qldrwcc75fg"
 
 [node name="Dead" type="Node" parent="StateMachine" unique_id=680853402 node_paths=PackedStringArray("ShakerNode", "Player")]
@@ -145,6 +153,7 @@ Player = NodePath("../..")
 metadata/_custom_type_script = "uid://b04c5sxp5ujtd"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=860649556]
+top_level = true
 position = Vector2(-6.8265945e-07, 5.7742e-08)
 texture = ExtResource("5_fkugw")
 
@@ -215,3 +224,15 @@ pitch_scale = 2.73
 
 [node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1017188884]
 stream = SubResource("AudioStreamRandomizer_we0b7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=311667966]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_b2kln")
+
+[node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
+script = ExtResource("19_mtric")
+Cursor = NodePath("../HurtBox/Cursor")
+Entity = NodePath("..")
+BulletScene = ExtResource("20_mtric")
+Cooldown = 0.1
+metadata/_custom_type_script = "uid://bi5pc8pccxgwf"

@@ -4,6 +4,8 @@ using System;
 [GlobalClass]
 public partial class PlayerMove : PlayerState
 {
+	[Export]
+	public BulletShooter Shooter { get; set; }
 	public override void OnEnter()
 	{
 		GD.Print("Entered move");
@@ -33,7 +35,6 @@ public partial class PlayerMove : PlayerState
 
 	public override void Tick(double delta)
 	{
+		if (Input.IsActionPressed("light")) Shooter.Shoot();
 	}
-
-
 }

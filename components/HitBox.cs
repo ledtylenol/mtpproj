@@ -29,10 +29,15 @@ public partial class HitBox : Area2D
 	[Signal]
 	public delegate void HitFailedEventHandler(HitBox self, HurtBox hurtBox);
 
+	[Signal]
+	public delegate void OutOfHitsEventHandler(HitBox self);
+
 	public override void _Ready()
 	{
 		base._Ready();
+		GD.Print(Entity);
 		Entity ??= Owner as Entity;
+		GD.Print(Entity);
 		HitsLeft = HitLimit;
 	}
 	public IEnumerable<HurtBox> Collide()
@@ -65,6 +70,10 @@ public partial class HitBox : Area2D
 				{
 					EmitSignalHitFailed(this, col);
 				}
+			}
+			if (HitsLeft == 0)
+			{
+				EmitSignalOutOfHits(this);
 			}
 		}
 		else

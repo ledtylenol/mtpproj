@@ -11,6 +11,9 @@ public partial class Player : Entity
 
 	[Export]
 	ShakeOnHit Shake { get; set; }
+
+	[Export]
+	Sprite2D Sprite { get; set; }
 	[Signal]
 	public delegate void DiedEventHandler();
 
@@ -31,6 +34,7 @@ public partial class Player : Entity
 	{
 		base._PhysicsProcess(delta);
 		StateMachine.PhysicsTick(delta);
+		Sprite.GlobalPosition = GlobalPosition.Snapped(new Vector2(1f, 1f));
 	}
 	public override void _Process(double delta)
 	{

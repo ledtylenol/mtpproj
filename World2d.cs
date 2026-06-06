@@ -71,22 +71,26 @@ public partial class World2d : Node2D
 	public Label Label { get; set; }
 
 	[Export]
-	public Player Player { get; set; }
-
-	[Export]
 	public Health PlayerHealth { get; set; }
+
 	[Signal]
 	public delegate void PlayerDiedEventHandler(Player Player);
+
+	[Signal]
+	public delegate void PlayAreaUpdatedEventHandler(Rect2 newArea);
 	private int x = 0;
 	public override void _Ready()
 	{
 		if (Engine.IsEditorHint()) return;
+		Texture = new();
 		ClearTexture();
 
 		var global = Global.Single;
 		global.World = this;
 		UpdatePlayArea();
-		PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
+		if (PlayerHealth is not null)
+			PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
+		Global.Single.Spawn2D += SpawnEntity;
 	}
 
 	public void ClearTexture()
@@ -97,7 +101,7 @@ public partial class World2d : Node2D
 	public void UpdatePlayArea()
 	{
 		PlayArea = new(-Size / 2f, Size);
-		GD.Print($"Play area updated: {PlayArea}");
+		EmitSignalPlayAreaUpdated(PlayArea);
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -110,7 +114,6 @@ public partial class World2d : Node2D
 	public override void _Draw()
 	{
 		base._Draw();
-		GD.Print($"DARAW RECT OF SIZE {Size} WITH COLOR {Color}");
 
 		Rect2 r = new(-Size / 2f, Size);
 		Rect2 outerRect = new(-(Vector2)GetWindow().Size / 2f + new Vector2(0.5f, 0.5f), (Vector2)GetWindow().Size - new Vector2(0.5f, 0.5f));
@@ -118,6 +121,9 @@ public partial class World2d : Node2D
 		DrawRect(outerRect, Color, filled: false, width: 1f);
 	}
 
-
-
+	private void SpawnEntity(Node2D e)
+	{
+		AddChild(e);
+		GD.Print(e);
+	}
 }

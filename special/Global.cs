@@ -21,4 +21,14 @@ public partial class Global : Node
 		base._EnterTree();
 		Single = this;
 	}
+
+	public void Spawn(Node2D src)
+	{
+		GD.Print("SPAWN 2D");
+		EmitSignalSpawn2D(src);
+	}
+	public void Spawn(Control src)
+	{
+		EmitSignalSpawnUI(src);
+	}
 }

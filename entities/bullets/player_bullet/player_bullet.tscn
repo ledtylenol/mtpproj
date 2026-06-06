@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://dlgx0vnvtlki3"]
+
+[ext_resource type="Script" uid="uid://cfopyelmqwt0t" path="res://entities/bullets/Bullet.cs" id="1_hpeex"]
+[ext_resource type="Script" uid="uid://cvv4y2g4bk42n" path="res://components/HitBox.cs" id="2_86ced"]
+[ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="3_kan8y"]
+[ext_resource type="Script" uid="uid://bmflyhl6odbe3" path="res://components/ParticleDirection.cs" id="4_mbatb"]
+[ext_resource type="Script" uid="uid://dx0xv7f2vhrfq" path="res://components/EraseOffScreenAfterParticles.cs" id="5_g8fno"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbatb"]
+atlas = ExtResource("3_kan8y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kan8y"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_kan8y"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mbatb"]
+gradient = SubResource("Gradient_kan8y")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_mbatb"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5060484)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g8fno"]
+gradient = SubResource("Gradient_mbatb")
+width = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kan8y"]
+particle_flag_disable_z = true
+initial_velocity_min = 2.3
+initial_velocity_max = 45.649998
+gravity = Vector3(0, 0, 0)
+damping_min = 69.062004
+damping_max = 69.062004
+scale_max = 2.55
+color_initial_ramp = SubResource("GradientTexture1D_g8fno")
+
+[node name="PlayerBullet" type="CharacterBody2D" unique_id=1978228422 node_paths=PackedStringArray("HitBox")]
+script = ExtResource("1_hpeex")
+HitBox = NodePath("HitBox")
+MoveSpeed = 300.0
+metadata/_custom_type_script = "uid://cfopyelmqwt0t"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1046588928]
+texture = SubResource("AtlasTexture_mbatb")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1051420313]
+script = ExtResource("2_86ced")
+HitLimit = 1
+metadata/_custom_type_script = "uid://cvv4y2g4bk42n"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=59158160]
+shape = SubResource("CircleShape2D_kan8y")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=591318909]
+physics_interpolation_mode = 1
+emitting = false
+amount = 23
+texture = SubResource("GradientTexture1D_mbatb")
+randomness = 1.0
+fixed_fps = 16
+interpolate = false
+fract_delta = false
+visibility_rect = Rect2(-5000, -5000, 10000, 10000)
+process_material = SubResource("ParticleProcessMaterial_kan8y")
+
+[node name="ParticleDirection" type="Node" parent="." unique_id=1758818192 node_paths=PackedStringArray("Particles", "Entity")]
+script = ExtResource("4_mbatb")
+Particles = NodePath("../GPUParticles2D")
+Entity = NodePath("..")
+metadata/_custom_type_script = "uid://bmflyhl6odbe3"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=324333540]
+
+[node name="EraseOffScreenAfterParticles" type="Node" parent="VisibleOnScreenNotifier2D" unique_id=590080408 node_paths=PackedStringArray("Particles", "Target", "Notifier")]
+script = ExtResource("5_g8fno")
+Particles = NodePath("../../GPUParticles2D")
+Target = NodePath("../..")
+Notifier = NodePath("..")
+metadata/_custom_type_script = "uid://dx0xv7f2vhrfq"
