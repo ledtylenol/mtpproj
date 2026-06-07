@@ -225,14 +225,17 @@ pitch_scale = 2.73
 [node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1017188884]
 stream = SubResource("AudioStreamRandomizer_we0b7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=311667966]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_b2kln")
-
 [node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
 script = ExtResource("19_mtric")
 Cursor = NodePath("../HurtBox/Cursor")
 Entity = NodePath("..")
 BulletScene = ExtResource("20_mtric")
+BulletCount = 4
+Spread = 0.262
+Separation = 1.0
 Cooldown = 0.1
 metadata/_custom_type_script = "uid://bi5pc8pccxgwf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=311667966]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_b2kln")

@@ -16,6 +16,7 @@ public partial class Bullet : Entity
 		//pass the owner to the hitbox for ignore purposes
 		HitBox.Entity = Root.Entity;
 		HitBox.OutOfHits += (hb) => QueueFree();
+		Global.Single.LevelChanged += HandleLevelChanged;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -31,5 +32,10 @@ public partial class Bullet : Entity
 		else Velocity = wishVel;
 
 		MoveAndSlide();
+	}
+	private void HandleLevelChanged()
+	{
+		GD.Print("LEVEL CHANGED");
+		QueueFree();
 	}
 }

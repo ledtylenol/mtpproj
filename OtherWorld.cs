@@ -24,7 +24,9 @@ public partial class OtherWorld : SubViewportContainer
 	}
 	private void ClearViewport()
 	{
+		foreach (var child in Root.GetChildren()) if (child is Node2D node) node.Hide();
 		Viewport.RenderTargetClearMode = SubViewport.ClearMode.Once;
+
 	}
 
 	private void UpdateSize(Rect2 newSize)

@@ -22,12 +22,12 @@ public partial class SpawnParticlesOnHit : Node
 		var inst = Particles.Instantiate<GpuParticles2D>();
 		inst.Emitting = true;
 		inst.OneShot = true;
+		var dir = source.GlobalPosition.DirectionTo(entity.GlobalPosition);
 		if (inst.ProcessMaterial is ParticleProcessMaterial pmm)
 		{
-			var dir = source.GlobalPosition.DirectionTo(entity.GlobalPosition);
 			pmm.Direction = new Vector3(dir.X, dir.Y, 0f).Normalized();
 		}
-		inst.Transform = entity.GlobalTransform;
+		inst.Transform = entity.GlobalTransform.Translated(-dir * 10f);
 		Global.Single.SpawnOther(inst);
 	}
 }

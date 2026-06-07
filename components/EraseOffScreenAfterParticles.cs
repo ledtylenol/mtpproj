@@ -8,7 +8,8 @@ public partial class EraseOffScreenAfterParticles : EraseOffScreen
 	public GpuParticles2D Particles { get; set; }
 	public override void Erase()
 	{
-		Particles.Finished += Target.QueueFree;
+		GD.Print("ERASE");
+		GetTree().CreateTimer(Particles.Lifetime).Timeout += Target.QueueFree;
 		Particles.Emitting = false;
 	}
 }

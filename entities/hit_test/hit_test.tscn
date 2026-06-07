@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="9_8wdjs"]
 [ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="10_berey"]
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="11_rjj6u"]
-[ext_resource type="AudioStream" uid="uid://7hjocghwsnup" path="res://entities/player/sounds/hit.sfxr" id="12_73dq7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2baf"]
 
@@ -21,11 +20,10 @@ random_pitch = 1.2086668
 streams_count = 1
 stream_0/stream = ExtResource("11_rjj6u")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fci5t"]
-playback_mode = 1
-random_pitch = 1.2086668
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8wdjs"]
+random_pitch = 1.1764989
 streams_count = 1
-stream_0/stream = ExtResource("12_73dq7")
+stream_0/stream = ExtResource("11_rjj6u")
 
 [node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("Health")]
 script = ExtResource("1_krqq1")
@@ -81,4 +79,4 @@ stream = SubResource("AudioStreamRandomizer_fxsul")
 pitch_scale = 2.73
 
 [node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=2083065156]
-stream = SubResource("AudioStreamRandomizer_fci5t")
+stream = SubResource("AudioStreamRandomizer_8wdjs")

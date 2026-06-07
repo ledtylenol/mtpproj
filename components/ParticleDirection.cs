@@ -28,6 +28,7 @@ public partial class ParticleDirection : Node
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
+		if (Particles is null || !IsInstanceValid(Particles)) { QueueFree(); return; }
 		UpdateDirection();
 	}
 	private void UpdateDirection()
@@ -43,6 +44,6 @@ public partial class ParticleDirection : Node
 	public override void _ExitTree()
 	{
 		base._ExitTree();
-		Particles.QueueFree();
+		Particles?.QueueFree();
 	}
 }
