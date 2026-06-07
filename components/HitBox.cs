@@ -35,9 +35,7 @@ public partial class HitBox : Area2D
 	public override void _Ready()
 	{
 		base._Ready();
-		GD.Print(Entity);
 		Entity ??= Owner as Entity;
-		GD.Print(Entity);
 		HitsLeft = HitLimit;
 	}
 	public IEnumerable<HurtBox> Collide()

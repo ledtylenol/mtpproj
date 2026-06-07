@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bm83tuyw8vstd"]
+
+[ext_resource type="Script" uid="uid://bxb70q1r336l3" path="res://entities/hit_test/HitTest.cs" id="1_krqq1"]
+[ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="2_h3ctb"]
+[ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="3_w6fno"]
+[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="4_h3ctb"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_krqq1"]
+[ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="5_w6fno"]
+[ext_resource type="PackedScene" uid="uid://c1hissncyu37h" path="res://special/particles/hit_1.tscn" id="6_8fpis"]
+[ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="6_ihgl1"]
+[ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="9_8wdjs"]
+[ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="10_berey"]
+[ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="11_rjj6u"]
+[ext_resource type="AudioStream" uid="uid://7hjocghwsnup" path="res://entities/player/sounds/hit.sfxr" id="12_73dq7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2baf"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fxsul"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("11_rjj6u")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fci5t"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("12_73dq7")
+
+[node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("Health")]
+script = ExtResource("1_krqq1")
+Health = NodePath("Health")
+metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+
+[node name="Health" type="Node" parent="." unique_id=681163245]
+script = ExtResource("2_h3ctb")
+CurrentHealth = 10
+MaxHealth = 10
+metadata/_custom_type_script = "uid://iv5wxd01vyqv"
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=2045123575 node_paths=PackedStringArray("Health")]
+script = ExtResource("3_w6fno")
+Health = NodePath("../Health")
+metadata/_custom_type_script = "uid://djd2q55i8737w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=535412033]
+shape = SubResource("CircleShape2D_h2baf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2058461670]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("4_h3ctb")
+
+[node name="HitShake" type="Node2D" parent="Sprite2D" unique_id=2010768824]
+script = ExtResource("5_krqq1")
+duration = 0.25
+fade_in = 1e-05
+shakerPreset = ExtResource("6_ihgl1")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1024272573 node_paths=PackedStringArray("Health")]
+script = ExtResource("5_w6fno")
+Particles = ExtResource("6_8fpis")
+Health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bka021k5m4tk3"
+
+[node name="ShakeOnHit" type="Node" parent="." unique_id=610787719 node_paths=PackedStringArray("Health", "Shaker")]
+script = ExtResource("9_8wdjs")
+Health = NodePath("../Health")
+Shaker = NodePath("../Sprite2D/HitShake")
+metadata/_custom_type_script = "uid://b03wlp2uu4sal"
+
+[node name="Sounds" type="Node" parent="." unique_id=1373571216 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath")]
+script = ExtResource("10_berey")
+Health = NodePath("../Health")
+SoundsOnHit = [NodePath("HitSound")]
+SoundsOnDeath = [NodePath("HitSound2")]
+metadata/_custom_type_script = "uid://c8eybkhh1ct04"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1417630162]
+stream = SubResource("AudioStreamRandomizer_fxsul")
+pitch_scale = 2.73
+
+[node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=2083065156]
+stream = SubResource("AudioStreamRandomizer_fci5t")

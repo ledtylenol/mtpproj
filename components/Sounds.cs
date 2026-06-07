@@ -23,7 +23,9 @@ public partial class Sounds : Node
 	{
 		foreach (var sound in sounds)
 		{
-			sound.Play();
+			var dup = (AudioStreamPlayer)sound.Duplicate();
+			Global.Single.Spawn(dup);
+			dup.Play();
 		}
 	}
 }

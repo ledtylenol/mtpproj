@@ -22,6 +22,7 @@ public partial class ShakeOnHit : Node
 	private void Shake(Entity entity, HitBox source, float damage)
 	{
 		if (!Active) return;
+		if ((bool)Shaker.Get("is_playing")) Shaker.Call("force_stop_shake");
 		Shaker.Call("play_shake");
 	}
 }

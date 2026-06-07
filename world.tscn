@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://cfluv02nb8mov"]
 
 [ext_resource type="Script" uid="uid://cf7vmc4ae5sv3" path="res://World2d.cs" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://OtherWorld.cs" id="1_k3n1d"]
 [ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="2_fj7yv"]
 [ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="3_tlwt5"]
 [ext_resource type="Theme" uid="uid://cr0fsad13irxf" path="res://special/theme.tres" id="4_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://bm83tuyw8vstd" path="res://entities/hit_test/hit_test.tscn" id="9_2o6r5"]
 [ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/WorldBorder.cs" id="10_wse8f"]
 [ext_resource type="Shape2D" uid="uid://belibtm78iay1" path="res://special/left.tres" id="11_70uel"]
+[ext_resource type="Texture2D" uid="uid://ba82kwc73u5b0" path="res://icon.svg" id="11_ic0uy"]
 [ext_resource type="Shape2D" uid="uid://b5emsw6herrtf" path="res://special/right.tres" id="12_hiqwa"]
 [ext_resource type="Shape2D" uid="uid://6sqnqlwtm8u" path="res://special/down.tres" id="13_2u3nc"]
 [ext_resource type="Shape2D" uid="uid://cj7ehv8uvn8t4" path="res://special/up.tres" id="14_udxuc"]
@@ -20,6 +23,89 @@ atlas = ExtResource("5_036b0")
 region = Rect2(16, 0, 16, 16)
 
 [node name="World" type="Node" unique_id=499391976]
+
+[node name="World" type="CanvasLayer" parent="." unique_id=1866482370]
+follow_viewport_enabled = true
+
+[node name="World2D" type="Node2D" parent="World" unique_id=1774144915 node_paths=PackedStringArray("Label")]
+script = ExtResource("1_f3sb7")
+Size = Vector2(309.59, 288)
+Color = Color(0, 0.5333333, 1, 1)
+Label = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
+
+[node name="Env" type="WorldEnvironment" parent="World/World2D" unique_id=349935157]
+environment = ExtResource("3_tlwt5")
+
+[node name="Entity" parent="World/World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
+motion_mode = 1
+
+[node name="WorldBorder" type="StaticBody2D" parent="World/World2D" unique_id=134723482 node_paths=PackedStringArray("World")]
+script = ExtResource("10_wse8f")
+World = NodePath("..")
+Left = ExtResource("11_70uel")
+Right = ExtResource("12_hiqwa")
+Up = ExtResource("14_udxuc")
+Down = ExtResource("13_2u3nc")
+
+[node name="Left" type="CollisionShape2D" parent="World/World2D/WorldBorder" unique_id=344285944]
+shape = ExtResource("11_70uel")
+one_way_collision_direction = Vector2(1, 0)
+
+[node name="Right" type="CollisionShape2D" parent="World/World2D/WorldBorder" unique_id=894328809]
+shape = ExtResource("12_hiqwa")
+one_way_collision_direction = Vector2(-1, 0)
+
+[node name="Down" type="CollisionShape2D" parent="World/World2D/WorldBorder" unique_id=533127162]
+shape = ExtResource("13_2u3nc")
+one_way_collision_direction = Vector2(0, -1)
+
+[node name="Up" type="CollisionShape2D" parent="World/World2D/WorldBorder" unique_id=1130717722]
+shape = ExtResource("14_udxuc")
+
+[node name="HitTest" parent="World" unique_id=333776931 instance=ExtResource("9_2o6r5")]
+position = Vector2(-70, -54)
+
+[node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
+visibility_layer = 2
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -144.0
+offset_right = -387.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_k3n1d")
+Root = NodePath("SubViewport/Root")
+Viewport = NodePath("SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="DrawWorld2d" unique_id=1074518260]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+gui_disable_input = true
+canvas_cull_mask = 4293918722
+oversampling = false
+size = Vector2i(250, 288)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="Root" type="Node2D" parent="DrawWorld2d/SubViewport" unique_id=1458987256]
+
+[node name="Env" type="WorldEnvironment" parent="DrawWorld2d/SubViewport/Root" unique_id=1299417203]
+environment = ExtResource("3_tlwt5")
+
+[node name="Camera2D" type="Camera2D" parent="DrawWorld2d/SubViewport/Root" unique_id=402984710]
+
+[node name="Sprite2D" type="Sprite2D" parent="DrawWorld2d/SubViewport/Root" unique_id=1096019]
+visibility_layer = 2
+position = Vector2(180, 23)
+texture = ExtResource("11_ic0uy")
 
 [node name="UI" type="Control" parent="." unique_id=455808819]
 layout_mode = 3
@@ -65,39 +151,4 @@ texture = SubResource("AtlasTexture_dwbse")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label")]
-script = ExtResource("1_f3sb7")
-Size = Vector2(250, 288)
-Color = Color(0, 0.5333333, 1, 1)
-Label = NodePath("../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
-
-[node name="Env" type="WorldEnvironment" parent="World2D" unique_id=349935157]
-environment = ExtResource("3_tlwt5")
-
-[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
-motion_mode = 1
-
-[node name="WorldBorder" type="StaticBody2D" parent="World2D" unique_id=134723482 node_paths=PackedStringArray("World")]
-script = ExtResource("10_wse8f")
-World = NodePath("..")
-Left = ExtResource("11_70uel")
-Right = ExtResource("12_hiqwa")
-Up = ExtResource("14_udxuc")
-Down = ExtResource("13_2u3nc")
-
-[node name="Left" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=344285944]
-shape = ExtResource("11_70uel")
-one_way_collision_direction = Vector2(1, 0)
-
-[node name="Right" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=894328809]
-shape = ExtResource("12_hiqwa")
-one_way_collision_direction = Vector2(-1, 0)
-
-[node name="Down" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=533127162]
-shape = ExtResource("13_2u3nc")
-one_way_collision_direction = Vector2(0, -1)
-
-[node name="Up" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=1130717722]
-shape = ExtResource("14_udxuc")
-
-[editable path="World2D/Entity"]
+[editable path="World/World2D/Entity"]

@@ -58,6 +58,7 @@ shape = SubResource("CircleShape2D_kan8y")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=591318909]
 physics_interpolation_mode = 1
+visibility_layer = 2
 emitting = false
 amount = 23
 texture = SubResource("GradientTexture1D_mbatb")
