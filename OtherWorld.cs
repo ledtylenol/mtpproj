@@ -14,8 +14,8 @@ public partial class OtherWorld : SubViewportContainer
 		base._Ready();
 		Global.Single.SpawnOtherWorld += SpawnNode;
 		Global.Single.LevelChanged += ClearViewport;
-		Global.Single.World.PlayAreaUpdated += UpdateSize;
-		UpdateSize(Global.Single.World.PlayArea);
+		Global.World.PlayAreaUpdated += UpdateSize;
+		UpdateSize(Global.World.PlayArea);
 	}
 
 	private void SpawnNode(Node2D node)

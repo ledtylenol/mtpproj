@@ -19,6 +19,6 @@ public partial class RectLine : Node2D
 	public override void _Draw()
 	{
 		base._Draw();
-		DrawRect(new(-Radius / 2f, Radius), Global.Single.World.Color, false, width: 1f);
+		DrawRect(new(-Radius / 2f, Radius), Global.World.Color, false, width: 1f);
 	}
 }

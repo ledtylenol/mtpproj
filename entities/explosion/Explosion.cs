@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Explosion(ExplosionStats explosionStats) : Entity
+public partial class Explosion(ExplosionStats explosionStats, uint mask, uint layer) : Entity
 {
 	[Export]
 	public ExplosionStats ExplosionStats { get; set; } = explosionStats;
@@ -64,6 +64,8 @@ public partial class Explosion(ExplosionStats explosionStats) : Entity
 		CollisionShape.Shape = Shape;
 
 		HitBox.Damage = ExplosionStats.Damage;
+		HitBox.CollisionMask = mask;
+		HitBox.CollisionLayer = layer;
 
 		HitBox.AddChild(CollisionShape);
 		AddChild(WindUpPlayer);

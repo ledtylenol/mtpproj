@@ -25,4 +25,15 @@ public partial class Entity : CharacterBody2D
 	{
 		MoveAndSlide();
 	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		StateMachine?.PhysicsTick(delta);
+	}
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		StateMachine?.Tick(delta);
+	}
 }

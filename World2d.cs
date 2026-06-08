@@ -43,13 +43,16 @@ public partial class World2d : Node2D
 
 	[Signal]
 	public delegate void PlayAreaUpdatedEventHandler(Rect2 newArea);
+
+	[Signal]
+	public delegate void RedrawEventHandler();
 	private int x = 0;
 	public override void _Ready()
 	{
 		if (Engine.IsEditorHint()) return;
 
-		var global = Global.Single;
-		global.World = this;
+		Global.World = this;
+
 		UpdatePlayArea();
 		if (PlayerHealth is not null)
 			PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
@@ -68,15 +71,6 @@ public partial class World2d : Node2D
 		x++;
 		Label.Text = $"{x:D9}";
 
-	}
-	public override void _Draw()
-	{
-		base._Draw();
-
-		Rect2 r = new(-Size / 2f, Size);
-		Rect2 outerRect = new(-(Vector2)GetWindow().Size / 2f + new Vector2(0.5f, 0.5f), (Vector2)GetWindow().Size - new Vector2(0.5f, 0.5f));
-		DrawRect(r, Color, filled: false, width: 1f);
-		DrawRect(outerRect, Color, filled: false, width: 1f);
 	}
 
 	private void SpawnEntity(Node2D e)

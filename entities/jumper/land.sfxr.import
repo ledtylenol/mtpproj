@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cymsb7fwj2ig0"
+path="res://.godot/imported/land.sfxr-7589dd6a34043e24ef127793a99985a3.sample"
+
+[deps]
+
+source_file="res://entities/jumper/land.sfxr"
+dest_files=["res://.godot/imported/land.sfxr-7589dd6a34043e24ef127793a99985a3.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

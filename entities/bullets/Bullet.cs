@@ -9,6 +9,7 @@ public partial class Bullet : Entity
 
 	public BulletShooter Root { get; set; }
 	public Vector2 Direction { get; set; }
+	public float Range { get; set; }
 
 	public override void _Ready()
 	{
@@ -32,10 +33,12 @@ public partial class Bullet : Entity
 		else Velocity = wishVel;
 
 		MoveAndSlide();
+		Range -= (Velocity * (float)delta).Length();
+		if (Range <= 0f) QueueFree();
 	}
 	private void HandleLevelChanged()
 	{
-		GD.Print("LEVEL CHANGED");
+		if (!IsInstanceValid(this)) return;
 		QueueFree();
 	}
 }

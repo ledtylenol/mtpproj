@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_wyl5g"]
 
-[sub_resource type="Gradient" id="Gradient_5kuti"]
+[sub_resource type="Gradient" id="Gradient_wyl5g"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.3951613, 0.7560484)
 colors = PackedColorArray(1, 1, 1, 1, 0.64, 0.64, 0.64, 1, 0.14, 0.14, 0.14, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_wyl5g"]
-gradient = SubResource("Gradient_5kuti")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7vvg"]
+gradient = SubResource("Gradient_wyl5g")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5kuti"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ewhrj"]
 resource_local_to_scene = true
 particle_flag_disable_z = true
 spread = 80.735
@@ -21,7 +21,7 @@ damping_min = 450.00003
 damping_max = 500.00003
 scale_max = 3.0
 color = Color(1, 1, 1, 0.5176471)
-color_initial_ramp = SubResource("GradientTexture1D_wyl5g")
+color_initial_ramp = SubResource("GradientTexture1D_h7vvg")
 
 [node name="Hit1" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
@@ -32,7 +32,7 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 18
 interpolate = false
-process_material = SubResource("ParticleProcessMaterial_5kuti")
+process_material = SubResource("ParticleProcessMaterial_ewhrj")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
 script = ExtResource("1_wyl5g")

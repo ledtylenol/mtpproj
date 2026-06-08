@@ -109,6 +109,7 @@ stream_0/stream = ExtResource("17_3wlsy")
 size = Vector2(10, 6)
 
 [node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Health", "Shake", "Sprite", "StateMachine")]
+collision_layer = 4
 script = ExtResource("1_sglur")
 DeathExplosionStats = SubResource("Resource_eyb6c")
 Health = NodePath("Health")
@@ -161,7 +162,7 @@ texture = ExtResource("5_fkugw")
 show_behind_parent = true
 position = Vector2(0, 3)
 script = ExtResource("2_26q78")
-Radius = Vector2(8, 8)
+Radius = Vector2(9, 8)
 metadata/_custom_type_script = "uid://dcsnu12pfq43c"
 
 [node name="HitShake" type="Node2D" parent="PlayerSprite" unique_id=264011470]
@@ -185,6 +186,8 @@ IFrames = 1.5
 metadata/_custom_type_script = "uid://iv5wxd01vyqv"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1372679147 node_paths=PackedStringArray("Health")]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("9_bectd")
 Health = NodePath("../Health")
 metadata/_custom_type_script = "uid://djd2q55i8737w"
@@ -228,11 +231,13 @@ stream = SubResource("AudioStreamRandomizer_we0b7")
 [node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
 script = ExtResource("19_mtric")
 Cursor = NodePath("../HurtBox/Cursor")
+CooldownItems = 15
+CountItems = 7
 Entity = NodePath("..")
 BulletScene = ExtResource("20_mtric")
-BulletCount = 4
-Spread = 0.262
-Separation = 1.0
+BulletCount = 2
+Separation = 5.0
+Range = 70.0
 Cooldown = 0.1
 metadata/_custom_type_script = "uid://bi5pc8pccxgwf"
 

@@ -13,7 +13,8 @@ public partial class Player : Entity
 	ShakeOnHit Shake { get; set; }
 
 	[Export]
-	Sprite2D Sprite { get; set; }
+	public Sprite2D Sprite { get; set; }
+
 	[Signal]
 	public delegate void DiedEventHandler();
 
@@ -24,6 +25,7 @@ public partial class Player : Entity
 	{
 		base._Ready();
 		Health.Died += Die;
+		Global.Player = this;
 	}
 	public void ProcessInputs()
 	{
@@ -33,7 +35,6 @@ public partial class Player : Entity
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		StateMachine.PhysicsTick(delta);
 		Sprite.GlobalPosition = GlobalPosition.Snapped(new Vector2(1f, 1f));
 	}
 	public override void _Process(double delta)

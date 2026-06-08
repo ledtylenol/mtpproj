@@ -9,11 +9,13 @@ public abstract partial class BulletShooter : Node2D
 	[Export]
 	private PackedScene BulletScene { get; set; }
 	[Export]
-	private uint BulletCount { get; set; }
+	protected uint BulletCount { get; set; }
 	[Export]
-	private float Spread { get; set; }
+	protected float Spread { get; set; }
 	[Export]
-	private float Separation { get; set; }
+	protected float Separation { get; set; }
+	[Export]
+	protected float Range { get; set; }
 
 	[Export]
 	public float Cooldown { get; set; }
@@ -30,16 +32,19 @@ public abstract partial class BulletShooter : Node2D
 	{
 		if (RealCooldown <= 0f)
 		{
-			RealCooldown = Cooldown;
+			RealCooldown = GetCooldown();
 
 			var dir = GetDir();
 			var translation = dir.Rotated(Mathf.Pi / 2f) * Separation;
-			for (int i = 0; i < BulletCount; i++)
+			var spread = GetSpread();
+			var bulletCount = GetBulletCount();
+			for (int i = 0; i < bulletCount; i++)
 			{
 				var instance = BulletScene.Instantiate<Bullet>();
+				instance.Range = GetRange();
 				instance.Root = this;
-				instance.Transform = GlobalTransform.Translated(translation * i - translation * (BulletCount / 2) / 2f);
-				instance.Direction = dir.Rotated(Spread * (i - BulletCount / 2));
+				instance.Transform = GlobalTransform.Translated(translation * i - translation * (bulletCount / 2) + translation / 2f);
+				instance.Direction = dir.Rotated(spread * i - spread * (bulletCount / 2) + spread / 2f);
 				Global.Single.Spawn(instance);
 			}
 		}
@@ -52,4 +57,8 @@ public abstract partial class BulletShooter : Node2D
 	}
 
 	public abstract Vector2 GetDir();
+	public abstract float GetCooldown();
+	public abstract float GetBulletCount();
+	public abstract float GetSpread();
+	public abstract float GetRange();
 }

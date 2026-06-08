@@ -5,7 +5,8 @@ public partial class Global : Node
 {
 	//Singleton for convenience
 	public static Global Single { get; private set; }
-	public World2d World { get; set; }
+	public static World2d World { get; set; }
+	public static Player Player { get; set; }
 
 	[Signal]
 	public delegate void Spawn2DEventHandler(Node2D sc);

@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://d3sfr5aj2ks65"]
+
+[ext_resource type="AudioStream" uid="uid://ccdyext5igu2p" path="res://entities/jumper/superjump1.ogg" id="1_w68bs"]
+[ext_resource type="AudioStream" uid="uid://bjnut3ba74nel" path="res://entities/jumper/superjump2.ogg" id="2_53j6i"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.4628177
+streams_count = 2
+stream_0/stream = ExtResource("1_w68bs")
+stream_1/stream = ExtResource("2_53j6i")

@@ -53,6 +53,7 @@ public partial class PlayerDeath : PlayerState
 		}
 
 		deathTween.TweenCallback(Callable.From(SpawnFinalExplosion));
+		deathTween.TweenCallback(Callable.From(Player.Hide));
 		deathTween.TweenProperty(ShakerNode, "intensity", 0.0f, 0.5f);
 	}
 
@@ -68,21 +69,23 @@ public partial class PlayerDeath : PlayerState
 			var y = (float)GD.RandRange(-posOffset, posOffset);
 
 			var pos = new Vector2(x, y);
-			var explosion = new Explosion(ExplosionStats)
+			var explosion = new Explosion(ExplosionStats, 1 << 1, 1 << 2)
 			{
-				Position = pos,
+				Position = pos + Player.Position,
 				Scale = new Vector2(1f + iReal, 1f + iReal)
 			};
 
-			Player.AddChild(explosion);
+			Global.Single.Spawn(explosion);
 		}
 		);
 	}
 	private void SpawnFinalExplosion()
 	{
-		var explosion = new Explosion(FinalExplosionStats);
-
-		Player.AddChild(explosion);
+		var explosion = new Explosion(FinalExplosionStats, 1 << 1, 1 << 2)
+		{
+			Transform = Player.Transform
+		};
+		Global.Single.Spawn(explosion);
 	}
 
 }
