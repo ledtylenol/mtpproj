@@ -22,6 +22,7 @@ public partial class PlayerDeath : PlayerState
 	[Export]
 	double InitialExplosionDelay { get; set; }
 
+	private Tween DeathTween { get; set; }
 	public override void OnEnter()
 	{
 		TweenDeath();
@@ -29,6 +30,8 @@ public partial class PlayerDeath : PlayerState
 
 	public override void OnExit()
 	{
+		ShakerNode.Call("force_stop_shake");
+		ShakerNode.Set("intensity", 1f);
 	}
 
 	public override void PhysicsTick(double delta)
@@ -37,24 +40,33 @@ public partial class PlayerDeath : PlayerState
 
 	public override void Tick(double delta)
 	{
+
+		if (DeathTween.IsRunning()) return;
+		if (Input.IsActionJustPressed("proceed"))
+		{
+			Global.World.Reset();
+			EmitSignalTransitioned("idle");
+		}
+
 	}
 
 	private void TweenDeath()
 	{
+		DeathTween?.Kill();
 		ShakerNode.Call("play_shake");
-		var deathTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
-		deathTween.TweenInterval(InitialExplosionDelay);
+		DeathTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+		DeathTween.TweenInterval(InitialExplosionDelay);
 		double delay = ExplosionDelay;
 		for (int i = 0; i < GD.Randi() % 3 + ExplosionCount; i++)
 		{
 			var subt = CreateTween();
 			subt.TweenCallback(SpawnExplosion(i));
-			deathTween.TweenSubtween(subt).SetDelay(delay);
+			DeathTween.TweenSubtween(subt).SetDelay(delay);
 		}
 
-		deathTween.TweenCallback(Callable.From(SpawnFinalExplosion));
-		deathTween.TweenCallback(Callable.From(Player.Hide));
-		deathTween.TweenProperty(ShakerNode, "intensity", 0.0f, 0.5f);
+		DeathTween.TweenCallback(Callable.From(SpawnFinalExplosion));
+		DeathTween.TweenCallback(Callable.From(Player.Hide));
+		DeathTween.TweenProperty(ShakerNode, "intensity", 0f, 0.5f).From(1f);
 	}
 
 	private Callable SpawnExplosion(int i)
@@ -86,6 +98,7 @@ public partial class PlayerDeath : PlayerState
 			Transform = Player.Transform
 		};
 		Global.Single.Spawn(explosion);
+		Player.Die();
 	}
 
 }

@@ -7,7 +7,7 @@ using System.Linq;
 public partial class StateMachine : Node
 {
 	[Export] private State InitialState { get; set; }
-	private State CurrentState { get; set; }
+	[Export] private State CurrentState { get; set; }
 	private Dictionary<string, State> States { get; set; } = [];
 
 	public override void _Ready()

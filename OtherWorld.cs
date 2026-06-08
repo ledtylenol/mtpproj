@@ -12,10 +12,11 @@ public partial class OtherWorld : SubViewportContainer
 	public override void _Ready()
 	{
 		base._Ready();
-		Global.Single.SpawnOtherWorld += SpawnNode;
-		Global.Single.LevelChanged += ClearViewport;
-		Global.World.PlayAreaUpdated += UpdateSize;
+		Global.Single.Connect("SpawnOtherWorld", Callable.From<Node2D>(SpawnNode));
+		Global.Single.Connect("LevelChanged", Callable.From(ClearViewport));
+		Global.World.Connect("PlayAreaUpdated", Callable.From<Rect2>(UpdateSize));
 		UpdateSize(Global.World.PlayArea);
+		Global.World.PlayerDied += (player) => ClearViewport();
 	}
 
 	private void SpawnNode(Node2D node)

@@ -12,7 +12,7 @@ public partial class Borders : Node2D
 	public override void _Ready()
 	{
 		base._Ready();
-		World.Redraw += QueueRedraw;
+		World.Connect("Redraw", Callable.From(QueueRedraw));
 	}
 	public override void _Draw()
 	{

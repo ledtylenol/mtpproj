@@ -6,8 +6,6 @@ public partial class Player : Entity
 {
 	[Export]
 	private ExplosionStats DeathExplosionStats { get; set; }
-	[Export]
-	private Health Health { get; set; }
 
 	[Export]
 	ShakeOnHit Shake { get; set; }
@@ -24,8 +22,8 @@ public partial class Player : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		Health.Died += Die;
 		Global.Player = this;
+		Health.Died += SetDead;
 	}
 	public void ProcessInputs()
 	{
@@ -43,10 +41,20 @@ public partial class Player : Entity
 		StateMachine.Tick(delta);
 	}
 
-	private void Die(Entity _entity)
+	private void SetDead(Entity _entity)
 	{
 		Dead = true;
 		Shake.Active = false;
+	}
+
+	public void UnDie()
+	{
+		Dead = false;
+		Shake.Active = true;
+		Visible = true;
+	}
+	public void Die()
+	{
 
 		EmitSignalDied();
 	}

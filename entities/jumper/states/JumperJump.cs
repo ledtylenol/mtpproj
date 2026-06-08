@@ -15,13 +15,14 @@ public partial class JumperJump : JumperState
 	public Timer JumpCooldown { get; set; }
 	public override void OnEnter()
 	{
+		var mod = GD.Randi() % 2 == 0 ? 1f : 0f;
 		var dir = Jumper.GlobalPosition.DirectionTo(Global.Player.GlobalPosition);
 		var dist = Jumper.GlobalPosition.DistanceTo(Global.Player.GlobalPosition);
 		var th = GD.RandRange(0, Mathf.Tau);
 		var r = GD.RandRange(0, 30);
 		var (sin, cos) = (Math.Sin(th), Math.Cos(th));
 		var randVec = new Vector2((float)cos, (float)sin) * r;
-		Jumper.Jump(dir * dist + Global.Player.Velocity + randVec);
+		Jumper.Jump(dir * dist + Global.Player.Velocity * mod + randVec);
 		Jumper.Tween.Finished += () => EmitSignalTransitioned("idle");
 		JumpCooldown.Start();
 		Jump.Play();

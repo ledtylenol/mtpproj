@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b5ipesonwjqlx"]
+
+[ext_resource type="Script" uid="uid://uvhk7s8br2u8" path="res://special/Point.cs" id="1_hc3e8"]
+[ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="2_vmfk1"]
+[ext_resource type="Script" uid="uid://7oh1dg8wraus" path="res://special/PointIdle.cs" id="3_w5x2c"]
+[ext_resource type="Script" uid="uid://bbuakvxx2teye" path="res://special/PointTrace.cs" id="4_kkegq"]
+[ext_resource type="Script" uid="uid://b4ima05517lmj" path="res://components/PointApplier.cs" id="5_kkegq"]
+
+[node name="Point" type="CharacterBody2D" unique_id=122172100 node_paths=PackedStringArray("StateMachine")]
+collision_layer = 0
+script = ExtResource("1_hc3e8")
+Friction = 245.0
+StateMachine = NodePath("StateMachine")
+metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1690281905 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_vmfk1")
+InitialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://yttbfrfstie3"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=903255627]
+script = ExtResource("3_w5x2c")
+metadata/_custom_type_script = "uid://7oh1dg8wraus"
+
+[node name="Trace" type="Node" parent="StateMachine" unique_id=1710986546 node_paths=PackedStringArray("Applier")]
+script = ExtResource("4_kkegq")
+Applier = NodePath("../../PointApplier")
+metadata/_custom_type_script = "uid://bbuakvxx2teye"
+
+[node name="PointApplier" type="Node" parent="." unique_id=1321265034 node_paths=PackedStringArray("Point")]
+script = ExtResource("5_kkegq")
+Point = NodePath("..")
+metadata/_custom_type_script = "uid://b4ima05517lmj"

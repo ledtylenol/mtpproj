@@ -38,6 +38,9 @@ public partial class World2d : Node2D
 	[Export]
 	public Health PlayerHealth { get; set; }
 
+	[Export]
+	public Node2D SpawnSlot { get; set; }
+
 	[Signal]
 	public delegate void PlayerDiedEventHandler(Player Player);
 
@@ -46,17 +49,19 @@ public partial class World2d : Node2D
 
 	[Signal]
 	public delegate void RedrawEventHandler();
-	private int x = 0;
+
 	public override void _Ready()
 	{
 		if (Engine.IsEditorHint()) return;
 
+		GD.Print("READY");
 		Global.World = this;
+		Global.Single.Score = 0f;
 
 		UpdatePlayArea();
 		if (PlayerHealth is not null)
 			PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
-		Global.Single.Spawn2D += SpawnEntity;
+		Global.Single.Connect("Spawn2D", Callable.From<Node2D>(SpawnEntity));
 	}
 
 	public void UpdatePlayArea()
@@ -68,13 +73,26 @@ public partial class World2d : Node2D
 	{
 		if (Engine.IsEditorHint()) return;
 		base._PhysicsProcess(delta);
-		x++;
-		Label.Text = $"{x:D9}";
+		int score = (int)Global.Single.Score;
+		Label.Text = $"{score:D9}";
 
 	}
 
 	private void SpawnEntity(Node2D e)
 	{
-		AddChild(e);
+		SpawnSlot.AddChild(e);
+	}
+	public void Reset()
+	{
+		var player = Global.Player;
+		Global.Single.Score = 0f;
+		EmitSignalPlayerDied(Global.Player);
+		player.Health.CurrentHealth = player.Health.MaxHealth;
+		player.UnDie();
+		LevelHandler.Single.Reset();
+
+		SpawnSlot.QueueFree();
+		SpawnSlot = new();
+		AddChild(SpawnSlot);
 	}
 }

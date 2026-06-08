@@ -7,15 +7,15 @@
 [ext_resource type="Shader" uid="uid://dm7dw4t0r5kfv" path="res://special/world_bg.gdshader" id="2_hiqwa"]
 [ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="3_tlwt5"]
 [ext_resource type="Theme" uid="uid://cr0fsad13irxf" path="res://special/theme.tres" id="4_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="5_036b0"]
-[ext_resource type="PackedScene" uid="uid://bm83tuyw8vstd" path="res://entities/hit_test/hit_test.tscn" id="9_2o6r5"]
 [ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/Borders.cs" id="10_2o6r5"]
 [ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/WorldBorder.cs" id="10_wse8f"]
 [ext_resource type="Shape2D" uid="uid://belibtm78iay1" path="res://special/left.tres" id="11_70uel"]
+[ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/ProceedLabel.cs" id="12_2u3nc"]
 [ext_resource type="Shape2D" uid="uid://b5emsw6herrtf" path="res://special/right.tres" id="12_hiqwa"]
 [ext_resource type="Shape2D" uid="uid://6sqnqlwtm8u" path="res://special/down.tres" id="13_2u3nc"]
 [ext_resource type="Shape2D" uid="uid://cj7ehv8uvn8t4" path="res://special/up.tres" id="14_udxuc"]
-[ext_resource type="PackedScene" uid="uid://cr2ewne40fqeq" path="res://entities/jumper/jumper.tscn" id="16_2u3nc"]
+[ext_resource type="AudioStream" uid="uid://dtwk0qurmjyrb" path="res://special/Hr_coin.wav" id="17_udxuc"]
+[ext_resource type="Script" uid="uid://bvgrv70bx2vc6" path="res://special/ShepardSound.cs" id="18_ikiii"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hiqwa"]
 noise_type = 2
@@ -44,56 +44,23 @@ font_color = Color(0, 0, 0, 1)
 font_size = 28
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dwbse"]
-atlas = ExtResource("5_036b0")
-region = Rect2(16, 0, 16, 16)
-
 [node name="World" type="Node" unique_id=499391976]
 
-[node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label")]
+[node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label", "SpawnSlot")]
 y_sort_enabled = true
 script = ExtResource("1_f3sb7")
 Size = Vector2(250, 288)
 Color = Color(0, 0.5333333, 1, 1)
 Label = NodePath("../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
-
-[node name="Jumper" parent="World2D" unique_id=495895628 instance=ExtResource("16_2u3nc")]
-position = Vector2(81, 110)
-
-[node name="Jumper4" parent="World2D" unique_id=777382546 instance=ExtResource("16_2u3nc")]
-position = Vector2(-105, -127)
-
-[node name="Jumper5" parent="World2D" unique_id=238932940 instance=ExtResource("16_2u3nc")]
-position = Vector2(-40, -94)
-
-[node name="Jumper6" parent="World2D" unique_id=346107036 instance=ExtResource("16_2u3nc")]
-position = Vector2(69, -22)
-
-[node name="Jumper7" parent="World2D" unique_id=682641906 instance=ExtResource("16_2u3nc")]
-position = Vector2(18, 42)
-
-[node name="Jumper8" parent="World2D" unique_id=1695238452 instance=ExtResource("16_2u3nc")]
-position = Vector2(-84, 29)
-
-[node name="Jumper9" parent="World2D" unique_id=681633010 instance=ExtResource("16_2u3nc")]
-position = Vector2(-57, 56)
-
-[node name="Jumper10" parent="World2D" unique_id=1218046473 instance=ExtResource("16_2u3nc")]
-position = Vector2(-43, -18)
-
-[node name="Jumper2" parent="World2D" unique_id=8990821 instance=ExtResource("16_2u3nc")]
-position = Vector2(-77, 107)
-
-[node name="Jumper3" parent="World2D" unique_id=886443098 instance=ExtResource("16_2u3nc")]
-position = Vector2(59, -96)
+SpawnSlot = NodePath("SpawnSlot")
 
 [node name="BgShader" type="ColorRect" parent="World2D" unique_id=619111321 node_paths=PackedStringArray("World")]
 z_index = -7
 material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
-instance_shader_parameters/distance_threshold = 0.0
+instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.0
+instance_shader_parameters/time = 100.87948
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -109,6 +76,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 script = ExtResource("2_70uel")
 World = NodePath("..")
+TimeScale = 0.2
 TweenDuration = 3.5
 EaseType = 2
 TransType = 5
@@ -117,9 +85,9 @@ TransType = 5
 z_index = -8
 material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
-instance_shader_parameters/distance_threshold = 0.0
+instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.0
+instance_shader_parameters/time = 100.779335
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -135,6 +103,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 script = ExtResource("2_70uel")
 World = NodePath("..")
+TimeScale = 0.2
 TweenDuration = 4.5
 EaseType = 2
 TransType = 5
@@ -168,29 +137,31 @@ one_way_collision_direction = Vector2(0, -1)
 [node name="Up" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=1130717722]
 shape = ExtResource("14_udxuc")
 
-[node name="HitTest" parent="World2D" unique_id=333776931 instance=ExtResource("9_2o6r5")]
-position = Vector2(-70, -54)
-
-[node name="HitTest2" parent="World2D" unique_id=430757258 instance=ExtResource("9_2o6r5")]
-position = Vector2(-24, -37)
-
-[node name="HitTest3" parent="World2D" unique_id=540819569 instance=ExtResource("9_2o6r5")]
-position = Vector2(-61, -29)
-
-[node name="HitTest4" parent="World2D" unique_id=772543703 instance=ExtResource("9_2o6r5")]
-position = Vector2(-89, -35)
-
-[node name="HitTest5" parent="World2D" unique_id=1704601557 instance=ExtResource("9_2o6r5")]
-position = Vector2(-96, -63)
-
-[node name="HitTest6" parent="World2D" unique_id=1029362674 instance=ExtResource("9_2o6r5")]
-position = Vector2(-67, -77)
-
 [node name="Borders" type="Node2D" parent="World2D" unique_id=198662441 node_paths=PackedStringArray("World")]
 z_index = 4
 script = ExtResource("10_2o6r5")
 World = NodePath("..")
 metadata/_custom_type_script = "uid://dff1gt3wl1n6u"
+
+[node name="SpawnSlot" type="Node2D" parent="World2D" unique_id=214075037]
+
+[node name="ProceedLabel" type="RichTextLabel" parent="World2D" unique_id=77434158]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -20.0
+offset_right = 125.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=40][center][TAB]
+[shake]PROCEED"
+fit_content = true
+script = ExtResource("12_2u3nc")
 
 [node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
 visibility_layer = 2
@@ -227,9 +198,9 @@ visible = false
 visibility_layer = 2
 material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
-instance_shader_parameters/distance_threshold = 0.0
+instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.0
+instance_shader_parameters/time = 101.20055
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5
@@ -243,6 +214,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0)
 script = ExtResource("2_70uel")
 World = NodePath("../../../World2D")
+TimeScale = 0.2
 TweenDuration = 1.0
 EaseType = 1
 TransType = 5
@@ -314,15 +286,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "1274"
 label_settings = SubResource("LabelSettings_tlwt5")
-autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1228785792]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-size_flags_stretch_ratio = 0.3
-offset_transform_enabled = true
-texture = SubResource("AtlasTexture_dwbse")
-expand_mode = 2
-stretch_mode = 5
+[node name="Coin" type="AudioStreamPlayer" parent="." unique_id=563499818]
+stream = ExtResource("17_udxuc")
+volume_db = -8.924
+script = ExtResource("18_ikiii")
 
 [editable path="World2D/Entity"]

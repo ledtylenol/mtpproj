@@ -16,6 +16,9 @@ public partial class Entity : CharacterBody2D
 	[Export]
 	public StateMachine StateMachine { get; set; }
 
+	[Export]
+	public Health Health { get; set; }
+
 	public Vector2? Normal { get; set; }
 	public override void _Ready()
 	{

@@ -9,30 +9,36 @@ public partial class Points : Node
 	public uint PointCount { get; set; }
 	[Export]
 	public Health Health { get; set; }
+	[Export]
+	public PackedScene PointScene { get; set; }
 
 	public override void _Ready()
 	{
 		base._Ready();
-		Health.Died += SpawnPoints;
+		Health.Damaged += SpawnPoints;
 	}
 
-	private void SpawnPoints(Entity entity)
+	private void SpawnPoints(Entity entity, HitBox source, float damage)
 	{
 		if (Global.Player.Dead) return;
-		List<uint> digits = [];
-		while (PointCount > 0)
-		{
-			digits.Add(PointCount % 10);
-			PointCount /= 10;
-		}
+		var ratio = damage / Health.MaxHealth;
+		var count = 1;
+		var ratioPer = ratio / count;
 
-		digits.Reverse();
-		var length = digits.Count;
-		for (int i = 0; i < length; i++)
+		var th = (float)GD.RandRange(-Mathf.Pi / 12, Mathf.Pi / 12);
+		var dir = source.GlobalPosition.DirectionTo(entity.GlobalPosition) * 120f;
+		dir = dir.Rotated(th);
+
+		var points = ratioPer * PointCount;
+		for (int i = 0; i < count; i++)
 		{
-			var value = Mathf.Pow(10, length - i - 1);
-			GD.Print($"{digits[i] * value}, of {digits[i]} count");
+
+			var inst = PointScene.Instantiate<Point>();
+			inst.Velocity = dir;
+			inst.Position = entity.GlobalPosition;
+			inst.Points = points;
+
+			Global.World.AddChild(inst);
 		}
-		GD.Print();
 	}
 }

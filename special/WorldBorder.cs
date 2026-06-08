@@ -19,7 +19,7 @@ public partial class WorldBorder : StaticBody2D
 	public override void _Ready()
 	{
 		base._Ready();
-		World.PlayAreaUpdated += UpdateShapes;
+		World.Connect("PlayAreaUpdated", Callable.From<Rect2>(UpdateShapes));
 		UpdateShapes(World.PlayArea);
 	}
 

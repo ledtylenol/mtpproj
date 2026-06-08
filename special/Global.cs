@@ -7,7 +7,7 @@ public partial class Global : Node
 	public static Global Single { get; private set; }
 	public static World2d World { get; set; }
 	public static Player Player { get; set; }
-
+	public float Score { get; set; } = 0f;
 	[Signal]
 	public delegate void Spawn2DEventHandler(Node2D sc);
 
@@ -26,15 +26,6 @@ public partial class Global : Node
 		base._EnterTree();
 		Single = this;
 	}
-	public override void _Input(InputEvent @event)
-	{
-		base._Input(@event);
-		if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Keycode == Key.R)
-		{
-			EmitSignalLevelChanged();
-		}
-
-	}
 
 	public void Spawn(Node2D src)
 	{
@@ -51,6 +42,11 @@ public partial class Global : Node
 	public void SpawnOther(Node2D src)
 	{
 		EmitSignalSpawnOtherWorld(src);
+	}
+
+	public void ChangeLevel()
+	{
+		EmitSignalLevelChanged();
 	}
 
 }

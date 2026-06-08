@@ -60,8 +60,9 @@ public partial class BgShader : ColorRect
 	public override void _Ready()
 	{
 		base._Ready();
-		World.PlayAreaUpdated += UpdateSize;
+		World.Connect("PlayAreaUpdated", Callable.From<Rect2>(UpdateSize));
 		UpdateSize(World.PlayArea);
+		TweenDistanceThreshold(1f); TweenTimeScale(0.2f, Vector2.Down);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -70,7 +71,6 @@ public partial class BgShader : ColorRect
 		Time += (float)delta * TimeScale;
 		if (Engine.IsEditorHint()) return;
 		FlowDir += TargetDir * (float)delta * TimeScale;
-		if (Input.IsActionJustPressed("light")) { TweenDistanceThreshold(1f); TweenTimeScale(0.2f, Vector2.Down); }
 	}
 	private void UpdateSize(Rect2 playArea)
 	{

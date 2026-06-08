@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://boqrq1lcoyriu"]
+
+[ext_resource type="Script" uid="uid://bjvfxobvbpel6" path="res://special/LevelHandler.cs" id="1_5a6vl"]
+[ext_resource type="Script" uid="uid://wi785ap1xqd8" path="res://entities/Enemy.cs" id="2_xh4kn"]
+[ext_resource type="PackedScene" uid="uid://cr2ewne40fqeq" path="res://entities/jumper/jumper.tscn" id="3_7xi7q"]
+[ext_resource type="PackedScene" uid="uid://bm83tuyw8vstd" path="res://entities/hit_test/hit_test.tscn" id="4_7xi7q"]
+[ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="5_y67dr"]
+
+[sub_resource type="Resource" id="Resource_y67dr"]
+script = ExtResource("2_xh4kn")
+Scene = ExtResource("3_7xi7q")
+Cost = 5.0
+metadata/_custom_type_script = "uid://wi785ap1xqd8"
+
+[sub_resource type="Resource" id="Resource_q2sny"]
+script = ExtResource("2_xh4kn")
+Scene = ExtResource("4_7xi7q")
+Cost = 1.0
+metadata/_custom_type_script = "uid://wi785ap1xqd8"
+
+[sub_resource type="Curve" id="Curve_q2sny"]
+
+[sub_resource type="Curve" id="Curve_pbr1k"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6882662, 20), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_8rcs6"]
+script = ExtResource("5_y67dr")
+InnerWidthCurve = SubResource("Curve_q2sny")
+OuterWidthCurve = SubResource("Curve_pbr1k")
+InitEaseType = 1
+InitTransType = 5
+EaseType = 1
+TransType = 5
+EndRadius = 250.0
+Duration = 1.0
+metadata/_custom_type_script = "uid://da00nqce8xth4"
+
+[node name="LevelHandler" type="Node" unique_id=27431079]
+script = ExtResource("1_5a6vl")
+PossibleEnemies = Array[ExtResource("2_xh4kn")]([SubResource("Resource_y67dr"), SubResource("Resource_q2sny")])
+Stats = SubResource("Resource_8rcs6")
+metadata/_custom_type_script = "uid://bjvfxobvbpel6"

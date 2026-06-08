@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cr2ewne40fqeq"]
 
 [ext_resource type="Script" uid="uid://cgyxg13a4ylmq" path="res://entities/jumper/Jumper.cs" id="1_oo0cc"]
-[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="2_oo0cc"]
+[ext_resource type="Texture2D" uid="uid://qj4lf660qeex" path="res://entities/jumper/jumper.tres" id="3_fkjj6"]
 [ext_resource type="Script" uid="uid://dcsnu12pfq43c" path="res://entities/player/RectLine.cs" id="3_u3ros"]
 [ext_resource type="Script" uid="uid://cvv4y2g4bk42n" path="res://components/HitBox.cs" id="4_e3x4s"]
 [ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_m5rm0"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://d3sfr5aj2ks65" path="res://entities/jumper/superjump.tres" id="18_emnci"]
 [ext_resource type="AudioStream" uid="uid://cymsb7fwj2ig0" path="res://entities/jumper/land.sfxr" id="19_emnci"]
 [ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="21_34be1"]
+[ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/point.tscn" id="22_fkjj6"]
 
 [sub_resource type="Curve" id="Curve_1cp1u"]
 _data = [Vector2(0, 0), 0.0, 1.7159611, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -47,7 +48,7 @@ stream_0/stream = ExtResource("19_emnci")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82gfy"]
 size = Vector2(10, 12)
 
-[node name="Jumper" type="CharacterBody2D" unique_id=495895628 node_paths=PackedStringArray("Sprite", "JumpTimer", "HitBox", "StateMachine")]
+[node name="Jumper" type="CharacterBody2D" unique_id=495895628 node_paths=PackedStringArray("Sprite", "JumpTimer", "HitBox", "StateMachine", "Health")]
 collision_layer = 0
 script = ExtResource("1_oo0cc")
 Sprite = NodePath("JumperSprite")
@@ -59,6 +60,7 @@ MaxJumpDistance = 120.0
 HitBox = NodePath("HitBox")
 Friction = 100.0
 StateMachine = NodePath("StateMachine")
+Health = NodePath("Health")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="RectLine" type="Node2D" parent="." unique_id=93538919]
@@ -72,7 +74,7 @@ metadata/_custom_type_script = "uid://dcsnu12pfq43c"
 modulate = Color(0, 1, 0.01666665, 1)
 y_sort_enabled = true
 position = Vector2(-4.3585896e-07, -6.92904e-07)
-texture = ExtResource("2_oo0cc")
+texture = ExtResource("3_fkjj6")
 
 [node name="ShakerComponent2D" type="Node2D" parent="JumperSprite" unique_id=859043379]
 script = ExtResource("4_m5rm0")
@@ -189,4 +191,5 @@ shape = SubResource("RectangleShape2D_82gfy")
 script = ExtResource("21_34be1")
 PointCount = 1999
 Health = NodePath("../Health")
+PointScene = ExtResource("22_fkjj6")
 metadata/_custom_type_script = "uid://dcyoc4cxwcoq"

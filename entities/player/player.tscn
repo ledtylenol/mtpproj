@@ -45,6 +45,11 @@ Duration = 2.0
 Damage = 1
 metadata/_custom_type_script = "uid://da00nqce8xth4"
 
+[sub_resource type="Curve" id="Curve_t1t22"]
+_limits = [1.0, 1.25, 0.0, 20.0]
+_data = [Vector2(0, 1.25), 0.0, 0.0, 0, 0, Vector2(20, 1.0509994), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_mtric"]
 _limits = [0.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
@@ -108,23 +113,24 @@ stream_0/stream = ExtResource("17_3wlsy")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2kln"]
 size = Vector2(10, 6)
 
-[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Health", "Shake", "Sprite", "StateMachine")]
+[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Shake", "Sprite", "StateMachine", "Health")]
 collision_layer = 4
 script = ExtResource("1_sglur")
 DeathExplosionStats = SubResource("Resource_eyb6c")
-Health = NodePath("Health")
 Shake = NodePath("ShakeOnHit")
 Sprite = NodePath("PlayerSprite")
 MoveSpeed = 100.0
 Acceleration = 800.0
 Friction = 400.0
 StateMachine = NodePath("StateMachine")
+Health = NodePath("Health")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
 top_level = true
 process_callback = 0
 script = ExtResource("2_abrql")
+TweenIntensityCurve = SubResource("Curve_t1t22")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1336918116 node_paths=PackedStringArray("InitialState")]
 script = ExtResource("3_sglur")
@@ -175,6 +181,7 @@ metadata/_custom_type_script = "uid://gt23yxfcsi7h"
 [node name="DeathShake" type="Node2D" parent="PlayerSprite" unique_id=47660079]
 script = ExtResource("8_gx6sm")
 fade_in = 1e-05
+fade_out = 1e-05
 shakerPreset = ExtResource("9_j3ovn")
 metadata/_custom_type_script = "uid://gt23yxfcsi7h"
 
@@ -231,8 +238,6 @@ stream = SubResource("AudioStreamRandomizer_we0b7")
 [node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
 script = ExtResource("19_mtric")
 Cursor = NodePath("../HurtBox/Cursor")
-CooldownItems = 15
-CountItems = 7
 Entity = NodePath("..")
 BulletScene = ExtResource("20_mtric")
 BulletCount = 2
