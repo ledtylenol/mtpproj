@@ -70,6 +70,7 @@ metadata/_custom_type_script = "uid://dcsnu12pfq43c"
 
 [node name="JumperSprite" type="Sprite2D" parent="." unique_id=1817908108]
 modulate = Color(0, 1, 0.01666665, 1)
+y_sort_enabled = true
 position = Vector2(-4.3585896e-07, -6.92904e-07)
 texture = ExtResource("2_oo0cc")
 

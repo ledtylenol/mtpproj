@@ -31,7 +31,7 @@ public partial class Points : Node
 		for (int i = 0; i < length; i++)
 		{
 			var value = Mathf.Pow(10, length - i - 1);
-			GD.Print($"{digits[i] * value}, ");
+			GD.Print($"{digits[i] * value}, of {digits[i]} count");
 		}
 		GD.Print();
 	}
