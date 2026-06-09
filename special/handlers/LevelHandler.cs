@@ -58,7 +58,7 @@ public partial class LevelHandler : Node
 		Active = true;
 
 		LevelPool pool;
-		var possiblePools = BossPools.Where((pool) => pool.MinimumCost < totalPoints).ToList();
+		var possiblePools = BossPools.Where((pool) => pool.MinimumCost <= CurrentDifficulty).ToList();
 		var size = possiblePools.Count;
 		if (size < 1) pool = possiblePools.First();
 		else pool = possiblePools[(int)(GD.Randi() % size)];
@@ -93,7 +93,7 @@ public partial class LevelHandler : Node
 		Active = true;
 
 		LevelPool pool;
-		var possiblePools = Pools.Where((pool) => pool.MinimumCost < totalPoints).ToList();
+		var possiblePools = Pools.Where((pool) => pool.MinimumCost <= CurrentDifficulty).ToList();
 		var size = possiblePools.Count;
 		if (size < 1) pool = possiblePools.First();
 		else pool = possiblePools[(int)(GD.Randi() % size)];
@@ -191,5 +191,11 @@ public partial class LevelHandler : Node
 	{
 		if ((CurrentLevel + 1) % 6 == 0) SpawnBoss();
 		else SpawnEnemies();
+	}
+	public void SpawnEnemy(Entity enemy)
+	{
+		Global.Single.Spawn(enemy);
+		aliveEnemies.Add(enemy);
+		enemy.Health.Died += OnEnemyDeath;
 	}
 }

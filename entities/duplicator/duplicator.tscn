@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://bpc1rbd1p4jlm"]
+
+[ext_resource type="Script" uid="uid://drqpn84f3eusu" path="res://entities/duplicator/Duplicator.cs" id="1_mjgw3"]
+[ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="2_kx440"]
+[ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="3_kx440"]
+[ext_resource type="Script" uid="uid://bfik6b621j4oo" path="res://entities/duplicator/states/DuplicatorIdle.cs" id="3_xxtar"]
+[ext_resource type="Script" uid="uid://cj3ug7hpv8isx" path="res://entities/duplicator/states/DuplicatorFollow.cs" id="4_8cvvw"]
+[ext_resource type="Script" uid="uid://de4cuwdt8o0fd" path="res://entities/duplicator/states/DuplicatorDuplicate.cs" id="6_j0p8d"]
+[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="6_xxtar"]
+[ext_resource type="Script" uid="uid://dcsnu12pfq43c" path="res://entities/player/RectLine.cs" id="7_0p2r7"]
+[ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="7_8cvvw"]
+[ext_resource type="Script" uid="uid://hlnq34q2p817" path="res://entities/duplicator/states/DuplicatorEnraged.cs" id="7_lss1b"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="8_fw75c"]
+[ext_resource type="Script" uid="uid://dcwj18nq52c3s" path="res://components/Ghosts.cs" id="8_ipbjq"]
+[ext_resource type="Script" uid="uid://cvv4y2g4bk42n" path="res://components/HitBox.cs" id="9_h0ykt"]
+[ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="9_ldkev"]
+[ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="10_08hf4"]
+[ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="13_5qif0"]
+[ext_resource type="PackedScene" uid="uid://gthaec8e15lp" path="res://special/particles/hit_2.tscn" id="14_qrmfp"]
+[ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="15_c211r"]
+[ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="16_op7a3"]
+[ext_resource type="AudioStream" uid="uid://d2ukjdkj5nlq1" path="res://entities/death.sfxr" id="17_jjid5"]
+[ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="18_jjid5"]
+[ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="19_n81xb"]
+[ext_resource type="Script" uid="uid://b5llka3uw30s0" path="res://components/EraseOnDeath.cs" id="20_n81xb"]
+[ext_resource type="AudioStream" uid="uid://dufu5iqu72ohw" path="res://entities/duplicator/windup.sfxr" id="24_035rb"]
+[ext_resource type="AudioStream" uid="uid://6g8w8okiwfpw" path="res://entities/duplicator/launch.sfxr" id="24_e8jpo"]
+[ext_resource type="AudioStream" uid="uid://dgfqe8ixs68wy" path="res://entities/duplicator/bong_001.ogg" id="24_v64bk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0p2r7"]
+size = Vector2(10, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0ykt"]
+radius = 5.45
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_n81xb"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("16_op7a3")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j0p8d"]
+random_pitch = 1.1764989
+streams_count = 1
+stream_0/stream = ExtResource("17_jjid5")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0p8d"]
+radius = 53.2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v64bk"]
+random_pitch = 1.9435127
+streams_count = 1
+stream_0/stream = ExtResource("24_v64bk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7fi3x"]
+random_pitch = 1.6754903
+streams_count = 1
+stream_0/stream = ExtResource("24_e8jpo")
+
+[node name="Duplicator" type="CharacterBody2D" unique_id=1072277101 node_paths=PackedStringArray("DuplicateSound", "Sprite", "StateMachine", "Health")]
+collision_layer = 128
+collision_mask = 129
+motion_mode = 1
+script = ExtResource("1_mjgw3")
+DuplicateSound = NodePath("Duplicate")
+Sprite = NodePath("Sprite2D")
+DuplicateString = "uid://bpc1rbd1p4jlm"
+MoveSpeed = 100.0
+Acceleration = 5.0
+Friction = 5.0
+StateMachine = NodePath("StateMachine")
+Health = NodePath("Health")
+metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+
+[node name="RectLine" type="Node2D" parent="." unique_id=204571138]
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, 3)
+script = ExtResource("7_0p2r7")
+Radius = Vector2(9, 9)
+metadata/_custom_type_script = "uid://dcsnu12pfq43c"
+
+[node name="StateMachine" type="Node" parent="." unique_id=820743726 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_kx440")
+InitialState = NodePath("Idle")
+metadata/_custom_type_script = "uid://yttbfrfstie3"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=429662431 node_paths=PackedStringArray("Duplicator")]
+script = ExtResource("3_xxtar")
+Duplicator = NodePath("../..")
+metadata/_custom_type_script = "uid://bfik6b621j4oo"
+
+[node name="Follow" type="Node" parent="StateMachine" unique_id=1278091052 node_paths=PackedStringArray("Duplicator", "PlayerDetection", "DashTimer")]
+script = ExtResource("4_8cvvw")
+Duplicator = NodePath("../..")
+PlayerDetection = NodePath("../../PlayerDetectionArea")
+DashTimer = NodePath("DashTimer")
+metadata/_custom_type_script = "uid://cj3ug7hpv8isx"
+
+[node name="DashTimer" type="Timer" parent="StateMachine/Follow" unique_id=1039097914]
+one_shot = true
+
+[node name="Duplicate" type="Node" parent="StateMachine" unique_id=326959903 node_paths=PackedStringArray("Duplicator")]
+script = ExtResource("6_j0p8d")
+Duplicator = NodePath("../..")
+metadata/_custom_type_script = "uid://de4cuwdt8o0fd"
+
+[node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("Duplicator", "Ghosts", "Sprite", "Shaker", "Windup", "Dash")]
+script = ExtResource("7_lss1b")
+Duplicator = NodePath("../..")
+Ghosts = NodePath("Ghosts")
+Sprite = NodePath("../../Sprite2D")
+Shaker = NodePath("../../Sprite2D/Shaker")
+Windup = NodePath("../../Windup")
+Dash = NodePath("../../Dash")
+metadata/_custom_type_script = "uid://hlnq34q2p817"
+
+[node name="Ghosts" type="Node" parent="StateMachine/Enraged" unique_id=1645122620 node_paths=PackedStringArray("NodeToCopy")]
+script = ExtResource("8_ipbjq")
+NodeToCopy = NodePath("../../../Sprite2D")
+SpawnInterval = 0.05
+metadata/_custom_type_script = "uid://dcwj18nq52c3s"
+
+[node name="Health" type="Node" parent="." unique_id=1183197299]
+script = ExtResource("3_kx440")
+CurrentHealth = 9
+MaxHealth = 9
+metadata/_custom_type_script = "uid://iv5wxd01vyqv"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=502823133]
+modulate = Color(1, 0.90000004, 0, 1)
+texture = ExtResource("6_xxtar")
+
+[node name="HitShake" type="Node2D" parent="Sprite2D" unique_id=1224338705]
+script = ExtResource("8_fw75c")
+duration = 0.25
+fade_in = 1e-05
+shakerPreset = ExtResource("9_ldkev")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="Shaker" type="Node2D" parent="Sprite2D" unique_id=1492479031]
+script = ExtResource("8_fw75c")
+AutoPlay = true
+intensity = 0.0
+fade_in = 1e-05
+fade_out = 8.936089e-05
+shakerPreset = ExtResource("9_ldkev")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=2144862820 node_paths=PackedStringArray("Health")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("7_8cvvw")
+Health = NodePath("../Health")
+metadata/_custom_type_script = "uid://djd2q55i8737w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1292054232]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1525994598]
+shape = SubResource("RectangleShape2D_0p2r7")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=2147280666 node_paths=PackedStringArray("Entity")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("9_h0ykt")
+Entity = NodePath("..")
+Pierce = true
+metadata/_custom_type_script = "uid://cvv4y2g4bk42n"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=669684144]
+shape = SubResource("CircleShape2D_h0ykt")
+
+[node name="ShakeOnHit" type="Node" parent="." unique_id=511838293 node_paths=PackedStringArray("Health", "Shaker")]
+script = ExtResource("10_08hf4")
+Health = NodePath("../Health")
+Shaker = NodePath("../Sprite2D/HitShake")
+metadata/_custom_type_script = "uid://b03wlp2uu4sal"
+
+[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1193451887 node_paths=PackedStringArray("Health")]
+script = ExtResource("13_5qif0")
+Particles = ExtResource("14_qrmfp")
+Health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bka021k5m4tk3"
+
+[node name="Sounds" type="Node" parent="." unique_id=119961742 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath", "SoundsOnShoot")]
+script = ExtResource("15_c211r")
+Health = NodePath("../Health")
+SoundsOnHit = [NodePath("HitSound")]
+SoundsOnDeath = [NodePath("HitSound2")]
+SoundsOnShoot = []
+metadata/_custom_type_script = "uid://c8eybkhh1ct04"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=182949136]
+stream = SubResource("AudioStreamRandomizer_n81xb")
+pitch_scale = 1.33
+bus = &"Sfx"
+
+[node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=91093236]
+stream = SubResource("AudioStreamRandomizer_j0p8d")
+bus = &"Sfx"
+
+[node name="Points" type="Node" parent="." unique_id=2080865032 node_paths=PackedStringArray("Health")]
+script = ExtResource("18_jjid5")
+PointCount = 100
+Health = NodePath("../Health")
+PointScene = ExtResource("19_n81xb")
+metadata/_custom_type_script = "uid://dcyoc4cxwcoq"
+
+[node name="EraseOnDeath" type="Node" parent="." unique_id=1738556776 node_paths=PackedStringArray("Health")]
+script = ExtResource("20_n81xb")
+Health = NodePath("../Health")
+metadata/_custom_type_script = "uid://b5llka3uw30s0"
+
+[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=2035963417]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=654922934]
+shape = SubResource("CircleShape2D_j0p8d")
+
+[node name="Duplicate" type="AudioStreamPlayer" parent="." unique_id=1795599667]
+stream = SubResource("AudioStreamRandomizer_v64bk")
+
+[node name="Dash" type="AudioStreamPlayer" parent="." unique_id=1703728102]
+stream = SubResource("AudioStreamRandomizer_7fi3x")
+
+[node name="Windup" type="AudioStreamPlayer" parent="." unique_id=821462756]
+stream = ExtResource("24_035rb")

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://bxp17xfo030ev"]
+
+[ext_resource type="PackedScene" uid="uid://bpc1rbd1p4jlm" path="res://entities/duplicator/duplicator.tscn" id="1_3sn2k"]
+[ext_resource type="Script" uid="uid://wi785ap1xqd8" path="res://entities/Enemy.cs" id="1_ty30x"]
+[ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="2_bfc6y"]
+
+[sub_resource type="Curve" id="Curve_mtric"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_eyb6c"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_4b0t8"]
+script = ExtResource("2_bfc6y")
+InnerWidthCurve = SubResource("Curve_mtric")
+OuterWidthCurve = SubResource("Curve_eyb6c")
+InitEaseType = 1
+InitTransType = 7
+EaseType = 1
+TransType = 5
+EndRadius = 30.0
+InitDuration = 0.5
+Duration = 1.0
+metadata/_custom_type_script = "uid://da00nqce8xth4"
+
+[resource]
+script = ExtResource("1_ty30x")
+Scene = ExtResource("1_3sn2k")
+SpawnExplosionStats = SubResource("Resource_4b0t8")
+Cost = 10.0
+metadata/_custom_type_script = "uid://wi785ap1xqd8"
