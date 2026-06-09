@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://31eywnwbyqkn" path="res://special/songs/jingle2.ogg" id="5_aa4vy"]
 [ext_resource type="AudioStream" uid="uid://cr14sbinvmue6" path="res://special/songs/wound.fm.ogg" id="5_vx5ni"]
 [ext_resource type="AudioStream" uid="uid://b4gnw6yq0b2gc" path="res://special/songs/Thinker Walker Dreamer Scatter.ogg" id="6_e4rls"]
+[ext_resource type="AudioStream" uid="uid://b0ehdgxskjnvw" path="res://special/songs/thunder.ogg" id="9_sc115"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_267rj"]
 streams_count = 3
@@ -21,12 +22,13 @@ streams_count = 2
 stream_0/stream = ExtResource("5_vx5ni")
 stream_1/stream = ExtResource("6_e4rls")
 
-[node name="Music" type="Node" unique_id=1622549719 node_paths=PackedStringArray("FightPlayer", "IdlePlayer", "FightJingle", "IdleJingle", "FightTimer", "IdleTimer")]
+[node name="Music" type="Node" unique_id=1622549719 node_paths=PackedStringArray("FightPlayer", "IdlePlayer", "FightJingle", "IdleJingle", "BossJingle", "FightTimer", "IdleTimer")]
 script = ExtResource("1_267rj")
 FightPlayer = NodePath("Fight")
 IdlePlayer = NodePath("Idle")
 FightJingle = NodePath("FightJingle")
 IdleJingle = NodePath("IdleJingle")
+BossJingle = NodePath("BossJingle")
 FightTimer = NodePath("FightTimer")
 IdleTimer = NodePath("IdleTimer")
 metadata/_custom_type_script = "uid://ck8i0fnppmoxx"
@@ -50,3 +52,8 @@ one_shot = true
 
 [node name="IdleTimer" type="Timer" parent="." unique_id=633780180]
 one_shot = true
+
+[node name="BossJingle" type="AudioStreamPlayer" parent="." unique_id=541771282]
+stream = ExtResource("9_sc115")
+volume_db = -9.267
+mix_target = 2

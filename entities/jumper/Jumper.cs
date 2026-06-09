@@ -49,10 +49,11 @@ public partial class Jumper : Entity
 		Tween = CreateTween();
 		HitBox.Active = false;
 
+		var sign = Mathf.Sign(pos.X);
 		Tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic).TweenProperty(this, "X", 1f, 0.5f);
-		Tween.Parallel().TweenProperty(Sprite, "rotation", Mathf.Pi, 0.5f).From(0f);
+		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Pi, 0.5f).From(0f);
 		Tween.SetEase(Tween.EaseType.In).TweenProperty(this, "X", 0f, 0.5f);
-		Tween.Parallel().TweenProperty(Sprite, "rotation", Mathf.Tau, 0.5f);
+		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Tau, 0.5f);
 		Velocity = pos;
 	}
 }

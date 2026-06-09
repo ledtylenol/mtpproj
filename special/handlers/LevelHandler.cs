@@ -43,6 +43,12 @@ public partial class LevelHandler : Node
 
 	[Signal]
 	public delegate void BossStartedEventHandler();
+
+	[Signal]
+	public delegate void BossNextTurnEventHandler();
+
+	[Signal]
+	public delegate void BossEnemyKilledEventHandler();
 	public override void _Ready()
 	{
 		base._Ready();
@@ -52,13 +58,18 @@ public partial class LevelHandler : Node
 	{
 		return (CurrentLevel + 1) % 6 == 0;
 	}
+
+	public bool WillBeBoss()
+	{
+		return (CurrentLevel + 2) % 6 == 0;
+	}
 	public void SpawnBoss()
 	{
 		var totalPoints = CurrentDifficulty * 15f;
 		Active = true;
 
 		LevelPool pool;
-		var possiblePools = BossPools.Where((pool) => pool.MinimumCost <= CurrentDifficulty).ToList();
+		var possiblePools = BossPools.Where((pool) => pool.MinimumCost <= CurrentDifficulty && pool.MaximumCost >= CurrentDifficulty).ToList();
 		var size = possiblePools.Count;
 		if (size < 1) pool = possiblePools.First();
 		else pool = possiblePools[(int)(GD.Randi() % size)];
@@ -81,6 +92,11 @@ public partial class LevelHandler : Node
 			var subtween = CreateTween();
 			subtween.TweenCallback(Callable.From(() => Global.Single.Spawn(wrapper)));
 			tween.TweenSubtween(subtween).SetDelay(delay);
+
+			var pos = new Vector2((float)GD.RandRange(5f, xRange - 5f), (float)GD.RandRange(5f, yRange - 5f));
+
+			if (pool.RandomizePosition)
+				inst.Position = pos + playArea.Position;
 			if (GD.Randi() % 3 != 0)
 				delay += (float)GD.RandRange(0.05, 0.25);
 			aliveEnemies.Add(inst);
@@ -92,8 +108,9 @@ public partial class LevelHandler : Node
 		var totalPoints = CurrentDifficulty * 15f;
 		Active = true;
 
+
 		LevelPool pool;
-		var possiblePools = Pools.Where((pool) => pool.MinimumCost <= CurrentDifficulty).ToList();
+		var possiblePools = Pools.Where((pool) => pool.MinimumCost <= CurrentDifficulty && pool.MaximumCost >= CurrentDifficulty).ToList();
 		var size = possiblePools.Count;
 		if (size < 1) pool = possiblePools.First();
 		else pool = possiblePools[(int)(GD.Randi() % size)];
@@ -111,7 +128,8 @@ public partial class LevelHandler : Node
 			var enemy = pool.GetEnemy(totalPoints);
 			if (enemy is null) break;
 			var inst = enemy.Scene.Instantiate<Entity>();
-			inst.Position = pos + playArea.Position;
+			if (pool.RandomizePosition)
+				inst.Position = pos + playArea.Position;
 
 			if (inst.CountsTowardEnemies)
 				inst.Health.Died += OnEnemyDeath;
@@ -133,6 +151,7 @@ public partial class LevelHandler : Node
 	private void OnEnemyDeath(Entity entity)
 	{
 		aliveEnemies.Remove(entity);
+		if (IsBoss()) EmitSignalBossEnemyKilled();
 		if (aliveEnemies.Count == 0)
 		{
 			GD.Print("All enemies are dead");
@@ -151,6 +170,10 @@ public partial class LevelHandler : Node
 			if (IsBoss())
 			{
 				EmitSignalBossFinished();
+			}
+			if (WillBeBoss())
+			{
+				EmitSignalBossNextTurn();
 			}
 			CurrentLevel++;
 			Active = false;

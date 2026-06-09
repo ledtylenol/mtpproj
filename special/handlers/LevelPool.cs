@@ -12,6 +12,11 @@ public partial class LevelPool : Resource
 	[Export]
 	public float MinimumCost { get; set; }
 
+	[Export]
+	public float MaximumCost { get; set; }
+
+	[Export]
+	public bool RandomizePosition { get; set; }
 
 	public Enemy GetEnemy(float maxPoints)
 	{

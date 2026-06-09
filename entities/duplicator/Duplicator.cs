@@ -34,7 +34,19 @@ public partial class Duplicator : Entity
 		Velocity = Direction * CurrentSpeed;
 		Sprite.Rotation = Direction.X * Mathf.Pi / 6f;
 
-		MoveAndSlide();
+		var iterations = 5;
+		var subdelt = _delta / iterations;
+
+		for (int i = 0; i < iterations; i++)
+		{
+			var res = MoveAndCollide(Velocity * (float)subdelt);
+
+			if (res is not null)
+			{
+				Velocity = Velocity.Bounce(res.GetNormal());
+				Direction = Direction.Bounce(res.GetNormal());
+			}
+		}
 	}
 	public override void _PhysicsProcess(double delta)
 	{

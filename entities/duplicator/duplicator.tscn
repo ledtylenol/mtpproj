@@ -61,8 +61,7 @@ streams_count = 1
 stream_0/stream = ExtResource("24_e8jpo")
 
 [node name="Duplicator" type="CharacterBody2D" unique_id=1072277101 node_paths=PackedStringArray("DuplicateSound", "Sprite", "StateMachine", "Health")]
-collision_layer = 128
-collision_mask = 129
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_mjgw3")
 DuplicateSound = NodePath("Duplicate")
@@ -108,12 +107,13 @@ script = ExtResource("6_j0p8d")
 Duplicator = NodePath("../..")
 metadata/_custom_type_script = "uid://de4cuwdt8o0fd"
 
-[node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("Duplicator", "Ghosts", "Sprite", "Shaker", "Windup", "Dash")]
+[node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("Duplicator", "Ghosts", "Sprite", "Shaker", "HitBox", "Windup", "Dash")]
 script = ExtResource("7_lss1b")
 Duplicator = NodePath("../..")
 Ghosts = NodePath("Ghosts")
 Sprite = NodePath("../../Sprite2D")
 Shaker = NodePath("../../Sprite2D/Shaker")
+HitBox = NodePath("../../HitBox")
 Windup = NodePath("../../Windup")
 Dash = NodePath("../../Dash")
 metadata/_custom_type_script = "uid://hlnq34q2p817"
@@ -126,8 +126,8 @@ metadata/_custom_type_script = "uid://dcwj18nq52c3s"
 
 [node name="Health" type="Node" parent="." unique_id=1183197299]
 script = ExtResource("3_kx440")
-CurrentHealth = 9
-MaxHealth = 9
+CurrentHealth = 14
+MaxHealth = 14
 metadata/_custom_type_script = "uid://iv5wxd01vyqv"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=502823133]
@@ -169,6 +169,7 @@ collision_mask = 4
 script = ExtResource("9_h0ykt")
 Entity = NodePath("..")
 Pierce = true
+Active = false
 metadata/_custom_type_script = "uid://cvv4y2g4bk42n"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=669684144]

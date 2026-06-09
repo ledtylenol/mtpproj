@@ -42,7 +42,7 @@ public partial class BgShader : ColorRect
 		}
 	}
 
-	private Vector2 TargetDir;
+	public Vector2 TargetDir { get; set; }
 	private float TargetTimeScale;
 
 	private float _DistanceThreshold;

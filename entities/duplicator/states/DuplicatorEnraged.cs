@@ -18,6 +18,8 @@ public partial class DuplicatorEnraged : State
 	public Node2D Shaker { get; set; }
 
 	[Export]
+	public HitBox HitBox { get; set; }
+	[Export]
 	public AudioStreamPlayer Windup { get; set; }
 
 	[Export]
@@ -39,12 +41,14 @@ public partial class DuplicatorEnraged : State
 			Duplicator.Direction = GetDir();
 			Ghosts.Active = true;
 			Sprite.Scale = Vector2.One;
+			HitBox.Active = true;
 		}));
 		Tween.TweenProperty(Shaker, "intensity", 0f, 0.5);
 		Tween.TweenCallback(Callable.From(() =>
 		{
 			EmitSignalTransitioned("idle");
 			Ghosts.Active = false;
+			HitBox.Active = false;
 		}));
 	}
 

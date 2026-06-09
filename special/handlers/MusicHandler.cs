@@ -16,6 +16,8 @@ public partial class MusicHandler : Node
 	[Export]
 	private AudioStreamPlayer IdleJingle { get; set; }
 
+	[Export]
+	private AudioStreamPlayer BossJingle { get; set; }
 
 	[Export]
 	private Timer FightTimer { get; set; }
@@ -30,8 +32,10 @@ public partial class MusicHandler : Node
 	public override void _Ready()
 	{
 		base._Ready();
+		Single = this;
 		LevelHandler.Single.LevelFinished += StartIdle;
 		LevelHandler.Single.LevelStarted += StartFight;
+		LevelHandler.Single.BossNextTurn += StartBoss;
 		FightTimer.Timeout += () => FightPlayer.Play();
 		IdleTimer.Timeout += () => IdlePlayer.Play();
 		IdleTimer.Timeout += TweenIdleVolume;
@@ -60,5 +64,13 @@ public partial class MusicHandler : Node
 		IdleTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
 
 		IdleTween.TweenProperty(IdlePlayer, "volume_linear", LinearIdleVolume, 1f).From(0f);
+	}
+	public void StartBoss()
+	{
+		FightTimer.Stop();
+		FightPlayer.Stop();
+		IdleTimer.Stop();
+		IdlePlayer.Stop();
+		BossJingle.Play();
 	}
 }

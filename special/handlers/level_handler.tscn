@@ -14,17 +14,31 @@
 [sub_resource type="Resource" id="Resource_wyl5g"]
 script = ExtResource("2_g6laa")
 PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("5_frlk0")])
+MaximumCost = 1.8
+RandomizePosition = true
 metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
 [sub_resource type="Resource" id="Resource_v64bk"]
 script = ExtResource("2_g6laa")
 PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("5_frlk0"), ExtResource("6_0n3gh")])
 MinimumCost = 1.6
+MaximumCost = 10.0
+RandomizePosition = true
 metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
 [sub_resource type="Resource" id="Resource_0n3gh"]
 script = ExtResource("2_g6laa")
 PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0")])
+MaximumCost = 1.8
+RandomizePosition = true
+metadata/_custom_type_script = "uid://dsuvq5eoystbi"
+
+[sub_resource type="Resource" id="Resource_fsskh"]
+script = ExtResource("2_g6laa")
+PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("6_0n3gh"), ExtResource("6_0n3gh"), ExtResource("6_0n3gh"), ExtResource("6_0n3gh"), ExtResource("6_0n3gh"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0")])
+MinimumCost = 1.8
+MaximumCost = 10.0
+RandomizePosition = true
 metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
 [sub_resource type="Curve" id="Curve_q2sny"]
@@ -71,7 +85,7 @@ metadata/_custom_type_script = "uid://da00nqce8xth4"
 [node name="LevelHandler" type="Node" unique_id=27431079]
 script = ExtResource("1_5a6vl")
 Pools = Array[ExtResource("2_g6laa")]([SubResource("Resource_wyl5g"), SubResource("Resource_v64bk")])
-BossPools = Array[ExtResource("2_g6laa")]([SubResource("Resource_0n3gh")])
+BossPools = Array[ExtResource("2_g6laa")]([SubResource("Resource_0n3gh"), SubResource("Resource_fsskh")])
 Stats = SubResource("Resource_8rcs6")
 PowerupScenes = Array[PackedScene]([ExtResource("7_luuxi"), ExtResource("8_0n3gh"), ExtResource("9_fsskh")])
 ItemExplosionStats = SubResource("Resource_luuxi")

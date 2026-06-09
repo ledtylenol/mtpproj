@@ -6,6 +6,7 @@
 [ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="4_hrv0m"]
 [ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="5_earyr"]
 [ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/world/borders/WorldBorder.cs" id="6_4e7d3"]
+[ext_resource type="Script" uid="uid://b8k53ugxx3xhh" path="res://special/handlers/BgHandler.cs" id="9_n7shi"]
 [ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/world/borders/Borders.cs" id="11_ubau6"]
 [ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/world/ProceedLabel.cs" id="12_xuavk"]
 [ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://special/world/OtherWorld.cs" id="13_ttqxl"]
@@ -73,7 +74,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 141.58536
+instance_shader_parameters/time = 68.4509
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +101,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 141.58536
+instance_shader_parameters/time = 68.4509
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,6 +189,11 @@ position = Vector2(0, 270)
 rotation = 1.5707964
 occluder = SubResource("OccluderPolygon2D_bhunq")
 
+[node name="BgHandler" type="Node" parent="World2D" unique_id=321989157 node_paths=PackedStringArray("Shaders")]
+script = ExtResource("9_n7shi")
+Shaders = [NodePath("../BgShader"), NodePath("../BgShader2")]
+metadata/_custom_type_script = "uid://b8k53ugxx3xhh"
+
 [node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
 visibility_layer = 2
 z_index = -4
@@ -225,7 +231,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 141.58536
+instance_shader_parameters/time = 68.4509
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5
