@@ -33,7 +33,7 @@ public partial class PowerupContainer : Node2D
 		};
 		Global.Single.ForceSpawn2D(label);
 
-		var tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+		var tween = label.CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
 		var th = (float)GD.RandRange(-Pi / 2, Pi / 2);
 		var r = (float)GD.RandRange(20f, 80f);
 
@@ -47,5 +47,6 @@ public partial class PowerupContainer : Node2D
 
 		tween.TweenProperty(label, "position", dir, 1f).AsRelative();
 		tween.TweenCallback(Callable.From(label.QueueFree));
+		QueueFree();
 	}
 }
