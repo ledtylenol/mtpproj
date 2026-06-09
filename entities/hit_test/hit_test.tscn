@@ -26,6 +26,7 @@ streams_count = 1
 stream_0/stream = ExtResource("11_rjj6u")
 
 [node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("Health")]
+y_sort_enabled = true
 script = ExtResource("1_krqq1")
 Health = NodePath("Health")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
@@ -48,6 +49,7 @@ shape = SubResource("CircleShape2D_h2baf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2058461670]
 modulate = Color(1, 0, 0, 1)
+y_sort_enabled = true
 texture = ExtResource("4_h3ctb")
 
 [node name="HitShake" type="Node2D" parent="Sprite2D" unique_id=2010768824]
@@ -69,11 +71,12 @@ Health = NodePath("../Health")
 Shaker = NodePath("../Sprite2D/HitShake")
 metadata/_custom_type_script = "uid://b03wlp2uu4sal"
 
-[node name="Sounds" type="Node" parent="." unique_id=1373571216 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath")]
+[node name="Sounds" type="Node" parent="." unique_id=1373571216 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath", "SoundsOnShoot")]
 script = ExtResource("10_berey")
 Health = NodePath("../Health")
 SoundsOnHit = [NodePath("HitSound")]
 SoundsOnDeath = [NodePath("HitSound2")]
+SoundsOnShoot = []
 metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1417630162]

@@ -22,6 +22,8 @@ public abstract partial class BulletShooter : Node2D
 
 	private float RealCooldown { get; set; } = 0f;
 
+	[Signal]
+	public delegate void ShotEventHandler();
 	public override void _Ready()
 	{
 		base._Ready();
@@ -47,6 +49,7 @@ public abstract partial class BulletShooter : Node2D
 				instance.Direction = dir.Rotated(spread * i - spread * (bulletCount / 2) + spread / 2f);
 				Global.Single.Spawn(instance);
 			}
+			EmitSignalShot();
 		}
 	}
 	public override void _PhysicsProcess(double delta)

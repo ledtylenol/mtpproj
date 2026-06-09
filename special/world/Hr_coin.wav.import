@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dtwk0qurmjyrb"
-path="res://.godot/imported/Hr_coin.wav-b272725f6bcbf87e6da9545c47aacc02.sample"
+path="res://.godot/imported/Hr_coin.wav-53a9d3d1ec6fee2ad7d507faf9738e91.sample"
 
 [deps]
 
-source_file="res://special/Hr_coin.wav"
-dest_files=["res://.godot/imported/Hr_coin.wav-b272725f6bcbf87e6da9545c47aacc02.sample"]
+source_file="res://special/world/Hr_coin.wav"
+dest_files=["res://.godot/imported/Hr_coin.wav-53a9d3d1ec6fee2ad7d507faf9738e91.sample"]
 
 [params]
 

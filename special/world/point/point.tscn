@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b5ipesonwjqlx"]
 
-[ext_resource type="Script" uid="uid://uvhk7s8br2u8" path="res://special/Point.cs" id="1_hc3e8"]
+[ext_resource type="Script" uid="uid://uvhk7s8br2u8" path="res://special/world/point/Point.cs" id="1_hc3e8"]
 [ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="2_vmfk1"]
-[ext_resource type="Script" uid="uid://7oh1dg8wraus" path="res://special/PointIdle.cs" id="3_w5x2c"]
-[ext_resource type="Script" uid="uid://bbuakvxx2teye" path="res://special/PointTrace.cs" id="4_kkegq"]
+[ext_resource type="Script" uid="uid://7oh1dg8wraus" path="res://special/world/point/PointIdle.cs" id="3_w5x2c"]
+[ext_resource type="Script" uid="uid://bbuakvxx2teye" path="res://special/world/point/PointTrace.cs" id="4_kkegq"]
 [ext_resource type="Script" uid="uid://b4ima05517lmj" path="res://components/PointApplier.cs" id="5_kkegq"]
 
 [node name="Point" type="CharacterBody2D" unique_id=122172100 node_paths=PackedStringArray("StateMachine")]

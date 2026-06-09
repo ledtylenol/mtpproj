@@ -93,6 +93,8 @@ public partial class World2d : Node2D
 
 		SpawnSlot.QueueFree();
 		SpawnSlot = new();
+		SpawnSlot.YSortEnabled = true;
 		AddChild(SpawnSlot);
+
 	}
 }

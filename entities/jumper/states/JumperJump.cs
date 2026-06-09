@@ -13,8 +13,11 @@ public partial class JumperJump : JumperState
 	public AudioStreamPlayer Land { get; set; }
 	[Export]
 	public Timer JumpCooldown { get; set; }
+	[Export]
+	public Ghosts Ghosts { get; set; }
 	public override void OnEnter()
 	{
+		Ghosts.Active = true;
 		var mod = GD.Randi() % 2 == 0 ? 1f : 0f;
 		var dir = Jumper.GlobalPosition.DirectionTo(Global.Player.GlobalPosition);
 		var dist = Jumper.GlobalPosition.DistanceTo(Global.Player.GlobalPosition);
@@ -34,6 +37,8 @@ public partial class JumperJump : JumperState
 		Shaker.Call("play_shake");
 		Jumper.HitBox.Active = false;
 		Land.Play();
+
+		Ghosts.Active = false;
 	}
 
 	public override void PhysicsTick(double delta)

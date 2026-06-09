@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://co34voc1mf6qs"]
+
+[ext_resource type="Script" uid="uid://dn6lcxh3fi87n" path="res://special/ui/health_visuals/HealthIcon.cs" id="1_kclt2"]
+[ext_resource type="Texture2D" uid="uid://bkphpcbrd5ovd" path="res://special/ui/health_visuals/filled_heart.tres" id="2_r7v1c"]
+[ext_resource type="Script" uid="uid://c1ptbeantuu7h" path="res://addons/shaker/src/shaker_component.gd" id="3_aslea"]
+[ext_resource type="Texture2D" uid="uid://biy7njoj24m53" path="res://special/ui/health_visuals/empty_heart.tres" id="3_vubx5"]
+[ext_resource type="Script" uid="uid://du1yew8fxqf7c" path="res://addons/shaker/data/ShakerProperty.gd" id="4_aslea"]
+[ext_resource type="Script" uid="uid://c6xsk8jqfvx5y" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="5_r7v1c"]
+
+[sub_resource type="Resource" id="Resource_vubx5"]
+script = ExtResource("5_r7v1c")
+seed = 15
+amplitude = Vector2(3, 3)
+metadata/_custom_type_script = "uid://c6xsk8jqfvx5y"
+
+[sub_resource type="Resource" id="Resource_kclt2"]
+script = ExtResource("4_aslea")
+property_name = "offset_transform_position"
+shake_type = SubResource("Resource_vubx5")
+metadata/_custom_type_script = "uid://du1yew8fxqf7c"
+
+[node name="HealthIcon" type="MarginContainer" unique_id=92897280 node_paths=PackedStringArray("Shaker", "Icon")]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+script = ExtResource("1_kclt2")
+Shaker = NodePath("TextureRect/ShakerComponent")
+Filled = false
+Icon = NodePath("TextureRect")
+ShownTexture = ExtResource("2_r7v1c")
+HideTexture = ExtResource("3_vubx5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=815073918]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0, 0)
+texture = ExtResource("2_r7v1c")
+
+[node name="ShakerComponent" type="Node" parent="TextureRect" unique_id=932522004]
+script = ExtResource("3_aslea")
+duration = 0.25
+fade_in = 1e-05
+shakerProperty = Array[ExtResource("4_aslea")]([SubResource("Resource_kclt2")])
+metadata/_custom_type_script = "uid://c1ptbeantuu7h"

@@ -1,21 +1,23 @@
 [gd_scene format=3 uid="uid://cfluv02nb8mov"]
 
-[ext_resource type="Script" uid="uid://cf7vmc4ae5sv3" path="res://World2d.cs" id="1_f3sb7"]
-[ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://OtherWorld.cs" id="1_k3n1d"]
-[ext_resource type="Script" uid="uid://ddwjfwvr4g4xu" path="res://special/BgShader.cs" id="2_70uel"]
-[ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="2_fj7yv"]
-[ext_resource type="Shader" uid="uid://dm7dw4t0r5kfv" path="res://special/world_bg.gdshader" id="2_hiqwa"]
-[ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="3_tlwt5"]
-[ext_resource type="Theme" uid="uid://cr0fsad13irxf" path="res://special/theme.tres" id="4_aqk2v"]
-[ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/Borders.cs" id="10_2o6r5"]
-[ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/WorldBorder.cs" id="10_wse8f"]
-[ext_resource type="Shape2D" uid="uid://belibtm78iay1" path="res://special/left.tres" id="11_70uel"]
-[ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/ProceedLabel.cs" id="12_2u3nc"]
-[ext_resource type="Shape2D" uid="uid://b5emsw6herrtf" path="res://special/right.tres" id="12_hiqwa"]
-[ext_resource type="Shape2D" uid="uid://6sqnqlwtm8u" path="res://special/down.tres" id="13_2u3nc"]
-[ext_resource type="Shape2D" uid="uid://cj7ehv8uvn8t4" path="res://special/up.tres" id="14_udxuc"]
-[ext_resource type="AudioStream" uid="uid://dtwk0qurmjyrb" path="res://special/Hr_coin.wav" id="17_udxuc"]
-[ext_resource type="Script" uid="uid://bvgrv70bx2vc6" path="res://special/ShepardSound.cs" id="18_ikiii"]
+[ext_resource type="Script" uid="uid://cf7vmc4ae5sv3" path="res://special/world/World2d.cs" id="1_ubau6"]
+[ext_resource type="Shader" uid="uid://dm7dw4t0r5kfv" path="res://special/world/world_bg.gdshader" id="2_4e7d3"]
+[ext_resource type="Script" uid="uid://ddwjfwvr4g4xu" path="res://special/world/BgShader.cs" id="3_hp72y"]
+[ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="4_hrv0m"]
+[ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="5_earyr"]
+[ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/world/borders/WorldBorder.cs" id="6_4e7d3"]
+[ext_resource type="Shape2D" uid="uid://belibtm78iay1" path="res://special/world/borders/left.tres" id="7_ubau6"]
+[ext_resource type="Shape2D" uid="uid://b5emsw6herrtf" path="res://special/world/borders/right.tres" id="8_4e7d3"]
+[ext_resource type="Shape2D" uid="uid://cj7ehv8uvn8t4" path="res://special/world/borders/up.tres" id="9_hp72y"]
+[ext_resource type="Shape2D" uid="uid://6sqnqlwtm8u" path="res://special/world/borders/down.tres" id="10_hrv0m"]
+[ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/world/borders/Borders.cs" id="11_ubau6"]
+[ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/world/ProceedLabel.cs" id="12_xuavk"]
+[ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://special/world/OtherWorld.cs" id="13_ttqxl"]
+[ext_resource type="Theme" uid="uid://cr0fsad13irxf" path="res://special/ui/theme.tres" id="14_uj1fh"]
+[ext_resource type="AudioStream" uid="uid://dtwk0qurmjyrb" path="res://special/world/Hr_coin.wav" id="15_f540n"]
+[ext_resource type="Script" uid="uid://2uachmum50fp" path="res://components/HealthDisplay.cs" id="15_hp72y"]
+[ext_resource type="Script" uid="uid://bvgrv70bx2vc6" path="res://special/world/point/ShepardSound.cs" id="16_3p4e6"]
+[ext_resource type="PackedScene" uid="uid://co34voc1mf6qs" path="res://special/ui/health_visuals/health_icon.tscn" id="16_hp72y"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hiqwa"]
 noise_type = 2
@@ -29,7 +31,7 @@ noise = SubResource("FastNoiseLite_hiqwa")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2u3nc"]
-shader = ExtResource("2_hiqwa")
+shader = ExtResource("2_4e7d3")
 shader_parameter/noise1 = SubResource("NoiseTexture2D_hiqwa")
 shader_parameter/step_start = 0.88
 shader_parameter/step_offset = 0.0
@@ -48,7 +50,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label", "SpawnSlot")]
 y_sort_enabled = true
-script = ExtResource("1_f3sb7")
+script = ExtResource("1_ubau6")
 Size = Vector2(250, 288)
 Color = Color(0, 0.5333333, 1, 1)
 Label = NodePath("../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
@@ -60,7 +62,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 100.87948
+instance_shader_parameters/time = 0.796666
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +76,7 @@ offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
-script = ExtResource("2_70uel")
+script = ExtResource("3_hp72y")
 World = NodePath("..")
 TimeScale = 0.2
 TweenDuration = 3.5
@@ -87,7 +89,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 100.779335
+instance_shader_parameters/time = 0.796666
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +103,7 @@ offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
-script = ExtResource("2_70uel")
+script = ExtResource("3_hp72y")
 World = NodePath("..")
 TimeScale = 0.2
 TweenDuration = 4.5
@@ -109,41 +111,42 @@ EaseType = 2
 TransType = 5
 
 [node name="Env" type="WorldEnvironment" parent="World2D" unique_id=349935157]
-environment = ExtResource("3_tlwt5")
+environment = ExtResource("4_hrv0m")
 
-[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("2_fj7yv")]
+[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("5_earyr")]
 motion_mode = 1
 
 [node name="WorldBorder" type="StaticBody2D" parent="World2D" unique_id=134723482 node_paths=PackedStringArray("World")]
-script = ExtResource("10_wse8f")
+script = ExtResource("6_4e7d3")
 World = NodePath("..")
-Left = ExtResource("11_70uel")
-Right = ExtResource("12_hiqwa")
-Up = ExtResource("14_udxuc")
-Down = ExtResource("13_2u3nc")
+Left = ExtResource("7_ubau6")
+Right = ExtResource("8_4e7d3")
+Up = ExtResource("9_hp72y")
+Down = ExtResource("10_hrv0m")
 
 [node name="Left" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=344285944]
-shape = ExtResource("11_70uel")
+shape = ExtResource("7_ubau6")
 one_way_collision_direction = Vector2(1, 0)
 
 [node name="Right" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=894328809]
-shape = ExtResource("12_hiqwa")
+shape = ExtResource("8_4e7d3")
 one_way_collision_direction = Vector2(-1, 0)
 
 [node name="Down" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=533127162]
-shape = ExtResource("13_2u3nc")
+shape = ExtResource("10_hrv0m")
 one_way_collision_direction = Vector2(0, -1)
 
 [node name="Up" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=1130717722]
-shape = ExtResource("14_udxuc")
+shape = ExtResource("9_hp72y")
 
 [node name="Borders" type="Node2D" parent="World2D" unique_id=198662441 node_paths=PackedStringArray("World")]
 z_index = 4
-script = ExtResource("10_2o6r5")
+script = ExtResource("11_ubau6")
 World = NodePath("..")
 metadata/_custom_type_script = "uid://dff1gt3wl1n6u"
 
 [node name="SpawnSlot" type="Node2D" parent="World2D" unique_id=214075037]
+y_sort_enabled = true
 
 [node name="ProceedLabel" type="RichTextLabel" parent="World2D" unique_id=77434158]
 anchors_preset = 8
@@ -161,7 +164,7 @@ bbcode_enabled = true
 text = "[font_size=40][center][TAB]
 [shake]PROCEED"
 fit_content = true
-script = ExtResource("12_2u3nc")
+script = ExtResource("12_xuavk")
 
 [node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
 visibility_layer = 2
@@ -176,7 +179,7 @@ offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-script = ExtResource("1_k3n1d")
+script = ExtResource("13_ttqxl")
 Root = NodePath("SubViewport/Root")
 Viewport = NodePath("SubViewport")
 
@@ -200,7 +203,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 101.20055
+instance_shader_parameters/time = 0.796666
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5
@@ -212,7 +215,7 @@ offset_top = -288.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
-script = ExtResource("2_70uel")
+script = ExtResource("3_hp72y")
 World = NodePath("../../../World2D")
 TimeScale = 0.2
 TweenDuration = 1.0
@@ -220,7 +223,7 @@ EaseType = 1
 TransType = 5
 
 [node name="Env" type="WorldEnvironment" parent="DrawWorld2d/SubViewport" unique_id=1299417203]
-environment = ExtResource("3_tlwt5")
+environment = ExtResource("4_hrv0m")
 
 [node name="Camera2D" type="Camera2D" parent="DrawWorld2d/SubViewport" unique_id=402984710]
 
@@ -254,7 +257,7 @@ anchor_right = -0.24414063
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_aqk2v")
+theme = ExtResource("14_uj1fh")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI" unique_id=1827182140]
@@ -287,9 +290,17 @@ size_flags_horizontal = 3
 text = "1274"
 label_settings = SubResource("LabelSettings_tlwt5")
 
+[node name="HealthDisplay" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1271256852]
+layout_mode = 2
+script = ExtResource("15_hp72y")
+HealthIconScene = ExtResource("16_hp72y")
+InitialDelay = 0.25
+DelayPerIcon = 0.15
+metadata/_custom_type_script = "uid://2uachmum50fp"
+
 [node name="Coin" type="AudioStreamPlayer" parent="." unique_id=563499818]
-stream = ExtResource("17_udxuc")
+stream = ExtResource("15_f540n")
 volume_db = -8.924
-script = ExtResource("18_ikiii")
+script = ExtResource("16_3p4e6")
 
 [editable path="World2D/Entity"]

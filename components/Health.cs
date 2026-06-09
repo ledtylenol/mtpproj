@@ -11,7 +11,9 @@ public partial class Health : Node
 		get => _Health;
 		set
 		{
+			var oldHealth = _Health;
 			_Health = Mathf.Clamp(value, 0, MaxHealth);
+			EmitSignalHealthChanged((Entity)Owner, oldHealth, _Health);
 
 		}
 	}

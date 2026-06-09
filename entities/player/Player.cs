@@ -52,6 +52,9 @@ public partial class Player : Entity
 		Dead = false;
 		Shake.Active = true;
 		Visible = true;
+		Velocity = Vector2.Zero;
+		Position = Vector2.Zero;
+		ResetPhysicsInterpolation();
 	}
 	public void Die()
 	{
