@@ -28,5 +28,6 @@ public partial class PlayerCamera : Camera2D
 		Tween.TweenProperty(this, "zoom", Vector2.One, 1.0).From(Vector2.One * TweenIntensityCurve.SampleBaked((float)timeSinceLastTween));
 		GD.Print("CACA3");
 		timeSinceLastTween = 0f;
+		ResetPhysicsInterpolation();
 	}
 }

@@ -181,9 +181,11 @@ metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1179834165]
 stream = SubResource("AudioStreamRandomizer_emnci")
 pitch_scale = 1.33
+bus = &"Sfx"
 
 [node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1933821066]
 stream = SubResource("AudioStreamRandomizer_82gfy")
+bus = &"Sfx"
 
 [node name="EraseOnDeath" type="Node" parent="." unique_id=179309848 node_paths=PackedStringArray("Health")]
 script = ExtResource("17_tupve")

@@ -111,10 +111,12 @@ metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1417630162]
 stream = SubResource("AudioStreamRandomizer_fxsul")
 pitch_scale = 2.73
+bus = &"Sfx"
 
 [node name="HitSound3" type="AudioStreamPlayer" parent="Sounds" unique_id=1924386396]
 stream = SubResource("AudioStreamRandomizer_fci5t")
 pitch_scale = 0.64
+bus = &"Sfx"
 
 [node name="Points" type="Node" parent="." unique_id=2093432625 node_paths=PackedStringArray("Health")]
 script = ExtResource("12_berey")

@@ -40,7 +40,7 @@ scale_max = 2.55
 color_initial_ramp = SubResource("GradientTexture1D_g8fno")
 
 [node name="PlayerBullet" type="CharacterBody2D" unique_id=1978228422 node_paths=PackedStringArray("HitBox")]
-modulate = Color(0.07999998, 0.7853335, 1, 1)
+modulate = Color(0.07999998, 0.7853335, 1, 0.3019608)
 script = ExtResource("1_hpeex")
 HitBox = NodePath("HitBox")
 MoveSpeed = 300.0

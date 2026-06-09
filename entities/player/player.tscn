@@ -260,14 +260,18 @@ metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1876559684]
 stream = SubResource("AudioStreamRandomizer_b2kln")
 pitch_scale = 2.73
+bus = &"Sfx"
 
 [node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1017188884]
 stream = SubResource("AudioStreamRandomizer_we0b7")
+bus = &"Sfx"
 
 [node name="Shoot" type="AudioStreamPlayer" parent="Sounds" unique_id=385203427]
 stream = SubResource("AudioStreamRandomizer_mtric")
+volume_db = -9.837
 pitch_scale = 3.14
 max_polyphony = 12
+bus = &"Sfx"
 
 [node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
 script = ExtResource("19_mtric")

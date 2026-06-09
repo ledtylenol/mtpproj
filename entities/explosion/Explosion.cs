@@ -59,12 +59,15 @@ public partial class Explosion(ExplosionStats explosionStats, uint mask, uint la
 
 		WindUpPlayer = new()
 		{
-			Stream = WindUp
+			Stream = WindUp,
+			Bus = "Sfx",
+
 		};
 
 		BoomPlayer = new()
 		{
-			Stream = Boom
+			Stream = Boom,
+			Bus = "Sfx",
 		};
 
 		CollisionShape = new();
