@@ -41,6 +41,6 @@ public partial class PlayerMove : PlayerState
 
 	public override void Tick(double delta)
 	{
-		if (Input.IsActionPressed("light")) Shooter.Shoot();
+
 	}
 }

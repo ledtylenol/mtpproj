@@ -8,7 +8,7 @@ public partial class DuplicatorIdle : State
 	public Duplicator Duplicator { get; set; }
 	public override void OnEnter()
 	{
-		GetTree().CreateTimer(1f).Timeout += () => EmitSignalTransitioned("follow");
+		GetTree().CreateTimer(0.5f, false).Timeout += () => EmitSignalTransitioned("follow");
 	}
 
 	public override void OnExit()

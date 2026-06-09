@@ -8,6 +8,9 @@ public partial class Cursor : Node2D
 	private Player Player { get; set; }
 
 	[Export]
+	private Sprite2D Sprite { get; set; }
+
+	[Export]
 	public float Width { get; set; }
 
 	[Export]
@@ -54,6 +57,7 @@ public partial class Cursor : Node2D
 
 		MouseDir = Player.Position.DirectionTo(MousePos);
 		HueShift += (float)delta * ShiftSpeed;
+		Sprite.FlipH = MouseDir.X <= 0f;
 	}
 
 	public override void _Draw()

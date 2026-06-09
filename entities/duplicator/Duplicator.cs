@@ -24,6 +24,11 @@ public partial class Duplicator : Entity
 		base._EnterTree();
 		Count++;
 	}
+	public override void _Ready()
+	{
+		base._Ready();
+		Sprite.FlipH = GD.Randi() % 2 == 0;
+	}
 	public override void _ExitTree()
 	{
 		base._EnterTree();
@@ -71,6 +76,7 @@ public partial class Duplicator : Entity
 		dup.CurrentSpeed = 50f;
 		dup.Direction = Vector2.Right.Rotated((float)GD.RandRange(0f, Mathf.Tau));
 		dup.Health.CurrentHealth = Health.CurrentHealth - 1;
+		Health.CurrentHealth -= 1;
 		DuplicateSound.Play();
 	}
 }

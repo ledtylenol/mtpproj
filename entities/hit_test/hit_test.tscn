@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="2_73dq7"]
 [ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="2_h3ctb"]
 [ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="3_w6fno"]
-[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="4_h3ctb"]
+[ext_resource type="Texture2D" uid="uid://qhismdg0c8e6" path="res://entities/hit_test/bomber.tres" id="5_fxsul"]
 [ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_krqq1"]
 [ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="5_w6fno"]
 [ext_resource type="PackedScene" uid="uid://c1hissncyu37h" path="res://special/particles/hit_1.tscn" id="6_8fpis"]
@@ -79,7 +79,7 @@ shape = SubResource("CircleShape2D_h2baf")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2058461670]
 modulate = Color(1, 0, 0, 1)
 y_sort_enabled = true
-texture = ExtResource("4_h3ctb")
+texture = ExtResource("5_fxsul")
 
 [node name="HitShake" type="Node2D" parent="Sprite2D" unique_id=2010768824]
 script = ExtResource("5_krqq1")

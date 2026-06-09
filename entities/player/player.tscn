@@ -219,6 +219,19 @@ MaxHealth = 5
 IFrames = 1.5
 metadata/_custom_type_script = "uid://iv5wxd01vyqv"
 
+[node name="Cursor" type="Node2D" parent="." unique_id=1007855764 node_paths=PackedStringArray("Player", "Sprite")]
+script = ExtResource("7_qiwj3")
+Player = NodePath("..")
+Sprite = NodePath("../PlayerSprite")
+Width = 1.0
+NormRadius = 6.0
+LineLength = 16.61
+Dash = 1.0
+Color = Color(0, 0.5500002, 1, 1)
+ShiftSpeed = 45.0
+ShiftPower = 0.1
+metadata/_custom_type_script = "uid://c0h3f8j2fra4m"
+
 [node name="HurtBox" type="Area2D" parent="." unique_id=1372679147 node_paths=PackedStringArray("Health")]
 collision_layer = 4
 collision_mask = 2
@@ -229,18 +242,6 @@ metadata/_custom_type_script = "uid://djd2q55i8737w"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1849591852]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_wvtmh")
-
-[node name="Cursor" type="Node2D" parent="HurtBox" unique_id=1007855764 node_paths=PackedStringArray("Player")]
-script = ExtResource("7_qiwj3")
-Player = NodePath("../..")
-Width = 1.0
-NormRadius = 6.0
-LineLength = 16.61
-Dash = 1.0
-Color = Color(0, 0.5500002, 1, 1)
-ShiftSpeed = 45.0
-ShiftPower = 0.1
-metadata/_custom_type_script = "uid://c0h3f8j2fra4m"
 
 [node name="ShakeOnHit" type="Node" parent="." unique_id=1462807470 node_paths=PackedStringArray("Health", "Shaker")]
 script = ExtResource("16_yqrof")
@@ -275,7 +276,7 @@ bus = &"Sfx"
 
 [node name="BulletShooter" type="Node2D" parent="." unique_id=117350278 node_paths=PackedStringArray("Cursor", "Entity")]
 script = ExtResource("19_mtric")
-Cursor = NodePath("../HurtBox/Cursor")
+Cursor = NodePath("../Cursor")
 Entity = NodePath("..")
 BulletScene = ExtResource("20_mtric")
 BulletCount = 2

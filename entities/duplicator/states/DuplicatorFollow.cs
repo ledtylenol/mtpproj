@@ -12,7 +12,7 @@ public partial class DuplicatorFollow : State
 	public Timer DashTimer { get; set; }
 	public override void OnEnter()
 	{
-		GetTree().CreateTimer(GD.RandRange(2f, 4f)).Timeout += () => EmitSignalTransitioned("duplicate");
+		GetTree().CreateTimer(GD.RandRange(2f, 4f), false).Timeout += () => EmitSignalTransitioned("duplicate");
 		PlayerDetection.BodyEntered += OnBodyEntered;
 	}
 

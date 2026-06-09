@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bfik6b621j4oo" path="res://entities/duplicator/states/DuplicatorIdle.cs" id="3_xxtar"]
 [ext_resource type="Script" uid="uid://cj3ug7hpv8isx" path="res://entities/duplicator/states/DuplicatorFollow.cs" id="4_8cvvw"]
 [ext_resource type="Script" uid="uid://de4cuwdt8o0fd" path="res://entities/duplicator/states/DuplicatorDuplicate.cs" id="6_j0p8d"]
-[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="6_xxtar"]
 [ext_resource type="Script" uid="uid://dcsnu12pfq43c" path="res://entities/player/RectLine.cs" id="7_0p2r7"]
 [ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="7_8cvvw"]
 [ext_resource type="Script" uid="uid://hlnq34q2p817" path="res://entities/duplicator/states/DuplicatorEnraged.cs" id="7_lss1b"]
@@ -15,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cvv4y2g4bk42n" path="res://components/HitBox.cs" id="9_h0ykt"]
 [ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="9_ldkev"]
 [ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="10_08hf4"]
+[ext_resource type="Texture2D" uid="uid://dwhrqos1c1eeh" path="res://entities/duplicator/duplicator.tres" id="10_v64bk"]
 [ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="13_5qif0"]
 [ext_resource type="PackedScene" uid="uid://gthaec8e15lp" path="res://special/particles/hit_2.tscn" id="14_qrmfp"]
 [ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="15_c211r"]
@@ -132,7 +132,7 @@ metadata/_custom_type_script = "uid://iv5wxd01vyqv"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=502823133]
 modulate = Color(1, 0.90000004, 0, 1)
-texture = ExtResource("6_xxtar")
+texture = ExtResource("10_v64bk")
 
 [node name="HitShake" type="Node2D" parent="Sprite2D" unique_id=1224338705]
 script = ExtResource("8_fw75c")

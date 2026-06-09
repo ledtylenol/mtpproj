@@ -70,4 +70,11 @@ public partial class PlayerBulletShooter : BulletShooter
 		CooldownItems = 0;
 	}
 
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		if (Global.Player.Dead) return;
+		if (Input.IsActionPressed("light")) Shoot();
+	}
+
 }

@@ -9,7 +9,7 @@ public partial class DuplicatorDuplicate : State
 
 	public override void OnEnter()
 	{
-		GetTree().CreateTimer(1f).Timeout += Spawn;
+		GetTree().CreateTimer(1f, false).Timeout += Spawn;
 	}
 
 	public override void OnExit()
