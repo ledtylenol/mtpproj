@@ -22,6 +22,7 @@ public partial class HealthDisplay : HBoxContainer
 	{
 		base._Ready();
 		var delay = InitialDelay;
+		Global.Player.Health.Died += OnPlayerDeath;
 		for (int i = 0; i < Global.Player.Health.MaxHealth - 1; i++)
 		{
 			var inst = HealthIconScene.Instantiate<HealthIcon>();
@@ -63,5 +64,19 @@ public partial class HealthDisplay : HBoxContainer
 			}
 		}
 		if (delay == InitialDelay) Tween.Kill();
+	}
+	private void OnPlayerDeath(Entity entity)
+	{
+		Tween?.Kill();
+		Tween = CreateTween().SetParallel();
+		var delay = 0.25f;
+
+		var health = Global.Player.Health;
+		for (int i = 0; i < health.MaxHealth - 1; i++)
+		{
+			var icon = icons[i];
+			Tween.TweenSubtween(icon.MinimizeIcon()).SetDelay(delay);
+			delay += 0.15f;
+		}
 	}
 }

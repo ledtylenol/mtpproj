@@ -39,4 +39,12 @@ public partial class HealthIcon : MarginContainer
 		Tween.TweenCallback(Callable.From(() => Filled = true));
 		return Tween;
 	}
+	public Tween MinimizeIcon()
+	{
+
+		Tween?.Kill();
+		Tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+		Tween.TweenProperty(Icon, "offset_transform_scale", Vector2.Zero, 1f).From(Vector2.One);
+		return Tween;
+	}
 }
