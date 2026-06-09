@@ -14,6 +14,9 @@ public partial class Entity : CharacterBody2D
 	public float Friction { get; set; }
 
 	[Export]
+	public bool CountsTowardEnemies { get; set; } = true;
+
+	[Export]
 	public StateMachine StateMachine { get; set; }
 
 	[Export]

@@ -11,7 +11,7 @@ public partial class PlayerCamera : Camera2D
 	public override void _Ready()
 	{
 		base._Ready();
-		Global.Single.LevelChanged += TweenZoom;
+		LevelHandler.Single.LevelFinished += TweenZoom;
 	}
 
 	public override void _PhysicsProcess(double delta)

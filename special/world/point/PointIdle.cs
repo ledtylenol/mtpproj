@@ -7,7 +7,7 @@ public partial class PointIdle : State
 	public override void _Ready()
 	{
 		base._Ready();
-		Global.Single.Connect("LevelChanged", Callable.From(OnLevelChange), 4);
+		LevelHandler.Single.Connect("LevelFinished", Callable.From(OnLevelChange), 4);
 	}
 	public override void OnEnter()
 	{

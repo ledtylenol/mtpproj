@@ -12,6 +12,9 @@ public partial class LevelHandler : Node
 	public Array<LevelPool> Pools = [];
 
 	[Export]
+	public Array<LevelPool> BossPools = [];
+
+	[Export]
 	public ExplosionStats Stats { get; set; }
 
 	[Export]
@@ -22,9 +25,12 @@ public partial class LevelHandler : Node
 
 	public bool Active { get; set; }
 	private List<Entity> aliveEnemies = [];
+	private List<Entity> decorativeEnemies = [];
+	private PackedScene NextPowerup = null;
 
 	public static LevelHandler Single { get; set; }
 	public float CurrentDifficulty { get; set; } = 1f;
+	public uint CurrentLevel { get; set; } = 0;
 
 	[Signal]
 	public delegate void LevelFinishedEventHandler();
@@ -36,6 +42,39 @@ public partial class LevelHandler : Node
 	{
 		base._Ready();
 		Single = this;
+	}
+	public void SpawnBoss()
+	{
+		var totalPoints = CurrentDifficulty * 15f;
+		Active = true;
+
+		LevelPool pool;
+		var possiblePools = BossPools.Where((pool) => pool.MinimumCost < totalPoints).ToList();
+		var size = possiblePools.Count;
+		if (size < 1) pool = possiblePools.First();
+		else pool = possiblePools[(int)(GD.Randi() % size)];
+		var tween = CreateTween().SetParallel();
+		var delay = 0f;
+		EmitSignalLevelStarted();
+		var playArea = Global.World.PlayArea;
+		var xRange = playArea.Size.X;
+		var yRange = playArea.Size.Y;
+		var enemies = pool.PossibleEnemies;
+		foreach (var enemy in enemies)
+		{
+			var inst = enemy.Scene.Instantiate<Entity>();
+
+			inst.Health.Died += OnEnemyDeath;
+			var wrapper = new SpawnWrapper(enemy.SpawnExplosionStats, inst);
+
+			var subtween = CreateTween();
+			subtween.TweenCallback(Callable.From(() => Global.Single.Spawn(wrapper)));
+			tween.TweenSubtween(subtween).SetDelay(delay);
+			if (GD.Randi() % 3 != 0)
+				delay += (float)GD.RandRange(0.05, 0.25);
+			totalPoints -= enemy.Cost;
+			aliveEnemies.Add(inst);
+		}
 	}
 	public void SpawnEnemies()
 	{
@@ -49,9 +88,9 @@ public partial class LevelHandler : Node
 		else pool = possiblePools[(int)(GD.Randi() % size)];
 		var tween = CreateTween().SetParallel();
 		var delay = 0f;
+		EmitSignalLevelStarted();
 		while (totalPoints > 0f)
 		{
-			EmitSignalLevelStarted();
 
 			var playArea = Global.World.PlayArea;
 			var xRange = playArea.Size.X;
@@ -63,7 +102,10 @@ public partial class LevelHandler : Node
 			var inst = enemy.Scene.Instantiate<Entity>();
 			inst.Position = pos + playArea.Position;
 
-			inst.Health.Died += OnEnemyDeath;
+			if (inst.CountsTowardEnemies)
+				inst.Health.Died += OnEnemyDeath;
+			else
+				inst.Health.Died += OnDecorativeEnemyDeath;
 			var wrapper = new SpawnWrapper(enemy.SpawnExplosionStats, inst);
 
 			var subtween = CreateTween();
@@ -72,7 +114,9 @@ public partial class LevelHandler : Node
 			if (GD.Randi() % 3 != 0)
 				delay += (float)GD.RandRange(0.05, 0.25);
 			totalPoints -= enemy.Cost;
-			aliveEnemies.Add(inst);
+			if (inst.CountsTowardEnemies)
+				aliveEnemies.Add(inst);
+			else decorativeEnemies.Add(inst);
 		}
 	}
 	private void OnEnemyDeath(Entity entity)
@@ -90,19 +134,24 @@ public partial class LevelHandler : Node
 			Global.Single.Spawn(expl);
 
 			if (Global.Player.Dead) return;
-			Global.Single.ChangeLevel();
 
 			CurrentDifficulty += 0.1f;
 			EmitSignalLevelFinished();
 			Active = false;
-			var i = (int)(GD.Randi() % PowerupScenes.Count);
+			if (NextPowerup is null) return;
 
-			var inst = PowerupScenes[i].Instantiate<PowerupContainer>();
+
+			var inst = NextPowerup.Instantiate<PowerupContainer>();
 			inst.Position = Vector2.Up * 25;
 			var wrapper = new SpawnWrapper(ItemExplosionStats, inst);
 
 			GetTree().CreateTimer(GD.RandRange(0.1, 0.6)).Timeout += () => Global.Single.Spawn(wrapper);
 		}
+	}
+
+	private void OnDecorativeEnemyDeath(Entity entity)
+	{
+		decorativeEnemies.Remove(entity);
 	}
 
 	public override void _PhysicsProcess(double delta)

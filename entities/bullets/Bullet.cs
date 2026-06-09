@@ -17,7 +17,7 @@ public partial class Bullet : Entity
 		//pass the owner to the hitbox for ignore purposes
 		HitBox.Entity = Root.Entity;
 		HitBox.OutOfHits += (hb) => QueueFree();
-		Global.Single.LevelChanged += HandleLevelChanged;
+		LevelHandler.Single.LevelFinished += HandleLevelChanged;
 	}
 
 	public override void _PhysicsProcess(double delta)

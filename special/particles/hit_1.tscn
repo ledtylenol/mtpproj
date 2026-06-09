@@ -36,8 +36,8 @@ scale_max = 3.0
 color = Color(1, 1, 1, 0.5176471)
 color_initial_ramp = SubResource("GradientTexture1D_wyl5g")
 collision_mode = 1
-collision_friction = 0.08
-collision_bounce = 0.68
+collision_friction = 0.0
+collision_bounce = 1.0
 collision_use_scale = true
 
 [node name="Hit1" type="GPUParticles2D" unique_id=1274422209]

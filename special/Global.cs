@@ -17,8 +17,6 @@ public partial class Global : Node
 	public delegate void SpawnUIEventHandler(Control sc);
 
 	[Signal]
-	public delegate void LevelChangedEventHandler();
-	[Signal]
 	public delegate void EntityDiedEventHandler(Entity e, Entity culprit);
 
 	public override void _EnterTree()
@@ -49,9 +47,5 @@ public partial class Global : Node
 		EmitSignalSpawnOtherWorld(src);
 	}
 
-	public void ChangeLevel()
-	{
-		EmitSignalLevelChanged();
-	}
 
 }
