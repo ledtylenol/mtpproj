@@ -184,6 +184,7 @@ public partial class LevelHandler : Node
 		aliveEnemies.Clear();
 		decorativeEnemies.Clear();
 		EmitSignalLevelFinished();
+		NextPowerup = null;
 	}
 
 	private void StartNewLevel()
