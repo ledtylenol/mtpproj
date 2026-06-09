@@ -15,6 +15,11 @@ script = ExtResource("2_g6laa")
 PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("5_frlk0")])
 metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
+[sub_resource type="Resource" id="Resource_0n3gh"]
+script = ExtResource("2_g6laa")
+PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0")])
+metadata/_custom_type_script = "uid://dsuvq5eoystbi"
+
 [sub_resource type="Curve" id="Curve_q2sny"]
 
 [sub_resource type="Curve" id="Curve_pbr1k"]
@@ -59,6 +64,7 @@ metadata/_custom_type_script = "uid://da00nqce8xth4"
 [node name="LevelHandler" type="Node" unique_id=27431079]
 script = ExtResource("1_5a6vl")
 Pools = Array[ExtResource("2_g6laa")]([SubResource("Resource_wyl5g")])
+BossPools = Array[ExtResource("2_g6laa")]([SubResource("Resource_0n3gh")])
 Stats = SubResource("Resource_8rcs6")
 PowerupScenes = Array[PackedScene]([ExtResource("7_luuxi"), ExtResource("8_0n3gh"), ExtResource("9_fsskh")])
 ItemExplosionStats = SubResource("Resource_luuxi")

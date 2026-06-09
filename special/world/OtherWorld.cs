@@ -13,7 +13,7 @@ public partial class OtherWorld : SubViewportContainer
 	{
 		base._Ready();
 		Global.Single.Connect("SpawnOtherWorld", Callable.From<Node2D>(SpawnNode));
-		LevelHandler.Single.Connect("LevelFinished", Callable.From(ClearViewport));
+		LevelHandler.Single.Connect("BossFinished", Callable.From(ClearViewport));
 		Global.World.Connect("PlayAreaUpdated", Callable.From<Rect2>(UpdateSize));
 		UpdateSize(Global.World.PlayArea);
 		Global.World.PlayerDied += (player) => ClearViewport();
@@ -32,7 +32,7 @@ public partial class OtherWorld : SubViewportContainer
 
 	private void UpdateSize(Rect2 newSize)
 	{
-		Position = newSize.Position;
-		Size = newSize.Size;
+		Position = newSize.Position - new Vector2(120f, 0f);
+		Size = newSize.Size + new Vector2(240f, 0f);
 	}
 }

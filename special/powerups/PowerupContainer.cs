@@ -26,7 +26,10 @@ public partial class PowerupContainer : Node2D
 		var label = new Label
 		{
 			Text = message,
-			Position = GlobalPosition
+			Position = GlobalPosition,
+			HorizontalAlignment = HorizontalAlignment.Center,
+			VerticalAlignment = VerticalAlignment.Center,
+
 		};
 		Global.Single.ForceSpawn2D(label);
 

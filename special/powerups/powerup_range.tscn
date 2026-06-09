@@ -7,7 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="4_hew5m"]
 [ext_resource type="AudioStream" uid="uid://cx63iv0847oao" path="res://special/powerups/powerup2.sfxr" id="5_odwxa"]
 [ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="6_hew5m"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="7_bcuk8"]
 [ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="7_vy4p5"]
+[ext_resource type="Script" uid="uid://rfx2tobqua5i" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="8_wykf0"]
+[ext_resource type="Script" uid="uid://c8mtdsv4tiedg" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="9_0kq3b"]
+[ext_resource type="Script" uid="uid://b5cnm0ify0nya" path="res://components/MoveToOtherworld.cs" id="9_iwtjc"]
+[ext_resource type="Script" uid="uid://lq56oqfax6my" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="10_02pfe"]
+[ext_resource type="Script" uid="uid://ckgmexcr3u0xj" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="11_tkd5d"]
 
 [sub_resource type="Resource" id="Resource_vvxvi"]
 script = ExtResource("3_ukme8")
@@ -19,11 +25,56 @@ metadata/_custom_type_script = "uid://mlo0g0q36hm"
 atlas = ExtResource("4_hew5m")
 region = Rect2(113, 0, 15, 16)
 
+[sub_resource type="Resource" id="Resource_5061l"]
+script = ExtResource("9_0kq3b")
+amplitude = Vector2(0, 2)
+metadata/_custom_type_script = "uid://c8mtdsv4tiedg"
+
+[sub_resource type="Resource" id="Resource_5dh58"]
+script = ExtResource("11_tkd5d")
+PositionShake = Array[ExtResource("8_wykf0")]([SubResource("Resource_5061l")])
+metadata/_custom_type_script = "uid://ckgmexcr3u0xj"
+
+[sub_resource type="Gradient" id="Gradient_ad04n"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.36526945, 0.6506986, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.49, 0.49, 0.49, 1, 0.65, 0.65, 0.65, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iwtjc"]
+gradient = SubResource("Gradient_ad04n")
+
+[sub_resource type="Curve" id="Curve_q30j7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ad04n"]
+curve = SubResource("Curve_q30j7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6nv8j"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 54.149998
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 100.00001
+damping_max = 200.00002
+damping_curve = SubResource("CurveTexture_ad04n")
+scale_max = 3.0
+color = Color(0, 1, 0.41568628, 1)
+color_initial_ramp = SubResource("GradientTexture1D_iwtjc")
+
 [node name="Powerup" type="Node2D" unique_id=1859059879 node_paths=PackedStringArray("Powerup", "Sprite", "Sound")]
 script = ExtResource("1_ukme8")
 Powerup = NodePath("Powerup")
 Sprite = NodePath("Sprite2D")
 Sound = NodePath("AudioStreamPlayer")
+
+[node name="MoveToOtherworld" type="Node" parent="." unique_id=452975581 node_paths=PackedStringArray("Particles", "Target")]
+script = ExtResource("9_iwtjc")
+Particles = NodePath("../Particles")
+UpdatePosition = true
+Target = NodePath("..")
+metadata/_custom_type_script = "uid://b5cnm0ify0nya"
 
 [node name="Powerup" type="Area2D" parent="." unique_id=422613361 node_paths=PackedStringArray("Points")]
 collision_layer = 0
@@ -41,6 +92,13 @@ shape = SubResource("CircleShape2D_bhunq")
 modulate = Color(0, 1, 0.41666675, 1)
 texture = SubResource("AtlasTexture_ukme8")
 
+[node name="ShakerComponent2D" type="Node2D" parent="Sprite2D" unique_id=1953745387]
+script = ExtResource("7_bcuk8")
+AutoPlay = true
+shake_speed = 0.33
+shakerPreset = SubResource("Resource_5dh58")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=804777328]
 stream = ExtResource("5_odwxa")
 
@@ -49,3 +107,8 @@ script = ExtResource("6_hew5m")
 PointCount = 500
 PointScene = ExtResource("7_vy4p5")
 metadata/_custom_type_script = "uid://dcyoc4cxwcoq"
+
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1077052389]
+visibility_layer = 2
+amount = 18
+process_material = SubResource("ParticleProcessMaterial_6nv8j")

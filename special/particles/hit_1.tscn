@@ -4,18 +4,25 @@
 
 [sub_resource type="Gradient" id="Gradient_wyl5g"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.35728544, 0.78043914)
-colors = PackedColorArray(1, 0, 0.016666412, 1, 0.54, 0, 0.008999863, 1, 0.14, 0, 0.0023332976, 1)
+offsets = PackedFloat32Array(0, 0.3473054, 0.7724551)
+colors = PackedColorArray(0.54, 0.54, 0.54, 1, 0.14, 0.14, 0.14, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wyl5g"]
 gradient = SubResource("Gradient_wyl5g")
+
+[sub_resource type="Curve" id="Curve_h7vvg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.37950665, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wyl5g"]
+curve = SubResource("Curve_h7vvg")
 
 [sub_resource type="Curve" id="Curve_v3iwk"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_wyl5g"]
+[sub_resource type="CurveTexture" id="CurveTexture_h7vvg"]
 curve = SubResource("Curve_v3iwk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wyl5g"]
@@ -23,13 +30,16 @@ resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
-spread = 159.568
-initial_velocity_min = 122.79
-initial_velocity_max = 248.39
+emission_shape = 3
+emission_box_extents = Vector3(12, 12, 1)
+spread = 18.984
+initial_velocity_min = 53.699997
+initial_velocity_max = 129.7
+radial_velocity_curve = SubResource("CurveTexture_wyl5g")
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = -50.0
 tangential_accel_max = 49.999996
-tangential_accel_curve = SubResource("CurveTexture_wyl5g")
+tangential_accel_curve = SubResource("CurveTexture_h7vvg")
 damping_min = 450.00003
 damping_max = 700.00006
 scale_max = 3.0
@@ -44,10 +54,12 @@ collision_use_scale = true
 top_level = true
 visibility_layer = 2
 emitting = false
-amount = 160
+amount = 30
+lifetime = 0.35000000000000003
 one_shot = true
 explosiveness = 1.0
-randomness = 0.59
+randomness = 1.0
+fixed_fps = 20
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_wyl5g")
 

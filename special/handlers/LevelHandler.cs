@@ -35,13 +35,22 @@ public partial class LevelHandler : Node
 	[Signal]
 	public delegate void LevelFinishedEventHandler();
 
-
 	[Signal]
 	public delegate void LevelStartedEventHandler();
+
+	[Signal]
+	public delegate void BossFinishedEventHandler();
+
+	[Signal]
+	public delegate void BossStartedEventHandler();
 	public override void _Ready()
 	{
 		base._Ready();
 		Single = this;
+	}
+	public bool IsBoss()
+	{
+		return (CurrentLevel + 1) % 6 == 0;
 	}
 	public void SpawnBoss()
 	{
@@ -56,10 +65,12 @@ public partial class LevelHandler : Node
 		var tween = CreateTween().SetParallel();
 		var delay = 0f;
 		EmitSignalLevelStarted();
+		EmitSignalBossStarted();
 		var playArea = Global.World.PlayArea;
 		var xRange = playArea.Size.X;
 		var yRange = playArea.Size.Y;
 		var enemies = pool.PossibleEnemies;
+		CurrentDifficulty += 0.5f;
 		foreach (var enemy in enemies)
 		{
 			var inst = enemy.Scene.Instantiate<Entity>();
@@ -72,9 +83,9 @@ public partial class LevelHandler : Node
 			tween.TweenSubtween(subtween).SetDelay(delay);
 			if (GD.Randi() % 3 != 0)
 				delay += (float)GD.RandRange(0.05, 0.25);
-			totalPoints -= enemy.Cost;
 			aliveEnemies.Add(inst);
 		}
+		NextPowerup = PowerupScenes.PickRandom();
 	}
 	public void SpawnEnemies()
 	{
@@ -137,6 +148,11 @@ public partial class LevelHandler : Node
 
 			CurrentDifficulty += 0.1f;
 			EmitSignalLevelFinished();
+			if (IsBoss())
+			{
+				EmitSignalBossFinished();
+			}
+			CurrentLevel++;
 			Active = false;
 			if (NextPowerup is null) return;
 
@@ -146,6 +162,7 @@ public partial class LevelHandler : Node
 			var wrapper = new SpawnWrapper(ItemExplosionStats, inst);
 
 			GetTree().CreateTimer(GD.RandRange(0.1, 0.6)).Timeout += () => Global.Single.Spawn(wrapper);
+			NextPowerup = null;
 		}
 	}
 
@@ -157,13 +174,21 @@ public partial class LevelHandler : Node
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		if (!Global.Player.Dead && Input.IsActionJustPressed("proceed") && aliveEnemies.Count == 0) SpawnEnemies();
+		if (!Global.Player.Dead && Input.IsActionJustPressed("proceed") && aliveEnemies.Count == 0) StartNewLevel();
 	}
 
 	public void Reset()
 	{
 		CurrentDifficulty = 1f;
+		CurrentLevel = 0;
 		aliveEnemies.Clear();
+		decorativeEnemies.Clear();
 		EmitSignalLevelFinished();
+	}
+
+	private void StartNewLevel()
+	{
+		if ((CurrentLevel + 1) % 6 == 0) SpawnBoss();
+		else SpawnEnemies();
 	}
 }

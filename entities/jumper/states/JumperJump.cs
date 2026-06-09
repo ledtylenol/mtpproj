@@ -22,7 +22,7 @@ public partial class JumperJump : JumperState
 		var dir = Jumper.GlobalPosition.DirectionTo(Global.Player.GlobalPosition);
 		var dist = Jumper.GlobalPosition.DistanceTo(Global.Player.GlobalPosition);
 		var th = GD.RandRange(0, Mathf.Tau);
-		var r = GD.RandRange(0, 30);
+		var r = GD.RandRange(0, 7);
 		var (sin, cos) = (Math.Sin(th), Math.Cos(th));
 		var randVec = new Vector2((float)cos, (float)sin) * r;
 		Jumper.Jump(dir * dist + Global.Player.Velocity * mod + randVec);

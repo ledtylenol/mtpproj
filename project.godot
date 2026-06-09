@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 run/max_fps=260
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dwajoww0vt8ut"
+
 [autoload]
 
 Shaker="*uid://cmxany5dl0ump"

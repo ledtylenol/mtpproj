@@ -11,7 +11,8 @@ public partial class Point : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		Scale = Vector2.One * (1f + Points / 2000f);
+		Scale = Vector2.One * (1f + Points / 500f);
+		ZIndex = -1;
 	}
 
 	public override void _Draw()

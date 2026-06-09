@@ -27,7 +27,7 @@ public partial class SpawnParticlesOnHit : Node
 		{
 			pmm.Direction = new Vector3(dir.X, dir.Y, 0f).Normalized();
 		}
-		inst.Transform = entity.GlobalTransform.Translated(-dir * 10f);
+		inst.Transform = entity.GlobalTransform;
 		Global.Single.SpawnOther(inst);
 	}
 }

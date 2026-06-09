@@ -12,6 +12,9 @@ public partial class ParticleDirection : Node
 	[Export]
 	public bool MoveToDrawWorld { get; set; }
 
+	[Export]
+	public bool UpdateDir { get; set; }
+
 	private ParticleProcessMaterial Material { get; set; }
 	public override void _Ready()
 	{
@@ -22,16 +25,15 @@ public partial class ParticleDirection : Node
 		Particles.Position = Entity.GlobalPosition.Snapped(new Vector2(1f, 1f));
 		Material = Particles.ProcessMaterial as ParticleProcessMaterial;
 
-		UpdateDirection();
+		if (UpdateDir)
+			UpdateDirection();
 		Particles.Emitting = true;
-		if (!MoveToDrawWorld) return;
-		Particles.GetParent().CallDeferred("remove_child", Particles);
-		Global.Single.CallDeferred("SpawnOther", Particles);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
+		if (!UpdateDir) return;
 		if (Particles is null || !IsInstanceValid(Particles)) { QueueFree(); return; }
 		UpdateDirection();
 	}

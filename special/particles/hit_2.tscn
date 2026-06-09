@@ -4,8 +4,8 @@
 
 [sub_resource type="Gradient" id="Gradient_5kuti"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.3951613, 0.7560484)
-colors = PackedColorArray(0, 1, 0.0333333, 1, 0, 0.64, 0.021333313, 1, 0, 0.14, 0.0046666623, 1)
+offsets = PackedFloat32Array(0, 0.29540917, 0.6666667)
+colors = PackedColorArray(0.64, 0.64, 0.64, 1, 0.14, 0.14, 0.14, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wyl5g"]
 gradient = SubResource("Gradient_5kuti")
@@ -23,6 +23,8 @@ resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(14, 14, 1)
 spread = 80.735
 initial_velocity_min = 137.3
 initial_velocity_max = 208.73
@@ -44,9 +46,11 @@ collision_use_scale = true
 top_level = true
 visibility_layer = 2
 emitting = false
-amount = 150
+amount = 40
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 18
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_5kuti")
 
