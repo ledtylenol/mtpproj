@@ -49,7 +49,7 @@ stream_0/stream = ExtResource("19_emnci")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82gfy"]
 size = Vector2(10, 12)
 
-[node name="Jumper" type="CharacterBody2D" unique_id=495895628 node_paths=PackedStringArray("Sprite", "JumpTimer", "HitBox", "StateMachine", "Health")]
+[node name="Jumper" type="CharacterBody2D" unique_id=495895628 node_paths=PackedStringArray("Sprite", "JumpTimer", "HitBox", "HurtBox", "StateMachine", "Health")]
 y_sort_enabled = true
 collision_layer = 0
 script = ExtResource("1_oo0cc")
@@ -60,6 +60,7 @@ JumpTimer = NodePath("Timer")
 Cooldown = 1.5
 MaxJumpDistance = 120.0
 HitBox = NodePath("HitBox")
+HurtBox = NodePath("HurtBox")
 Friction = 100.0
 StateMachine = NodePath("StateMachine")
 Health = NodePath("Health")
@@ -115,9 +116,11 @@ script = ExtResource("5_a30yv")
 InitialState = NodePath("Idle")
 metadata/_custom_type_script = "uid://yttbfrfstie3"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=394772311 node_paths=PackedStringArray("JumpTimer")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=394772311 node_paths=PackedStringArray("JumpTimer", "Sprite")]
 script = ExtResource("6_1cp1u")
 JumpTimer = NodePath("../../Timer")
+Sprite = NodePath("../../JumperSprite")
+JumpDuration = 0.5
 metadata/_custom_type_script = "uid://ctdoajcanci86"
 
 [node name="Jump" type="Node" parent="StateMachine" unique_id=1427742478 node_paths=PackedStringArray("Shaker", "Jump", "Land", "JumpCooldown", "Ghosts")]

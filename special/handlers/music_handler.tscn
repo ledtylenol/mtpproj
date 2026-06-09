@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cgc4ktn8g5wrx"]
+
+[ext_resource type="Script" uid="uid://ck8i0fnppmoxx" path="res://special/handlers/MusicHandler.cs" id="1_267rj"]
+[ext_resource type="AudioStream" uid="uid://dquoq30jck6bp" path="res://special/songs/Arcadeez.ogg" id="2_bq4h8"]
+[ext_resource type="AudioStream" uid="uid://bk03g18ts0w3x" path="res://special/songs/GO CRAZY.ogg" id="3_wd5w1"]
+[ext_resource type="AudioStream" uid="uid://post8ik8ehrb" path="res://special/songs/jingle1.ogg" id="4_b01mb"]
+[ext_resource type="AudioStream" uid="uid://d2oidft10ywy1" path="res://special/songs/The Emerald Lounge.ogg" id="4_ks56c"]
+[ext_resource type="AudioStream" uid="uid://31eywnwbyqkn" path="res://special/songs/jingle2.ogg" id="5_aa4vy"]
+[ext_resource type="AudioStream" uid="uid://cr14sbinvmue6" path="res://special/songs/wound.fm.ogg" id="5_vx5ni"]
+[ext_resource type="AudioStream" uid="uid://b4gnw6yq0b2gc" path="res://special/songs/Thinker Walker Dreamer Scatter.ogg" id="6_e4rls"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_267rj"]
+streams_count = 3
+stream_0/stream = ExtResource("2_bq4h8")
+stream_1/stream = ExtResource("3_wd5w1")
+stream_2/stream = ExtResource("4_ks56c")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vx5ni"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("5_vx5ni")
+stream_1/stream = ExtResource("6_e4rls")
+
+[node name="Music" type="Node" unique_id=1622549719 node_paths=PackedStringArray("FightPlayer", "IdlePlayer", "FightJingle", "IdleJingle", "FightTimer", "IdleTimer")]
+script = ExtResource("1_267rj")
+FightPlayer = NodePath("Fight")
+IdlePlayer = NodePath("Idle")
+FightJingle = NodePath("FightJingle")
+IdleJingle = NodePath("IdleJingle")
+FightTimer = NodePath("FightTimer")
+IdleTimer = NodePath("IdleTimer")
+metadata/_custom_type_script = "uid://ck8i0fnppmoxx"
+
+[node name="Fight" type="AudioStreamPlayer" parent="." unique_id=642536605]
+stream = SubResource("AudioStreamRandomizer_267rj")
+volume_db = -12.649
+
+[node name="FightJingle" type="AudioStreamPlayer" parent="." unique_id=1212482912]
+stream = ExtResource("4_b01mb")
+
+[node name="Idle" type="AudioStreamPlayer" parent="." unique_id=1935638087]
+stream = SubResource("AudioStreamRandomizer_vx5ni")
+volume_db = -12.0
+
+[node name="IdleJingle" type="AudioStreamPlayer" parent="." unique_id=1344570752]
+stream = ExtResource("5_aa4vy")
+
+[node name="FightTimer" type="Timer" parent="." unique_id=956236169]
+one_shot = true
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=633780180]
+one_shot = true

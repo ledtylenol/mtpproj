@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b4gnw6yq0b2gc"
+path="res://.godot/imported/Thinker Walker Dreamer Scatter.ogg-361c6317514418bae20a721fe0a5be02.oggvorbisstr"
+
+[deps]
+
+source_file="res://special/songs/Thinker Walker Dreamer Scatter.ogg"
+dest_files=["res://.godot/imported/Thinker Walker Dreamer Scatter.ogg-361c6317514418bae20a721fe0a5be02.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

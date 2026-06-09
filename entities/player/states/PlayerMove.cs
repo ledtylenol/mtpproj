@@ -29,6 +29,12 @@ public partial class PlayerMove : PlayerState
 			EmitSignalTransitioned("idle");
 			return;
 		}
+		if (Input.IsActionJustPressed("dash"))
+		{
+			EmitSignalTransitioned("dash");
+			return;
+		}
+
 		Velocity = Velocity.MoveToward(Direction * Player.MoveSpeed, (float)delta * Player.Acceleration);
 		Player.Move(delta);
 	}

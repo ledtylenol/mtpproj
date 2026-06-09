@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bhn6lugi8swxm"]
+
+[ext_resource type="Script" uid="uid://d08j3e8pj638" path="res://special/powerups/PowerupContainer.cs" id="1_h16jh"]
+[ext_resource type="Script" uid="uid://dqg77rq5ha4x2" path="res://components/powerups/Powerup.cs" id="2_8liay"]
+[ext_resource type="Script" uid="uid://djfx540xsbcuw" path="res://components/powerups/FireRate.cs" id="3_h16jh"]
+[ext_resource type="PackedScene" uid="uid://cfralsbax6s8n" path="res://special/powerups/powerup_2.tscn" id="3_y5cg3"]
+[ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="4_xe3jh"]
+[ext_resource type="AudioStream" uid="uid://6hxsuc2dflw" path="res://special/powerups/powerup3.sfxr" id="5_8liay"]
+[ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="6_xe3jh"]
+[ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="7_y5cg3"]
+
+[sub_resource type="Resource" id="Resource_h16jh"]
+script = ExtResource("3_h16jh")
+metadata/_custom_type_script = "uid://djfx540xsbcuw"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8liay"]
+atlas = ExtResource("4_xe3jh")
+region = Rect2(100, 0, 9, 16)
+
+[node name="Powerup" type="Node2D" unique_id=1859059879 node_paths=PackedStringArray("Powerup", "Sprite", "Sound")]
+script = ExtResource("1_h16jh")
+Powerup = NodePath("Powerup")
+Sprite = NodePath("Sprite2D")
+Sound = NodePath("AudioStreamPlayer")
+
+[node name="Powerup" type="Area2D" parent="." unique_id=422613361 node_paths=PackedStringArray("Points")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_8liay")
+Particles = ExtResource("3_y5cg3")
+Stat = SubResource("Resource_h16jh")
+Points = NodePath("../Points")
+metadata/_custom_type_script = "uid://dqg77rq5ha4x2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup" unique_id=1594633250]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=99370878]
+modulate = Color(1, 0, 0.016666412, 1)
+texture = SubResource("AtlasTexture_8liay")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=312407457]
+stream = ExtResource("5_8liay")
+
+[node name="Points" type="Node" parent="." unique_id=754259294]
+script = ExtResource("6_xe3jh")
+PointCount = 500
+PointScene = ExtResource("7_y5cg3")
+metadata/_custom_type_script = "uid://dcyoc4cxwcoq"

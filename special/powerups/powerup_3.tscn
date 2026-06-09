@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ccslqa8gk6x0w"]
+
+[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_6p4q1"]
+
+[sub_resource type="Gradient" id="Gradient_6p4q1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.26347306, 0.66866267)
+colors = PackedColorArray(0, 1, 0.41568628, 1, 0, 0.54, 0.22500005, 1, 0, 0.16, 0.06666668, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fjork"]
+gradient = SubResource("Gradient_6p4q1")
+
+[sub_resource type="Curve" id="Curve_v3iwk"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wyl5g"]
+curve = SubResource("Curve_v3iwk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lbswa"]
+resource_local_to_scene = true
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 122.79
+initial_velocity_max = 248.39
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -50.0
+tangential_accel_max = 49.999996
+tangential_accel_curve = SubResource("CurveTexture_wyl5g")
+damping_min = 450.00003
+damping_max = 700.00006
+scale_max = 3.0
+color = Color(1, 1, 1, 0.5176471)
+color_initial_ramp = SubResource("GradientTexture1D_fjork")
+collision_mode = 1
+collision_friction = 0.08
+collision_bounce = 0.68
+collision_use_scale = true
+
+[node name="Powerup3" type="GPUParticles2D" unique_id=1274422209]
+top_level = true
+visibility_layer = 2
+emitting = false
+amount = 160
+one_shot = true
+explosiveness = 1.0
+randomness = 0.59
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_lbswa")
+
+[node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
+script = ExtResource("1_6p4q1")
+metadata/_custom_type_script = "uid://u3do6jythrh3"

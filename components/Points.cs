@@ -15,7 +15,8 @@ public partial class Points : Node
 	public override void _Ready()
 	{
 		base._Ready();
-		Health.Damaged += SpawnPoints;
+		if (Health is not null)
+			Health.Damaged += SpawnPoints;
 	}
 
 	private void SpawnPoints(Entity entity, HitBox source, float damage)
@@ -26,7 +27,7 @@ public partial class Points : Node
 		var ratioPer = ratio / count;
 
 		var th = (float)GD.RandRange(-Mathf.Pi / 12, Mathf.Pi / 12);
-		var dir = source.GlobalPosition.DirectionTo(entity.GlobalPosition) * 120f;
+		var dir = source.GlobalPosition.DirectionTo(entity.GlobalPosition) * (120f + GD.RandRange(-10, 10));
 		dir = dir.Rotated(th);
 
 		var points = ratioPer * PointCount;
@@ -38,7 +39,30 @@ public partial class Points : Node
 			inst.Position = entity.GlobalPosition;
 			inst.Points = points;
 
-			Global.World.AddChild(inst);
+			Global.Single.Spawn(inst);
+		}
+	}
+	public void SpawnPointsRandom(Node2D source)
+	{
+		if (Global.Player.Dead) return;
+		var ratio = 1f;
+		var count = 20 + GD.Randi() % 10;
+		var ratioPer = ratio / count;
+
+
+		var points = ratioPer * PointCount;
+		for (int i = 0; i < count; i++)
+		{
+
+			var th = (float)GD.RandRange(0, Mathf.Tau);
+			var dir = Vector2.Right * (120f + GD.RandRange(-10, 10));
+			dir = dir.Rotated(th);
+			var inst = PointScene.Instantiate<Point>();
+			inst.Velocity = dir;
+			inst.Position = source.GlobalPosition;
+			inst.Points = points;
+
+			Global.Single.Spawn(inst);
 		}
 	}
 }

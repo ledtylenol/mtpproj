@@ -1,8 +1,10 @@
 using Godot;
 using System;
 
-public partial class Explosion(ExplosionStats explosionStats, uint mask, uint layer) : Entity
+public partial class Explosion(ExplosionStats explosionStats, uint mask, uint layer, bool clearOnLevelFinish) : Entity
 {
+	[Export]
+	public bool ClearOnLevelFinish { get; set; } = clearOnLevelFinish;
 	[Export]
 	public ExplosionStats ExplosionStats { get; set; } = explosionStats;
 
@@ -37,10 +39,19 @@ public partial class Explosion(ExplosionStats explosionStats, uint mask, uint la
 	private AudioStreamPlayer WindUpPlayer { get; set; }
 	private AudioStreamPlayer BoomPlayer { get; set; }
 
+	[Signal]
+	public delegate void VisualDoneEventHandler();
+
+	[Signal]
+	public delegate void ExplosionDoneEventHandler();
+
 	public override void _Ready()
 	{
 		base._Ready();
-		ExplosionStats.GetAndStartTween(this).TweenCallback(Callable.From(QueueFree));
+		var tween = ExplosionStats.GetAndStartTween(this);
+
+		tween.TweenCallback(Callable.From(EmitSignalExplosionDone));
+		tween.TweenCallback(Callable.From(QueueFree));
 		HitBox = new()
 		{
 			Active = false
@@ -68,6 +79,9 @@ public partial class Explosion(ExplosionStats explosionStats, uint mask, uint la
 		HitBox.CollisionLayer = layer;
 
 		HitBox.AddChild(CollisionShape);
+
+		if (ClearOnLevelFinish)
+			LevelHandler.Single.Connect("LevelFinished", Callable.From(QueueFree));
 		AddChild(WindUpPlayer);
 		if (ExplosionStats.InitDuration > 0f)
 			WindUpPlayer.Play();
@@ -106,5 +120,6 @@ public partial class Explosion(ExplosionStats explosionStats, uint mask, uint la
 		HitBox.Active = true;
 		Active = true;
 		BoomPlayer.Play();
+		EmitSignalVisualDone();
 	}
 }

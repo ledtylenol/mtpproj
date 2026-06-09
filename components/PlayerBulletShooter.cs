@@ -63,5 +63,11 @@ public partial class PlayerBulletShooter : BulletShooter
 	{
 		return Range + RangeItems * 50f;
 	}
+	public void Reset()
+	{
+		CountItems = 0;
+		RangeItems = 0;
+		CooldownItems = 0;
+	}
 
 }

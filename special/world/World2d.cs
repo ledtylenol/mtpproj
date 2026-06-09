@@ -61,7 +61,7 @@ public partial class World2d : Node2D
 		UpdatePlayArea();
 		if (PlayerHealth is not null)
 			PlayerHealth.Died += (e) => EmitSignalPlayerDied((Player)e);
-		Global.Single.Connect("Spawn2D", Callable.From<Node2D>(SpawnEntity));
+		Global.Single.Connect("Spawn2D", Callable.From<Node>(SpawnEntity));
 	}
 
 	public void UpdatePlayArea()
@@ -78,7 +78,7 @@ public partial class World2d : Node2D
 
 	}
 
-	private void SpawnEntity(Node2D e)
+	private void SpawnEntity(Node e)
 	{
 		SpawnSlot.AddChild(e);
 	}
@@ -92,8 +92,10 @@ public partial class World2d : Node2D
 		LevelHandler.Single.Reset();
 
 		SpawnSlot.QueueFree();
-		SpawnSlot = new();
-		SpawnSlot.YSortEnabled = true;
+		SpawnSlot = new()
+		{
+			YSortEnabled = true
+		};
 		AddChild(SpawnSlot);
 
 	}

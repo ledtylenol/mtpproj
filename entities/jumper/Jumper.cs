@@ -22,6 +22,8 @@ public partial class Jumper : Entity
 	public HitBox HitBox { get; set; }
 
 	[Export]
+	public HurtBox HurtBox { get; set; }
+	[Export]
 	private float X { get; set; } = 0f;
 
 	public Tween Tween { get; set; }

@@ -7,11 +7,15 @@ public partial class HurtBox : Area2D
 	[Export]
 	public Health Health { get; set; }
 
+	[Export]
+	public bool Active { get; set; } = true;
+
 	private Dictionary<HitBox, double> ExcludeList { get; set; } = [];
 
 	public bool Hit(HitBox source)
 	{
 		if (ExcludeList.ContainsKey(source)) return false;
+		if (!Active) return false;
 		Health.Hit(this, source);
 		if (source.Pierce) ExcludeList.Add(source, Health.IFrames);
 		else ExcludeList.Add(source, 9999999f);

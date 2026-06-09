@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2oidft10ywy1"
+path="res://.godot/imported/The Emerald Lounge.ogg-85199894a33f237dbe6ee70c87d7610f.oggvorbisstr"
+
+[deps]
+
+source_file="res://special/songs/The Emerald Lounge.ogg"
+dest_files=["res://.godot/imported/The Emerald Lounge.ogg-85199894a33f237dbe6ee70c87d7610f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

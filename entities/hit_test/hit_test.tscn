@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bm83tuyw8vstd"]
 
 [ext_resource type="Script" uid="uid://bxb70q1r336l3" path="res://entities/hit_test/HitTest.cs" id="1_krqq1"]
+[ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="2_73dq7"]
 [ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="2_h3ctb"]
 [ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="3_w6fno"]
 [ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="4_h3ctb"]
@@ -11,6 +12,33 @@
 [ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="9_8wdjs"]
 [ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="10_berey"]
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="11_rjj6u"]
+[ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="12_berey"]
+[ext_resource type="AudioStream" uid="uid://d2ukjdkj5nlq1" path="res://entities/death.sfxr" id="13_fxsul"]
+[ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="13_rjj6u"]
+
+[sub_resource type="Curve" id="Curve_73dq7"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_fxsul"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_fci5t"]
+script = ExtResource("2_73dq7")
+InnerWidthCurve = SubResource("Curve_73dq7")
+OuterWidthCurve = SubResource("Curve_fxsul")
+InitEaseType = 1
+InitTransType = 7
+EaseType = 1
+TransType = 5
+EndRadius = 60.0
+InitDuration = 1.0
+Duration = 0.5
+Damage = 1
+metadata/_custom_type_script = "uid://da00nqce8xth4"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2baf"]
 
@@ -20,14 +48,15 @@ random_pitch = 1.2086668
 streams_count = 1
 stream_0/stream = ExtResource("11_rjj6u")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8wdjs"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fci5t"]
 random_pitch = 1.1764989
 streams_count = 1
-stream_0/stream = ExtResource("11_rjj6u")
+stream_0/stream = ExtResource("13_fxsul")
 
 [node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("Health")]
 y_sort_enabled = true
 script = ExtResource("1_krqq1")
+ExplosionStats = SubResource("Resource_fci5t")
 Health = NodePath("Health")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
@@ -75,7 +104,7 @@ metadata/_custom_type_script = "uid://b03wlp2uu4sal"
 script = ExtResource("10_berey")
 Health = NodePath("../Health")
 SoundsOnHit = [NodePath("HitSound")]
-SoundsOnDeath = [NodePath("HitSound2")]
+SoundsOnDeath = [NodePath("HitSound3")]
 SoundsOnShoot = []
 metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 
@@ -83,5 +112,13 @@ metadata/_custom_type_script = "uid://c8eybkhh1ct04"
 stream = SubResource("AudioStreamRandomizer_fxsul")
 pitch_scale = 2.73
 
-[node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=2083065156]
-stream = SubResource("AudioStreamRandomizer_8wdjs")
+[node name="HitSound3" type="AudioStreamPlayer" parent="Sounds" unique_id=1924386396]
+stream = SubResource("AudioStreamRandomizer_fci5t")
+pitch_scale = 0.64
+
+[node name="Points" type="Node" parent="." unique_id=2093432625 node_paths=PackedStringArray("Health")]
+script = ExtResource("12_berey")
+PointCount = 400
+Health = NodePath("../Health")
+PointScene = ExtResource("13_rjj6u")
+metadata/_custom_type_script = "uid://dcyoc4cxwcoq"

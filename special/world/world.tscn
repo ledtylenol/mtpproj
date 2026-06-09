@@ -6,10 +6,6 @@
 [ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="4_hrv0m"]
 [ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="5_earyr"]
 [ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/world/borders/WorldBorder.cs" id="6_4e7d3"]
-[ext_resource type="Shape2D" uid="uid://belibtm78iay1" path="res://special/world/borders/left.tres" id="7_ubau6"]
-[ext_resource type="Shape2D" uid="uid://b5emsw6herrtf" path="res://special/world/borders/right.tres" id="8_4e7d3"]
-[ext_resource type="Shape2D" uid="uid://cj7ehv8uvn8t4" path="res://special/world/borders/up.tres" id="9_hp72y"]
-[ext_resource type="Shape2D" uid="uid://6sqnqlwtm8u" path="res://special/world/borders/down.tres" id="10_hrv0m"]
 [ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/world/borders/Borders.cs" id="11_ubau6"]
 [ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/world/ProceedLabel.cs" id="12_xuavk"]
 [ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://special/world/OtherWorld.cs" id="13_ttqxl"]
@@ -39,6 +35,21 @@ shader_parameter/warp_speed = 2.0
 shader_parameter/warp_closeness = 2.0
 shader_parameter/warp_intensity = 0.12
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkrmk"]
+size = Vector2(20, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7shi"]
+size = Vector2(20, 501)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubau6"]
+size = Vector2(500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e7d3"]
+size = Vector2(500, 20)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bhunq"]
+polygon = PackedVector2Array(-124, -143, -124, 144, -126, 144.00002, -126, -143, -126, -145, -124, -145)
+
 [sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
 font_color = Color(0, 0, 0, 1)
 
@@ -62,7 +73,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.796666
+instance_shader_parameters/time = 90.53228
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,7 +100,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.796666
+instance_shader_parameters/time = 90.53228
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,30 +125,31 @@ TransType = 5
 environment = ExtResource("4_hrv0m")
 
 [node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("5_earyr")]
-motion_mode = 1
 
-[node name="WorldBorder" type="StaticBody2D" parent="World2D" unique_id=134723482 node_paths=PackedStringArray("World")]
+[node name="WorldBorder" type="StaticBody2D" parent="World2D" unique_id=134723482 node_paths=PackedStringArray("World", "Left", "Right", "Up", "Down")]
+collision_priority = 100.0
 script = ExtResource("6_4e7d3")
+Separation = 10.0
 World = NodePath("..")
-Left = ExtResource("7_ubau6")
-Right = ExtResource("8_4e7d3")
-Up = ExtResource("9_hp72y")
-Down = ExtResource("10_hrv0m")
+Left = NodePath("Left")
+Right = NodePath("Right")
+Up = NodePath("Up")
+Down = NodePath("Down")
 
 [node name="Left" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=344285944]
-shape = ExtResource("7_ubau6")
+shape = SubResource("RectangleShape2D_bkrmk")
 one_way_collision_direction = Vector2(1, 0)
 
 [node name="Right" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=894328809]
-shape = ExtResource("8_4e7d3")
+shape = SubResource("RectangleShape2D_n7shi")
 one_way_collision_direction = Vector2(-1, 0)
 
 [node name="Down" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=533127162]
-shape = ExtResource("10_hrv0m")
+shape = SubResource("RectangleShape2D_ubau6")
 one_way_collision_direction = Vector2(0, -1)
 
 [node name="Up" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=1130717722]
-shape = ExtResource("9_hp72y")
+shape = SubResource("RectangleShape2D_4e7d3")
 
 [node name="Borders" type="Node2D" parent="World2D" unique_id=198662441 node_paths=PackedStringArray("World")]
 z_index = 4
@@ -165,6 +177,23 @@ text = "[font_size=40][center][TAB]
 [shake]PROCEED"
 fit_content = true
 script = ExtResource("12_xuavk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="World2D" unique_id=491170898]
+occluder = SubResource("OccluderPolygon2D_bhunq")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="World2D" unique_id=2078871021]
+position = Vector2(0, -19)
+rotation = 1.5707964
+occluder = SubResource("OccluderPolygon2D_bhunq")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="World2D" unique_id=305954143]
+position = Vector2(0, 270)
+rotation = 1.5707964
+occluder = SubResource("OccluderPolygon2D_bhunq")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="World2D" unique_id=763145607]
+position = Vector2(251, 0)
+occluder = SubResource("OccluderPolygon2D_bhunq")
 
 [node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
 visibility_layer = 2
@@ -203,7 +232,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.796666
+instance_shader_parameters/time = 90.53228
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5

@@ -13,6 +13,9 @@ public partial class Player : Entity
 	[Export]
 	public Sprite2D Sprite { get; set; }
 
+	[Export]
+	public PlayerBulletShooter Shooter { get; set; }
+
 	[Signal]
 	public delegate void DiedEventHandler();
 
@@ -54,11 +57,12 @@ public partial class Player : Entity
 		Visible = true;
 		Velocity = Vector2.Zero;
 		Position = Vector2.Zero;
+		Shooter.Reset();
 		ResetPhysicsInterpolation();
 	}
 	public void Die()
 	{
-
 		EmitSignalDied();
 	}
+
 }

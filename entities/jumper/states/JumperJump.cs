@@ -45,6 +45,7 @@ public partial class JumperJump : JumperState
 	{
 		Jumper.Move(delta);
 		Jumper.HitBox.Active = JumpCooldown.TimeLeft <= 0f;
+		Jumper.HurtBox.Active = JumpCooldown.TimeLeft <= 0f;
 	}
 
 	public override void Tick(double delta)

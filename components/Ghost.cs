@@ -8,6 +8,7 @@ public partial class Ghost(float duration) : Sprite2D
 	public override void _Ready()
 	{
 		base._Ready();
+		ZIndex = 1;
 		var tween = CreateTween();
 		tween.TweenProperty(this, "modulate:a", 0f, Duration);
 		tween.TweenCallback(Callable.From(QueueFree));

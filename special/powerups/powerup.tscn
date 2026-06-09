@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cw846gqk7u8n5"]
+
+[ext_resource type="Script" uid="uid://dqg77rq5ha4x2" path="res://components/powerups/Powerup.cs" id="1_ghqim"]
+[ext_resource type="Script" uid="uid://d08j3e8pj638" path="res://special/powerups/PowerupContainer.cs" id="1_s0jar"]
+[ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="3_4lp22"]
+[ext_resource type="Script" uid="uid://cpgthvmi0m4fn" path="res://components/powerups/Count.cs" id="3_nrh38"]
+
+[sub_resource type="Resource" id="Resource_nrh38"]
+script = ExtResource("3_nrh38")
+metadata/_custom_type_script = "uid://cpgthvmi0m4fn"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0jar"]
+atlas = ExtResource("3_4lp22")
+region = Rect2(80, 0, 16, 16)
+
+[node name="Powerup" type="Node2D" unique_id=1859059879 node_paths=PackedStringArray("Powerup", "Sprite")]
+script = ExtResource("1_s0jar")
+Powerup = NodePath("Powerup")
+Sprite = NodePath("Sprite2D")
+
+[node name="Powerup" type="Area2D" parent="." unique_id=422613361]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_ghqim")
+Stat = SubResource("Resource_nrh38")
+metadata/_custom_type_script = "uid://dqg77rq5ha4x2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup" unique_id=1594633250]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=99370878]
+modulate = Color(0.6499996, 0, 1, 1)
+position = Vector2(3, 0)
+texture = SubResource("AtlasTexture_s0jar")

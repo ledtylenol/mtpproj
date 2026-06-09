@@ -10,8 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="5_fkugw"]
 [ext_resource type="Script" uid="uid://b04c5sxp5ujtd" path="res://entities/player/states/PlayerDeath.cs" id="6_afbqv"]
 [ext_resource type="Script" uid="uid://c0h3f8j2fra4m" path="res://entities/player/Cursor.cs" id="7_qiwj3"]
+[ext_resource type="Script" uid="uid://crtjd315af8m7" path="res://entities/player/states/PlayerDash.cs" id="8_221hk"]
 [ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="8_gx6sm"]
 [ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="9_bectd"]
+[ext_resource type="Script" uid="uid://dcwj18nq52c3s" path="res://components/Ghosts.cs" id="9_ghoj8"]
 [ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="9_j3ovn"]
 [ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="10_wvtmh"]
 [ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="15_gx6sm"]
@@ -119,13 +121,16 @@ stream_0/stream = ExtResource("19_eyb6c")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2kln"]
 size = Vector2(10, 6)
 
-[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Shake", "Sprite", "StateMachine", "Health")]
+[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("Shake", "Sprite", "Shooter", "StateMachine", "Health")]
 y_sort_enabled = true
 collision_layer = 4
+collision_priority = 100.0
+motion_mode = 1
 script = ExtResource("1_sglur")
 DeathExplosionStats = SubResource("Resource_eyb6c")
 Shake = NodePath("ShakeOnHit")
 Sprite = NodePath("PlayerSprite")
+Shooter = NodePath("BulletShooter")
 MoveSpeed = 100.0
 Acceleration = 800.0
 Friction = 400.0
@@ -165,6 +170,20 @@ ExplosionDelay = 0.1
 InitialExplosionDelay = 1.0
 Player = NodePath("../..")
 metadata/_custom_type_script = "uid://b04c5sxp5ujtd"
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=2070047659 node_paths=PackedStringArray("Ghosts", "Player")]
+script = ExtResource("8_221hk")
+Ghosts = NodePath("Ghosts")
+DashSpeed = 400.0
+DashDistance = 50.0
+Player = NodePath("../..")
+metadata/_custom_type_script = "uid://crtjd315af8m7"
+
+[node name="Ghosts" type="Node" parent="StateMachine/Dash" unique_id=2001794019 node_paths=PackedStringArray("NodeToCopy")]
+script = ExtResource("9_ghoj8")
+NodeToCopy = NodePath("../../../PlayerSprite")
+SpawnInterval = 0.05
+metadata/_custom_type_script = "uid://dcwj18nq52c3s"
 
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=860649556]
 y_sort_enabled = true

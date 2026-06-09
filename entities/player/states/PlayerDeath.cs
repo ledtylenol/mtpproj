@@ -81,7 +81,7 @@ public partial class PlayerDeath : PlayerState
 			var y = (float)GD.RandRange(-posOffset, posOffset);
 
 			var pos = new Vector2(x, y);
-			var explosion = new Explosion(ExplosionStats, 1 << 1, 1 << 2)
+			var explosion = new Explosion(ExplosionStats, 1 << 1, 1 << 2, false)
 			{
 				Position = pos + Player.Position,
 				Scale = new Vector2(1f + iReal, 1f + iReal)
@@ -93,7 +93,7 @@ public partial class PlayerDeath : PlayerState
 	}
 	private void SpawnFinalExplosion()
 	{
-		var explosion = new Explosion(FinalExplosionStats, 1 << 1, 1 << 2)
+		var explosion = new Explosion(FinalExplosionStats, 1 << 1, 1 << 2, false)
 		{
 			Transform = Player.Transform
 		};

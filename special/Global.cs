@@ -9,7 +9,7 @@ public partial class Global : Node
 	public static Player Player { get; set; }
 	public float Score { get; set; } = 0f;
 	[Signal]
-	public delegate void Spawn2DEventHandler(Node2D sc);
+	public delegate void Spawn2DEventHandler(Node sc);
 
 	[Signal]
 	public delegate void SpawnOtherWorldEventHandler(Node2D sc);
@@ -38,6 +38,11 @@ public partial class Global : Node
 	public void Spawn(Control src)
 	{
 		EmitSignalSpawnUI(src);
+	}
+
+	public void ForceSpawn2D(Node src)
+	{
+		EmitSignalSpawn2D(src);
 	}
 	public void SpawnOther(Node2D src)
 	{

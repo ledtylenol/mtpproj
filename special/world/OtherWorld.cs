@@ -13,7 +13,7 @@ public partial class OtherWorld : SubViewportContainer
 	{
 		base._Ready();
 		Global.Single.Connect("SpawnOtherWorld", Callable.From<Node2D>(SpawnNode));
-		Global.Single.Connect("LevelChanged", Callable.From(ClearViewport));
+		LevelHandler.Single.Connect("LevelFinished", Callable.From(ClearViewport));
 		Global.World.Connect("PlayAreaUpdated", Callable.From<Rect2>(UpdateSize));
 		UpdateSize(Global.World.PlayArea);
 		Global.World.PlayerDied += (player) => ClearViewport();

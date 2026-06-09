@@ -8,5 +8,7 @@ public partial class Enemy : Resource
 	public PackedScene Scene { get; set; }
 
 	[Export]
+	public ExplosionStats SpawnExplosionStats { get; set; }
+	[Export]
 	public float Cost { get; set; }
 }

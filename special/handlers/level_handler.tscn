@@ -1,22 +1,19 @@
 [gd_scene format=3 uid="uid://boqrq1lcoyriu"]
 
 [ext_resource type="Script" uid="uid://bjvfxobvbpel6" path="res://special/handlers/LevelHandler.cs" id="1_5a6vl"]
+[ext_resource type="Script" uid="uid://dsuvq5eoystbi" path="res://special/handlers/LevelPool.cs" id="2_g6laa"]
 [ext_resource type="Script" uid="uid://wi785ap1xqd8" path="res://entities/Enemy.cs" id="2_xh4kn"]
-[ext_resource type="PackedScene" uid="uid://cr2ewne40fqeq" path="res://entities/jumper/jumper.tscn" id="3_7xi7q"]
-[ext_resource type="PackedScene" uid="uid://bm83tuyw8vstd" path="res://entities/hit_test/hit_test.tscn" id="4_7xi7q"]
+[ext_resource type="Resource" uid="uid://dhl0rjsen0ews" path="res://special/enemies/jumper.tres" id="4_frlk0"]
+[ext_resource type="Resource" uid="uid://b6ocpdhs241fq" path="res://special/enemies/bomber.tres" id="5_frlk0"]
 [ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="5_y67dr"]
+[ext_resource type="PackedScene" uid="uid://bhn6lugi8swxm" path="res://special/powerups/powerup_rate.tscn" id="7_luuxi"]
+[ext_resource type="PackedScene" uid="uid://7rannscwaae8" path="res://special/powerups/powerup_count.tscn" id="8_0n3gh"]
+[ext_resource type="PackedScene" uid="uid://df4dmy4tsi6i5" path="res://special/powerups/powerup_range.tscn" id="9_fsskh"]
 
-[sub_resource type="Resource" id="Resource_y67dr"]
-script = ExtResource("2_xh4kn")
-Scene = ExtResource("3_7xi7q")
-Cost = 5.0
-metadata/_custom_type_script = "uid://wi785ap1xqd8"
-
-[sub_resource type="Resource" id="Resource_q2sny"]
-script = ExtResource("2_xh4kn")
-Scene = ExtResource("4_7xi7q")
-Cost = 1.0
-metadata/_custom_type_script = "uid://wi785ap1xqd8"
+[sub_resource type="Resource" id="Resource_wyl5g"]
+script = ExtResource("2_g6laa")
+PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("5_frlk0")])
+metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
 [sub_resource type="Curve" id="Curve_q2sny"]
 
@@ -37,8 +34,32 @@ EndRadius = 250.0
 Duration = 1.0
 metadata/_custom_type_script = "uid://da00nqce8xth4"
 
+[sub_resource type="Curve" id="Curve_mtric"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_eyb6c"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_luuxi"]
+script = ExtResource("5_y67dr")
+InnerWidthCurve = SubResource("Curve_mtric")
+OuterWidthCurve = SubResource("Curve_eyb6c")
+InitEaseType = 1
+InitTransType = 7
+EaseType = 1
+TransType = 5
+EndRadius = 30.0
+Duration = 1.0
+metadata/_custom_type_script = "uid://da00nqce8xth4"
+
 [node name="LevelHandler" type="Node" unique_id=27431079]
 script = ExtResource("1_5a6vl")
-PossibleEnemies = Array[ExtResource("2_xh4kn")]([SubResource("Resource_y67dr"), SubResource("Resource_q2sny")])
+Pools = Array[ExtResource("2_g6laa")]([SubResource("Resource_wyl5g")])
 Stats = SubResource("Resource_8rcs6")
+PowerupScenes = Array[PackedScene]([ExtResource("7_luuxi"), ExtResource("8_0n3gh"), ExtResource("9_fsskh")])
+ItemExplosionStats = SubResource("Resource_luuxi")
 metadata/_custom_type_script = "uid://bjvfxobvbpel6"

@@ -25,6 +25,14 @@ public partial class ExplosionStats : Resource
 	public float Duration { get; set; }
 
 	public const float ActiveWidthThreshold = 0.9f;
+	public const uint MaskAll = 1 << 1 | 1 << 2;
+	public const uint LayerAll = 1 << 1 | 1 << 2;
+
+	public const uint MaskEnemy = 1 << 2;
+	public const uint LayerEnemy = 1 << 1;
+
+	public const uint MaskPlayer = 1 << 1;
+	public const uint LayerPlayer = 1 << 2;
 
 	[Export]
 	public int Damage { get; set; }

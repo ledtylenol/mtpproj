@@ -10,27 +10,43 @@ colors = PackedColorArray(0, 1, 0.0333333, 1, 0, 0.64, 0.021333313, 1, 0, 0.14, 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wyl5g"]
 gradient = SubResource("Gradient_5kuti")
 
+[sub_resource type="Curve" id="Curve_v3iwk"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v3iwk"]
+curve = SubResource("Curve_v3iwk")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5kuti"]
 resource_local_to_scene = true
+particle_flag_align_y = true
+particle_flag_rotate_y = true
 particle_flag_disable_z = true
 spread = 80.735
 initial_velocity_min = 137.3
 initial_velocity_max = 208.73
 gravity = Vector3(0, 0, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = 99.99999
+tangential_accel_curve = SubResource("CurveTexture_v3iwk")
 damping_min = 450.00003
 damping_max = 500.00003
 scale_max = 3.0
 color = Color(1, 1, 1, 0.5176471)
 color_initial_ramp = SubResource("GradientTexture1D_wyl5g")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
 
 [node name="Hit2" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
 visibility_layer = 2
 emitting = false
-amount = 33
+amount = 150
 one_shot = true
 explosiveness = 1.0
-fixed_fps = 18
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_5kuti")
 

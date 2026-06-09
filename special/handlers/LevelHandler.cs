@@ -6,12 +6,21 @@ using System.Linq;
 
 public partial class LevelHandler : Node
 {
+
+
 	[Export]
-	public Array<Enemy> PossibleEnemies = [];
+	public Array<LevelPool> Pools = [];
 
 	[Export]
 	public ExplosionStats Stats { get; set; }
 
+	[Export]
+	public Array<PackedScene> PowerupScenes { get; set; } = [];
+
+	[Export]
+	public ExplosionStats ItemExplosionStats { get; set; }
+
+	public bool Active { get; set; }
 	private List<Entity> aliveEnemies = [];
 
 	public static LevelHandler Single { get; set; }
@@ -31,26 +40,37 @@ public partial class LevelHandler : Node
 	public void SpawnEnemies()
 	{
 		var totalPoints = CurrentDifficulty * 15f;
+		Active = true;
+
+		LevelPool pool;
+		var possiblePools = Pools.Where((pool) => pool.MinimumCost < totalPoints).ToList();
+		var size = possiblePools.Count;
+		if (size < 1) pool = possiblePools.First();
+		else pool = possiblePools[(int)(GD.Randi() % size)];
+		var tween = CreateTween().SetParallel();
+		var delay = 0f;
 		while (totalPoints > 0f)
 		{
 			EmitSignalLevelStarted();
-			Enemy enemy;
-			var possibleEnemies = PossibleEnemies.Where((enemy) => enemy.Cost < totalPoints).ToList();
-			var size = possibleEnemies.Count;
-			if (size < 1) enemy = PossibleEnemies.First();
-			else enemy = possibleEnemies[(int)(GD.Randi() % size)];
 
 			var playArea = Global.World.PlayArea;
 			var xRange = playArea.Size.X;
 			var yRange = playArea.Size.Y;
-			var pos = new Vector2((float)GD.RandRange(0f, xRange), (float)GD.RandRange(0f, yRange));
+			var pos = new Vector2((float)GD.RandRange(5f, xRange - 5f), (float)GD.RandRange(5f, yRange - 5f));
 
+			var enemy = pool.GetEnemy(totalPoints);
+			if (enemy is null) break;
 			var inst = enemy.Scene.Instantiate<Entity>();
 			inst.Position = pos + playArea.Position;
 
 			inst.Health.Died += OnEnemyDeath;
+			var wrapper = new SpawnWrapper(enemy.SpawnExplosionStats, inst);
 
-			Global.Single.Spawn(inst);
+			var subtween = CreateTween();
+			subtween.TweenCallback(Callable.From(() => Global.Single.Spawn(wrapper)));
+			tween.TweenSubtween(subtween).SetDelay(delay);
+			if (GD.Randi() % 3 != 0)
+				delay += (float)GD.RandRange(0.05, 0.25);
 			totalPoints -= enemy.Cost;
 			aliveEnemies.Add(inst);
 		}
@@ -62,7 +82,7 @@ public partial class LevelHandler : Node
 		{
 			GD.Print("All enemies are dead");
 			var playArea = Global.World.PlayArea;
-			var expl = new Explosion(Stats, 0, 0)
+			var expl = new Explosion(Stats, 0, 0, false)
 			{
 				Position = playArea.Position + playArea.Size / 2f,
 				ZIndex = 100
@@ -74,6 +94,14 @@ public partial class LevelHandler : Node
 
 			CurrentDifficulty += 0.1f;
 			EmitSignalLevelFinished();
+			Active = false;
+			var i = (int)(GD.Randi() % PowerupScenes.Count);
+
+			var inst = PowerupScenes[i].Instantiate<PowerupContainer>();
+			inst.Position = Vector2.Up * 25;
+			var wrapper = new SpawnWrapper(ItemExplosionStats, inst);
+
+			GetTree().CreateTimer(GD.RandRange(0.1, 0.6)).Timeout += () => Global.Single.Spawn(wrapper);
 		}
 	}
 
