@@ -27,11 +27,13 @@ Global="*uid://hvhpx2dqjh3f"
 PauseManager="*uid://ddvymdqysmwnm"
 LevelHandler="*uid://boqrq1lcoyriu"
 MusicHandler="*uid://cgc4ktn8g5wrx"
+TimeHandler="*uid://danq8injxbsuf"
 
 [display]
 
 window/size/viewport_width=512
 window/size/viewport_height=288
+window/size/maximize_disabled=true
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0

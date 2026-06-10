@@ -65,6 +65,11 @@ public partial class MusicHandler : Node
 
 		IdleTween.TweenProperty(IdlePlayer, "volume_linear", LinearIdleVolume, 1f).From(0f);
 	}
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		FightPlayer.PitchScale = 0.1f + (float)Engine.TimeScale * 0.9f;
+	}
 	public void StartBoss()
 	{
 		FightTimer.Stop();

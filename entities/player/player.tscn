@@ -86,7 +86,7 @@ _limits = [0.0, 20.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
 point_count = 3
 
-[sub_resource type="Resource" id="Resource_t1t22"]
+[sub_resource type="Resource" id="Resource_vewsg"]
 script = ExtResource("2_b2kln")
 InnerWidthCurve = SubResource("Curve_221hk")
 OuterWidthCurve = SubResource("Curve_ghoj8")
@@ -140,6 +140,7 @@ metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
 top_level = true
+position = Vector2(0, -1.9073486e-06)
 process_callback = 0
 script = ExtResource("2_abrql")
 TweenIntensityCurve = SubResource("Curve_t1t22")
@@ -164,7 +165,7 @@ metadata/_custom_type_script = "uid://d0qldrwcc75fg"
 script = ExtResource("6_afbqv")
 ShakerNode = NodePath("../../PlayerSprite/DeathShake")
 ExplosionStats = SubResource("Resource_b2kln")
-FinalExplosionStats = SubResource("Resource_t1t22")
+FinalExplosionStats = SubResource("Resource_vewsg")
 ExplosionCount = 20
 ExplosionDelay = 0.1
 InitialExplosionDelay = 1.0
@@ -247,6 +248,7 @@ shape = SubResource("CircleShape2D_wvtmh")
 script = ExtResource("16_yqrof")
 Health = NodePath("../Health")
 Shaker = NodePath("../PlayerSprite/HitShake")
+ShakeOnDeath = false
 metadata/_custom_type_script = "uid://b03wlp2uu4sal"
 
 [node name="Sounds" type="Node" parent="." unique_id=567339484 node_paths=PackedStringArray("Health", "BulletShooter", "SoundsOnHit", "SoundsOnDeath", "SoundsOnShoot")]

@@ -6,9 +6,11 @@ public partial class DuplicatorIdle : State
 {
 	[Export]
 	public Duplicator Duplicator { get; set; }
+	private SceneTreeTimer Timer { get; set; }
 	public override void OnEnter()
 	{
-		GetTree().CreateTimer(0.5f, false).Timeout += () => EmitSignalTransitioned("follow");
+		Timer = GetTree().CreateTimer(0.5f, false);
+		Timer.Timeout += () => EmitSignalTransitioned("follow");
 	}
 
 	public override void OnExit()

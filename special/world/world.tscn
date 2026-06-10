@@ -74,7 +74,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 656.92395
+instance_shader_parameters/time = 0.54333293
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +101,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 656.92395
+instance_shader_parameters/time = 0.54333293
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -178,6 +178,7 @@ text = "[font_size=40][center][TAB]
 [shake]PROCEED"
 fit_content = true
 script = ExtResource("12_xuavk")
+InitialSpacing = 10.0
 
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="World2D" unique_id=2078871021]
 position = Vector2(0, -19)
@@ -231,7 +232,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 656.92395
+instance_shader_parameters/time = 0.54333293
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5

@@ -26,6 +26,19 @@ public partial class Sounds : Node
 			BulletShooter.Shot += () => PlaySounds(SoundsOnShoot);
 	}
 
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		foreach (var sound in SoundsOnHit)
+		{
+			sound.PitchScale = 0.1f + (float)Engine.TimeScale * 0.9f;
+		}
+
+		foreach (var sound in SoundsOnDeath)
+		{
+			sound.PitchScale = 0.1f + (float)Engine.TimeScale * 0.9f;
+		}
+	}
 	private void PlaySounds(Array<AudioStreamPlayer> sounds)
 	{
 		foreach (var sound in sounds)

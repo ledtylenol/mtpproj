@@ -27,6 +27,7 @@ public partial class Player : Entity
 		base._Ready();
 		Global.Player = this;
 		Health.Died += SetDead;
+		Health.Damaged += DoHitStop;
 	}
 	public void ProcessInputs()
 	{
@@ -63,6 +64,12 @@ public partial class Player : Entity
 	public void Die()
 	{
 		EmitSignalDied();
+	}
+
+	private void DoHitStop(Entity e, HitBox culprit, float damage)
+	{
+		if (Health.CurrentHealth == 0) return;
+		TimeHandler.Stop(0.5f, damage / 10f);
 	}
 
 }

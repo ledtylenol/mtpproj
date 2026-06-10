@@ -54,12 +54,12 @@ public partial class PlayerDeath : PlayerState
 	{
 		DeathTween?.Kill();
 		ShakerNode.Call("play_shake");
-		DeathTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+		DeathTween = CreateTween().SetIgnoreTimeScale().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
 		DeathTween.TweenInterval(InitialExplosionDelay);
 		double delay = ExplosionDelay;
 		for (int i = 0; i < GD.Randi() % 3 + ExplosionCount; i++)
 		{
-			var subt = CreateTween();
+			var subt = CreateTween().SetIgnoreTimeScale();
 			subt.TweenCallback(SpawnExplosion(i));
 			DeathTween.TweenSubtween(subt).SetDelay(delay);
 		}
