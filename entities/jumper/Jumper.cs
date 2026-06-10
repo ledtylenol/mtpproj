@@ -15,6 +15,9 @@ public partial class Jumper : Entity
 	public Timer JumpTimer { get; set; }
 	[Export]
 	public float Cooldown { get; set; } = 0.5f;
+
+	[Export]
+	public float JumpTime { get; set; } = 0.5f;
 	[Export]
 	public float MaxJumpDistance { get; set; } = 75f;
 
@@ -50,10 +53,26 @@ public partial class Jumper : Entity
 		HitBox.Active = false;
 
 		var sign = Mathf.Sign(pos.X);
-		Tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic).TweenProperty(this, "X", 1f, 0.5f);
-		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Pi, 0.5f).From(0f);
-		Tween.SetEase(Tween.EaseType.In).TweenProperty(this, "X", 0f, 0.5f);
-		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Tau, 0.5f);
+		Tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic).TweenProperty(this, "X", 1f, JumpTime / 2f);
+		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Pi, JumpTime / 2f).From(0f);
+		Tween.SetEase(Tween.EaseType.In).TweenProperty(this, "X", 0f, JumpTime / 2f);
+		Tween.Parallel().TweenProperty(Sprite, "rotation", sign * Mathf.Tau, JumpTime / 2f);
 		Velocity = pos;
+	}
+
+	public void MoveBounce(double _delta)
+	{
+		var iterations = 5;
+		var subdelt = _delta / iterations;
+
+		for (int i = 0; i < iterations; i++)
+		{
+			var res = MoveAndCollide(Velocity * (float)subdelt);
+
+			if (res is not null)
+			{
+				Velocity = Velocity.Bounce(res.GetNormal());
+			}
+		}
 	}
 }

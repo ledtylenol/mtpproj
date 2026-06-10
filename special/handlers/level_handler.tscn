@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://b6ocpdhs241fq" path="res://special/enemies/bomber.tres" id="5_frlk0"]
 [ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="5_y67dr"]
 [ext_resource type="Resource" uid="uid://bxp17xfo030ev" path="res://special/enemies/duplicator.tres" id="6_0n3gh"]
+[ext_resource type="Resource" uid="uid://cs5ny8jfqu0jd" path="res://special/enemies/jumper_boss.tres" id="7_fsskh"]
 [ext_resource type="PackedScene" uid="uid://bhn6lugi8swxm" path="res://special/powerups/powerup_rate.tscn" id="7_luuxi"]
 [ext_resource type="PackedScene" uid="uid://7rannscwaae8" path="res://special/powerups/powerup_count.tscn" id="8_0n3gh"]
 [ext_resource type="PackedScene" uid="uid://df4dmy4tsi6i5" path="res://special/powerups/powerup_range.tscn" id="9_fsskh"]
@@ -28,7 +29,7 @@ metadata/_custom_type_script = "uid://dsuvq5eoystbi"
 
 [sub_resource type="Resource" id="Resource_0n3gh"]
 script = ExtResource("2_g6laa")
-PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0")])
+PossibleEnemies = Array[ExtResource("2_xh4kn")]([ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("4_frlk0"), ExtResource("7_fsskh")])
 MaximumCost = 1.8
 RandomizePosition = true
 metadata/_custom_type_script = "uid://dsuvq5eoystbi"

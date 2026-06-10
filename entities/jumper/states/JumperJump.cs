@@ -25,9 +25,9 @@ public partial class JumperJump : JumperState
 		var r = GD.RandRange(0, 7);
 		var (sin, cos) = (Math.Sin(th), Math.Cos(th));
 		var randVec = new Vector2((float)cos, (float)sin) * r;
-		Jumper.Jump(dir * dist + Global.Player.Velocity * mod + randVec);
+		Jumper.Jump(GetDir());
 		Jumper.Tween.Finished += () => EmitSignalTransitioned("idle");
-		JumpCooldown.Start();
+		JumpCooldown.Start(Jumper.JumpTime - 0.1f);
 		Jump.Play();
 	}
 
@@ -43,7 +43,7 @@ public partial class JumperJump : JumperState
 
 	public override void PhysicsTick(double delta)
 	{
-		Jumper.Move(delta);
+		Jumper.MoveBounce(delta);
 		Jumper.HitBox.Active = JumpCooldown.TimeLeft <= 0f;
 		Jumper.HurtBox.Active = JumpCooldown.TimeLeft <= 0f;
 	}
@@ -51,6 +51,12 @@ public partial class JumperJump : JumperState
 	public override void Tick(double delta)
 	{
 
+	}
+
+	private Vector2 GetDir()
+	{
+		var playerPos = Global.Player.GlobalPosition;
+		return (playerPos + Global.Player.Velocity * Jumper.JumpTime - Jumper.GlobalPosition) / Jumper.JumpTime;
 	}
 
 }
