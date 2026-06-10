@@ -11,6 +11,9 @@ public partial class MusicHandler : Node
 	private AudioStreamPlayer IdlePlayer { get; set; }
 
 	[Export]
+	private AudioStreamPlayer PausePlayer { get; set; }
+
+	[Export]
 	private AudioStreamPlayer FightJingle { get; set; }
 
 	[Export]
@@ -21,6 +24,7 @@ public partial class MusicHandler : Node
 
 	[Export]
 	private Timer FightTimer { get; set; }
+
 	[Export]
 	private Timer IdleTimer { get; set; }
 
@@ -29,6 +33,7 @@ public partial class MusicHandler : Node
 	public static MusicHandler Single { get; set; }
 
 	private float LinearIdleVolume;
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -41,6 +46,8 @@ public partial class MusicHandler : Node
 		IdleTimer.Timeout += TweenIdleVolume;
 		StartIdle();
 		LinearIdleVolume = IdlePlayer.VolumeLinear;
+		PauseManager.Single.Paused += () => PausePlayer.Play();
+		PauseManager.Single.UnPaused += PausePlayer.Stop;
 	}
 
 	private void StartIdle()

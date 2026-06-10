@@ -6,11 +6,12 @@ public partial class DuplicatorIdle : State
 {
 	[Export]
 	public Duplicator Duplicator { get; set; }
-	private SceneTreeTimer Timer { get; set; }
+	[Export]
+	public Timer FollowTimer { get; set; }
 	public override void OnEnter()
 	{
-		Timer = GetTree().CreateTimer(0.5f, false);
-		Timer.Timeout += () => EmitSignalTransitioned("follow");
+		FollowTimer.Start(0.5f);
+
 	}
 
 	public override void OnExit()
@@ -22,6 +23,8 @@ public partial class DuplicatorIdle : State
 		float weight = -(float)delta * Duplicator.Friction;
 		Duplicator.CurrentSpeed = Mathf.Lerp(Duplicator.CurrentSpeed, 0f, 1.0f - Mathf.Exp(weight));
 		Duplicator.Move(delta);
+		if (FollowTimer.TimeLeft <= 0f)
+			EmitSignalTransitioned("follow");
 	}
 
 	public override void Tick(double delta)

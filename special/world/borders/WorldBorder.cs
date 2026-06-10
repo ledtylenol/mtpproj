@@ -28,6 +28,7 @@ public partial class WorldBorder : StaticBody2D
 
 	private void UpdateShapes(Rect2 newArea)
 	{
+		GD.Print(newArea);
 		var dX = -newArea.Size.X / 2f;
 		var dY = -newArea.Size.Y / 2f;
 

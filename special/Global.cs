@@ -7,7 +7,9 @@ public partial class Global : Node
 	public static Global Single { get; private set; }
 	public static World2d World { get; set; }
 	public static Player Player { get; set; }
-	public float Score { get; set; } = 0f;
+	public static Settings Settings { get; set; }
+	public static Run Run { get; set; }
+	public static RunsHistory Runs { get; set; }
 	[Signal]
 	public delegate void Spawn2DEventHandler(Node sc);
 
@@ -19,12 +21,39 @@ public partial class Global : Node
 	[Signal]
 	public delegate void EntityDiedEventHandler(Entity e, Entity culprit);
 
+	[Signal]
+	public delegate void RunEndedEventHandler(Run run);
+
+	public bool Counting { get; set; } = false;
+
 	public override void _EnterTree()
 	{
 		base._EnterTree();
 		Single = this;
+		Runs = RunsHistory.Load();
+		Runs ??= new();
+		foreach (var run in Runs.Runs)
+		{
+			GD.Print($"run with {run.Score} score lasted {run.Time}s");
+		}
+
+		Settings = Settings.Load();
+		Settings ??= new();
+		Run = new Run();
+	}
+	public override void _Ready()
+	{
+		base._Ready();
+
+		CallDeferred("ConnectHandlers");
 	}
 
+	private void ConnectHandlers()
+	{
+		LevelHandler.Single.LevelFinished += StopCounting;
+		LevelHandler.Single.LevelStarted += StartCounting;
+		Player.Health.Died += (e) => SubmitRun();
+	}
 	public void Spawn(Node2D src)
 	{
 		EmitSignalSpawn2D(src);
@@ -48,4 +77,27 @@ public partial class Global : Node
 	}
 
 
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		if (Counting)
+			Run.Time += (float)delta;
+	}
+	public void StopCounting()
+	{
+		Counting = false;
+	}
+
+	public void StartCounting()
+	{
+		Counting = true;
+	}
+
+	public static void SubmitRun()
+	{
+		Runs.AddRun(Run);
+		Runs.Save();
+		Single.EmitSignalRunEnded(Run);
+		Run = new();
+	}
 }

@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="11_o4q2q"]
 [ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="12_dfji6"]
 [ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="13_34lyd"]
-[ext_resource type="PackedScene" uid="uid://gthaec8e15lp" path="res://special/particles/hit_2.tscn" id="14_tn1h7"]
+[ext_resource type="PackedScene" uid="uid://f3org16qhm0u" path="res://special/particles/hit_3.tscn" id="14_oij3n"]
 [ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="15_3727f"]
 [ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="16_hqgvs"]
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="17_1kqmu"]
@@ -29,6 +29,7 @@ _data = [Vector2(0, 0), 0.0, 1.7159611, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1cp1u"]
+radius = 11.045361
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rae5n"]
 radius = 13.0
@@ -60,6 +61,7 @@ Sprite = NodePath("JumperSprite")
 JumpHeight = 35.0
 JumpCurve = SubResource("Curve_1cp1u")
 JumpTimer = NodePath("Timer")
+Cooldown = 0.0
 MaxJumpDistance = 500.0
 HitBox = NodePath("HitBox")
 HurtBox = NodePath("HurtBox")
@@ -96,6 +98,14 @@ fade_in = 1e-05
 shakerPreset = ExtResource("5_5qfnq")
 metadata/_custom_type_script = "uid://gt23yxfcsi7h"
 
+[node name="ShakerComponent2D2" type="Node2D" parent="JumperSprite" unique_id=529654072]
+script = ExtResource("4_387ro")
+AutoPlay = true
+duration = 2.0
+fade_in = 1e-05
+shakerPreset = ExtResource("5_5qfnq")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
 [node name="HitBox" type="Area2D" parent="." unique_id=29714751 node_paths=PackedStringArray("Entity")]
 collision_layer = 2
 collision_mask = 4
@@ -106,6 +116,7 @@ Active = false
 metadata/_custom_type_script = "uid://cvv4y2g4bk42n"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=550019712]
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_1cp1u")
 
 [node name="Timer" type="Timer" parent="." unique_id=2111640044]
@@ -122,20 +133,21 @@ metadata/_custom_type_script = "uid://yttbfrfstie3"
 script = ExtResource("8_iu28q")
 JumpTimer = NodePath("../../Timer")
 Sprite = NodePath("../../JumperSprite")
-JumpDuration = 1.0
+JumpDuration = 0.5
 metadata/_custom_type_script = "uid://ctdoajcanci86"
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=1427742478 node_paths=PackedStringArray("Shaker", "Jump", "Land", "JumpCooldown", "Ghosts")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1427742478 node_paths=PackedStringArray("Shaker", "Jump", "Land", "JumpCooldown", "JumpTimer", "Ghosts")]
 script = ExtResource("9_wnqpq")
 Shaker = NodePath("../../JumperSprite/ShakerComponent2D")
 Jump = NodePath("../../Jump")
 Land = NodePath("../../Land")
 JumpCooldown = NodePath("JumpCooldown")
+JumpTimer = NodePath("../../Timer")
 Ghosts = NodePath("Ghosts")
 metadata/_custom_type_script = "uid://dnm44oj5pwpst"
 
 [node name="JumpCooldown" type="Timer" parent="StateMachine/Jump" unique_id=1644337669]
-wait_time = 0.9
+wait_time = 0.4
 one_shot = true
 
 [node name="Ghosts" type="Node" parent="StateMachine/Jump" unique_id=9459576 node_paths=PackedStringArray("NodeToCopy")]
@@ -162,8 +174,9 @@ shape = SubResource("CircleShape2D_rae5n")
 
 [node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1312940938 node_paths=PackedStringArray("Health")]
 script = ExtResource("13_34lyd")
-Particles = ExtResource("14_tn1h7")
+Particles = ExtResource("14_oij3n")
 Health = NodePath("../Health")
+Delay = 0.05
 metadata/_custom_type_script = "uid://bka021k5m4tk3"
 
 [node name="ShakeOnHit" type="Node" parent="." unique_id=1445258238 node_paths=PackedStringArray("Health", "Shaker")]

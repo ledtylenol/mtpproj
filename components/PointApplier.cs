@@ -17,7 +17,7 @@ public partial class PointApplier : Node
 	public void ApplyPoints()
 	{
 		if (!IsInstanceValid(Owner)) return;
-		Global.Single.Score += Point.Points;
+		Global.Run.Score += Point.Points;
 		//TODO! Add sound here
 		Owner.QueueFree();
 		ShepardSound.Single.Hit();

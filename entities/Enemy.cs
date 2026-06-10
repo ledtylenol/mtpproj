@@ -11,4 +11,6 @@ public partial class Enemy : Resource
 	public ExplosionStats SpawnExplosionStats { get; set; }
 	[Export]
 	public float Cost { get; set; }
+	[Export]
+	public bool RandomizePosition { get; set; } = true;
 }

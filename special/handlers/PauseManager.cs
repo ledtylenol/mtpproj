@@ -6,15 +6,25 @@ public partial class PauseManager : Node
 {
 	public static PauseManager Single { get; set; }
 
+	[Signal]
+	public delegate void PausedEventHandler();
+
+	[Signal]
+	public delegate void UnPausedEventHandler();
 	public override void _Ready()
 	{
 		base._Ready();
 		Single = this;
 		ProcessMode = ProcessModeEnum.Always;
 	}
-	public void TogglePause()
+	public static void TogglePause()
 	{
-		GetTree().Paused = !GetTree().Paused;
+		var wasPaused = Single.GetTree().Paused;
+		Single.GetTree().Paused = !Single.GetTree().Paused;
+		if (!wasPaused)
+			Single.EmitSignalPaused();
+		else
+			Single.EmitSignalUnPaused();
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -22,7 +32,15 @@ public partial class PauseManager : Node
 		if (Input.IsActionJustPressed("pause")) TogglePause();
 	}
 
-	public void Pause() => GetTree().Paused = true;
-	public void Resume() => GetTree().Paused = false;
+	public static void Pause()
+	{
+		Single.GetTree().Paused = true;
+		Single.EmitSignalPaused();
+	}
+	public static void Resume()
+	{
+		Single.GetTree().Paused = false;
+		Single.EmitSignalUnPaused();
+	}
 
 }

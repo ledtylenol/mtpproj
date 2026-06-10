@@ -95,13 +95,14 @@ public partial class LevelHandler : Node
 
 			var pos = new Vector2((float)GD.RandRange(5f, xRange - 5f), (float)GD.RandRange(5f, yRange - 5f));
 
-			if (pool.RandomizePosition)
+			if (enemy.RandomizePosition)
 				inst.Position = pos + playArea.Position;
 			if (GD.Randi() % 3 != 0)
 				delay += (float)GD.RandRange(0.05, 0.25);
 			aliveEnemies.Add(inst);
 		}
 		NextPowerup = PowerupScenes.PickRandom();
+		GD.Print(PowerupScenes.Count);
 	}
 	public void SpawnEnemies()
 	{
@@ -128,7 +129,7 @@ public partial class LevelHandler : Node
 			var enemy = pool.GetEnemy(totalPoints);
 			if (enemy is null) break;
 			var inst = enemy.Scene.Instantiate<Entity>();
-			if (pool.RandomizePosition)
+			if (enemy.RandomizePosition)
 				inst.Position = pos + playArea.Position;
 
 			if (inst.CountsTowardEnemies)
@@ -154,6 +155,7 @@ public partial class LevelHandler : Node
 		if (IsBoss()) EmitSignalBossEnemyKilled();
 		if (aliveEnemies.Count == 0)
 		{
+			if (Global.Player.Dead) return;
 			GD.Print("All enemies are dead");
 			var playArea = Global.World.PlayArea;
 			var expl = new Explosion(Stats, 0, 0, false)

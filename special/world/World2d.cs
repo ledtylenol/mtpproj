@@ -56,7 +56,6 @@ public partial class World2d : Node2D
 
 		GD.Print("READY");
 		Global.World = this;
-		Global.Single.Score = 0f;
 
 		UpdatePlayArea();
 		if (PlayerHealth is not null)
@@ -73,7 +72,7 @@ public partial class World2d : Node2D
 	{
 		if (Engine.IsEditorHint()) return;
 		base._PhysicsProcess(delta);
-		int score = (int)Global.Single.Score;
+		int score = (int)Global.Run.Score;
 		Label.Text = $"{score:D9}";
 
 	}
@@ -85,7 +84,6 @@ public partial class World2d : Node2D
 	public void Reset()
 	{
 		var player = Global.Player;
-		Global.Single.Score = 0f;
 		EmitSignalPlayerDied(Global.Player);
 		player.Health.CurrentHealth = player.Health.MaxHealth;
 		player.UnDie();

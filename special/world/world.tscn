@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://2uachmum50fp" path="res://components/HealthDisplay.cs" id="15_hp72y"]
 [ext_resource type="Script" uid="uid://bvgrv70bx2vc6" path="res://special/world/point/ShepardSound.cs" id="16_3p4e6"]
 [ext_resource type="PackedScene" uid="uid://co34voc1mf6qs" path="res://special/ui/health_visuals/health_icon.tscn" id="16_hp72y"]
+[ext_resource type="Script" uid="uid://do7xvweawh1k2" path="res://special/ui/SettingsUi.cs" id="16_ubau6"]
+[ext_resource type="Script" uid="uid://klo6cdxb265p" path="res://special/ui/Leaderboard.cs" id="17_4e7d3"]
+[ext_resource type="PackedScene" uid="uid://ghuxq5b2a5ef" path="res://special/ui/leaderboard_entry.tscn" id="18_hp72y"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hiqwa"]
 noise_type = 2
@@ -74,7 +77,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.54333293
+instance_shader_parameters/time = 288.6695
 instance_shader_parameters/uv_scale = 1.18
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +104,7 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(1, 1, 1, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.54333293
+instance_shader_parameters/time = 288.6695
 instance_shader_parameters/uv_scale = -1.0
 anchors_preset = 8
 anchor_left = 0.5
@@ -191,6 +194,7 @@ rotation = 1.5707964
 occluder = SubResource("OccluderPolygon2D_bhunq")
 
 [node name="BgHandler" type="Node" parent="World2D" unique_id=321989157 node_paths=PackedStringArray("Shaders")]
+process_mode = 3
 script = ExtResource("9_n7shi")
 Shaders = [NodePath("../BgShader"), NodePath("../BgShader2")]
 metadata/_custom_type_script = "uid://b8k53ugxx3xhh"
@@ -232,16 +236,17 @@ material = SubResource("ShaderMaterial_2u3nc")
 instance_shader_parameters/color = Color(0, 0, 0, 1)
 instance_shader_parameters/distance_threshold = 1.0
 instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 0.54333293
+instance_shader_parameters/time = 288.6695
 instance_shader_parameters/uv_scale = 0.085
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -292.0
-offset_top = -288.0
-offset_right = -42.0
+offset_left = -125.0
+offset_top = -144.0
+offset_right = 125.0
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
@@ -323,5 +328,110 @@ metadata/_custom_type_script = "uid://2uachmum50fp"
 stream = ExtResource("15_f540n")
 volume_db = -8.924
 script = ExtResource("16_3p4e6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2123837178]
+offset = Vector2(255, -150)
+transform = Transform2D(1, 0, 0, 1, 255, -150)
+follow_viewport_enabled = true
+
+[node name="Settings" type="Control" parent="CanvasLayer" unique_id=14311772 node_paths=PackedStringArray("SfxSlider", "SfxLabel", "SfxContainer", "MusicSlider", "MusicLabel", "MusicContainer")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_uj1fh")
+script = ExtResource("16_ubau6")
+SfxSlider = NodePath("MarginContainer/VBoxContainer/SfxContainer/SfxSlider")
+SfxLabel = NodePath("MarginContainer/VBoxContainer/SfxContainer/Sfx")
+SfxContainer = NodePath("MarginContainer/VBoxContainer/SfxContainer")
+MusicSlider = NodePath("MarginContainer/VBoxContainer/MusicContainer/MusicSlider")
+MusicLabel = NodePath("MarginContainer/VBoxContainer/MusicContainer/Music")
+MusicContainer = NodePath("MarginContainer/VBoxContainer/MusicContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings" unique_id=1899254077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -233.0
+offset_bottom = -140.0625
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/MarginContainer" unique_id=1812721439]
+layout_mode = 2
+
+[node name="SfxContainer" type="HBoxContainer" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer" unique_id=2008732314]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_visual_only = false
+alignment = 2
+
+[node name="SfxSlider" type="HSlider" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/SfxContainer" unique_id=115399998]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+
+[node name="Sfx" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/SfxContainer" unique_id=1582121277]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+text = "Sfx"
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/SfxContainer" unique_id=425620212]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicContainer" type="HBoxContainer" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer" unique_id=78176359]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_visual_only = false
+
+[node name="MusicSlider" type="HSlider" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/MusicContainer" unique_id=1049190170]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+
+[node name="Music" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/MusicContainer" unique_id=891292927]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+text = "Music"
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer/MusicContainer" unique_id=1192072886]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LeaderboardCanvas" type="CanvasLayer" parent="." unique_id=836980293]
+follow_viewport_enabled = true
+
+[node name="Leaderboard" type="MarginContainer" parent="LeaderboardCanvas" unique_id=222429707 node_paths=PackedStringArray("Container")]
+anchors_preset = -1
+anchor_left = 0.24414063
+anchor_top = -0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_uj1fh")
+script = ExtResource("17_4e7d3")
+Container = NodePath("ScrollContainer/VBoxContainer")
+LeaderboardEntry = ExtResource("18_hp72y")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LeaderboardCanvas/Leaderboard" unique_id=339061388]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeaderboardCanvas/Leaderboard/ScrollContainer" unique_id=1392947385]
+layout_mode = 2
 
 [editable path="World2D/Entity"]

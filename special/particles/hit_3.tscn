@@ -1,59 +1,59 @@
-[gd_scene format=3 uid="uid://gthaec8e15lp"]
+[gd_scene format=3 uid="uid://f3org16qhm0u"]
 
-[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_v3iwk"]
+[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_cywm4"]
 
-[sub_resource type="Gradient" id="Gradient_v3iwk"]
+[sub_resource type="Gradient" id="Gradient_5kuti"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.29540917, 0.6666667)
 colors = PackedColorArray(0.64, 0.64, 0.64, 1, 0.14, 0.14, 0.14, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_e5ny1"]
-gradient = SubResource("Gradient_v3iwk")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wyl5g"]
+gradient = SubResource("Gradient_5kuti")
 
-[sub_resource type="Curve" id="Curve_qcurg"]
+[sub_resource type="Curve" id="Curve_v3iwk"]
 _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_bohes"]
-curve = SubResource("Curve_qcurg")
+[sub_resource type="CurveTexture" id="CurveTexture_v3iwk"]
+curve = SubResource("Curve_v3iwk")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_66xag"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5kuti"]
 resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(14, 14, 1)
-spread = 80.735
-initial_velocity_min = 137.3
-initial_velocity_max = 208.73
+spread = 122.43
+initial_velocity_min = 277.43
+initial_velocity_max = 544.95
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = -100.0
 tangential_accel_max = 99.99999
-tangential_accel_curve = SubResource("CurveTexture_bohes")
+tangential_accel_curve = SubResource("CurveTexture_v3iwk")
 damping_min = 450.00003
 damping_max = 500.00003
 scale_max = 3.0
-color = Color(1, 1, 1, 0.5176471)
-color_initial_ramp = SubResource("GradientTexture1D_e5ny1")
+color = Color(0.1333332, 1, 0, 0.5176471)
+color_initial_ramp = SubResource("GradientTexture1D_wyl5g")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
 collision_use_scale = true
 
-[node name="Hit2" type="GPUParticles2D" unique_id=1274422209]
+[node name="Hit3" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
 visibility_layer = 2
 emitting = false
-amount = 40
+amount = 219
 lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 18
 interpolate = false
-process_material = SubResource("ParticleProcessMaterial_66xag")
+process_material = SubResource("ParticleProcessMaterial_5kuti")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
-script = ExtResource("1_v3iwk")
+script = ExtResource("1_cywm4")
 metadata/_custom_type_script = "uid://u3do6jythrh3"

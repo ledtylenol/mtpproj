@@ -82,6 +82,7 @@ collision_mask = 4
 script = ExtResource("2_vxbph")
 Particles = ExtResource("3_esg0p")
 Stat = SubResource("Resource_nrh38")
+PowerupName = "count"
 Points = NodePath("../Points")
 metadata/_custom_type_script = "uid://dqg77rq5ha4x2"
 
@@ -91,12 +92,11 @@ shape = SubResource("CircleShape2D_bhunq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=99370878]
 modulate = Color(0.6499996, 0, 1, 1)
-position = Vector2(3, -1.3598082)
+position = Vector2(3, -1.3567106)
 texture = SubResource("AtlasTexture_s0jar")
 
 [node name="ShakerComponent2D" type="Node2D" parent="Sprite2D" unique_id=1706074931]
 script = ExtResource("6_oi1fg")
-is_playing = true
 AutoPlay = true
 shake_speed = 0.33
 shakerPreset = SubResource("Resource_68tor")

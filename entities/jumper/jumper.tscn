@@ -124,12 +124,13 @@ Sprite = NodePath("../../JumperSprite")
 JumpDuration = 0.5
 metadata/_custom_type_script = "uid://ctdoajcanci86"
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=1427742478 node_paths=PackedStringArray("Shaker", "Jump", "Land", "JumpCooldown", "Ghosts")]
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1427742478 node_paths=PackedStringArray("Shaker", "Jump", "Land", "JumpCooldown", "JumpTimer", "Ghosts")]
 script = ExtResource("7_t0u2h")
 Shaker = NodePath("../../JumperSprite/ShakerComponent2D")
 Jump = NodePath("../../Jump")
 Land = NodePath("../../Land")
 JumpCooldown = NodePath("JumpCooldown")
+JumpTimer = NodePath("../../Timer")
 Ghosts = NodePath("Ghosts")
 metadata/_custom_type_script = "uid://dnm44oj5pwpst"
 

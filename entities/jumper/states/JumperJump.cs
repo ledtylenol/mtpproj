@@ -13,22 +13,33 @@ public partial class JumperJump : JumperState
 	public AudioStreamPlayer Land { get; set; }
 	[Export]
 	public Timer JumpCooldown { get; set; }
+
+	[Export]
+	public Timer JumpTimer { get; set; }
 	[Export]
 	public Ghosts Ghosts { get; set; }
+
+	[Export]
+	public float MaxRandLength { get; set; }
 	public override void OnEnter()
 	{
-		Ghosts.Active = true;
 		var mod = GD.Randi() % 2 == 0 ? 1f : 0f;
 		var dir = Jumper.GlobalPosition.DirectionTo(Global.Player.GlobalPosition);
 		var dist = Jumper.GlobalPosition.DistanceTo(Global.Player.GlobalPosition);
 		var th = GD.RandRange(0, Mathf.Tau);
-		var r = GD.RandRange(0, 7);
+		var r = (float)GD.RandRange(0, MaxRandLength);
 		var (sin, cos) = (Math.Sin(th), Math.Cos(th));
+
 		var randVec = new Vector2((float)cos, (float)sin) * r;
-		Jumper.Jump(GetDir());
-		Jumper.Tween.Finished += () => EmitSignalTransitioned("idle");
-		JumpCooldown.Start(Jumper.JumpTime - 0.1f);
+
+		Jumper.Jump(GetDir() + randVec);
+
 		Jump.Play();
+		Jumper.Tween.Finished += () => EmitSignalTransitioned("idle");
+
+		JumpCooldown.Start(Jumper.JumpTime - 0.1f);
+
+		Ghosts.Active = true;
 	}
 
 	public override void OnExit()
@@ -39,6 +50,8 @@ public partial class JumperJump : JumperState
 		Land.Play();
 
 		Ghosts.Active = false;
+		if (Jumper.Cooldown > 0f)
+			JumpTimer.Start(Jumper.Cooldown * GD.RandRange(0.9, 1.1));
 	}
 
 	public override void PhysicsTick(double delta)

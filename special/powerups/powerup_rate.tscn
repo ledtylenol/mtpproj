@@ -82,6 +82,7 @@ collision_mask = 4
 script = ExtResource("2_8liay")
 Particles = ExtResource("3_y5cg3")
 Stat = SubResource("Resource_h16jh")
+PowerupName = "rate"
 Points = NodePath("../Points")
 metadata/_custom_type_script = "uid://dqg77rq5ha4x2"
 

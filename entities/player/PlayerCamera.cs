@@ -7,7 +7,9 @@ public partial class PlayerCamera : Camera2D
 	[Export]
 	public Curve TweenIntensityCurve { get; set; }
 
+	private Tween ZoomTween { get; set; }
 	private Tween Tween { get; set; }
+
 	private double timeSinceLastTween = 0f;
 	public override void _Ready()
 	{
@@ -22,10 +24,11 @@ public partial class PlayerCamera : Camera2D
 	}
 	private void TweenZoom()
 	{
-		Tween?.Kill();
-		Tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
-		Tween.TweenProperty(this, "zoom", Vector2.One, 1.0).From(Vector2.One * TweenIntensityCurve.SampleBaked((float)timeSinceLastTween));
+		ZoomTween?.Kill();
+		ZoomTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+		ZoomTween.TweenProperty(this, "zoom", Vector2.One, 1.0).From(Vector2.One * TweenIntensityCurve.SampleBaked((float)timeSinceLastTween));
 		timeSinceLastTween = 0f;
 		ResetPhysicsInterpolation();
 	}
+
 }

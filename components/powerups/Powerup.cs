@@ -11,6 +11,9 @@ public partial class Powerup : Area2D
 	public PowerupStat Stat { get; set; }
 
 	[Export]
+	public string PowerupName { get; set; }
+
+	[Export]
 	public bool Active { get; set; } = true;
 
 	[Export]
@@ -41,6 +44,7 @@ public partial class Powerup : Area2D
 
 		Stat.Apply(player);
 		EmitSignalPowerupApplied(Stat.GetMessage());
+		Global.Run.AddPowerup(PowerupName);
 		Active = false;
 	}
 	public void ActivateAfter(float time)

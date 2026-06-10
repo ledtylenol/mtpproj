@@ -27,6 +27,7 @@ public partial class Borders : Node2D
 	{
 		base._Draw();
 
+		GD.Print("HERE");
 		Rect2 r = new(-World.Size / 2f, World.Size);
 		DrawRect(r, World.Color, filled: false, width: 1f);
 		if (GetWindow().Size.Length() > 10f)

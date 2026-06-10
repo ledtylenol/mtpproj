@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cy2ghach1wya3"
+path="res://.godot/imported/Rafflesia Online.ogg-874f454528217f0ad4e4b0042c934a50.oggvorbisstr"
+
+[deps]
+
+source_file="res://special/songs/Rafflesia Online.ogg"
+dest_files=["res://.godot/imported/Rafflesia Online.ogg-874f454528217f0ad4e4b0042c934a50.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

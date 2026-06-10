@@ -87,25 +87,34 @@ script = ExtResource("2_kx440")
 InitialState = NodePath("Idle")
 metadata/_custom_type_script = "uid://yttbfrfstie3"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=429662431 node_paths=PackedStringArray("Duplicator")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=429662431 node_paths=PackedStringArray("Duplicator", "FollowTimer")]
 script = ExtResource("3_xxtar")
 Duplicator = NodePath("../..")
+FollowTimer = NodePath("FollowTimer")
 metadata/_custom_type_script = "uid://bfik6b621j4oo"
 
-[node name="Follow" type="Node" parent="StateMachine" unique_id=1278091052 node_paths=PackedStringArray("Duplicator", "PlayerDetection", "DashTimer")]
+[node name="FollowTimer" type="Timer" parent="StateMachine/Idle" unique_id=1305591459]
+one_shot = true
+
+[node name="Follow" type="Node" parent="StateMachine" unique_id=1278091052 node_paths=PackedStringArray("Duplicator", "PlayerDetection", "DashTimer", "DuplicateTimer")]
 script = ExtResource("4_8cvvw")
 Duplicator = NodePath("../..")
 PlayerDetection = NodePath("../../PlayerDetectionArea")
 DashTimer = NodePath("DashTimer")
+DuplicateTimer = NodePath("../Duplicate/DupTimer")
 metadata/_custom_type_script = "uid://cj3ug7hpv8isx"
 
 [node name="DashTimer" type="Timer" parent="StateMachine/Follow" unique_id=1039097914]
 one_shot = true
 
-[node name="Duplicate" type="Node" parent="StateMachine" unique_id=326959903 node_paths=PackedStringArray("Duplicator")]
+[node name="Duplicate" type="Node" parent="StateMachine" unique_id=326959903 node_paths=PackedStringArray("Duplicator", "DuplicateTimer")]
 script = ExtResource("6_j0p8d")
 Duplicator = NodePath("../..")
+DuplicateTimer = NodePath("DupTimer")
 metadata/_custom_type_script = "uid://de4cuwdt8o0fd"
+
+[node name="DupTimer" type="Timer" parent="StateMachine/Duplicate" unique_id=661345768]
+one_shot = true
 
 [node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("Duplicator", "Ghosts", "Sprite", "Shaker", "HitBox", "Windup", "Dash")]
 script = ExtResource("7_lss1b")

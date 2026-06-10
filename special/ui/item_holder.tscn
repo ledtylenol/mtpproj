@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://q3v3sv20etmd"]
+
+[ext_resource type="Script" uid="uid://jpr8wu3lrnre" path="res://special/ui/ItemHolder.cs" id="1_vroci"]
+
+[node name="ItemHolder" type="ColorRect" unique_id=1191703126]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vroci")

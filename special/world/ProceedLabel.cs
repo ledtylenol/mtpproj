@@ -33,7 +33,7 @@ public partial class ProceedLabel : RichTextLabel
 	{
 		Tween?.Kill();
 		Tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
-		Tween.TweenProperty(this, "Spacing", 0f, 2f).From(InitialSpacing);
+		Tween.TweenProperty(this, "Spacing", 0.1f, 2f).From(InitialSpacing);
 		Show();
 		Message = "[TAB]\nPROCEED";
 	}
@@ -42,7 +42,7 @@ public partial class ProceedLabel : RichTextLabel
 	{
 		Tween?.Kill();
 		Tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
-		Tween.TweenProperty(this, "Spacing", 0f, 2f).From(InitialSpacing);
+		Tween.TweenProperty(this, "Spacing", 0.1f, 2f).From(InitialSpacing);
 		Show();
 		Message = "YOU DIED\n[TAB]\nPROCEED";
 	}

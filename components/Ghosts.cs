@@ -14,6 +14,8 @@ public partial class Ghosts : Node
 	[Export]
 	public bool Active { get; set; } = false;
 
+	[Export]
+	public bool SpawnOther { get; set; } = false;
 	private float RealCooldown { get; set; }
 
 	public override void _Ready()
@@ -38,9 +40,17 @@ public partial class Ghosts : Node
 		var sprite = new Ghost(0.5f)
 		{
 			Texture = NodeToCopy.Texture,
-			Transform = NodeToCopy.GlobalTransform
+			Transform = NodeToCopy.GlobalTransform,
+			FlipH = NodeToCopy.FlipH
 		};
 
-		Global.Single.Spawn(sprite);
+		if (SpawnOther)
+		{
+			sprite.VisibilityLayer |= 2;
+			sprite.TopLevel = true;
+			Global.Single.SpawnOther(sprite);
+		}
+		else
+			Global.Single.Spawn(sprite);
 	}
 }

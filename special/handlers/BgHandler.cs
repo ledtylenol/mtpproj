@@ -1,14 +1,17 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Linq;
 
 [GlobalClass]
 public partial class BgHandler : Node
 {
 	private Tween Tween { get; set; }
+	private Tween DistanceTween { get; set; }
 	private Tween DirTween { get; set; }
 	[Export]
 	public Array<BgShader> Shaders { get; set; } = [];
+
 
 	private float Heat { get; set; }
 
@@ -31,6 +34,8 @@ public partial class BgHandler : Node
 		LevelHandler.Single.LevelFinished += () => TweenDir(Vector2.Down, 1f);
 
 		LevelHandler.Single.LevelStarted += () => { if (!LevelHandler.Single.IsBoss()) TweenTimeScale(0.2f, 0.5f); };
+		PauseManager.Single.Paused += TweenPrimaryBg;
+		PauseManager.Single.UnPaused += UnTweenPrimaryBg;
 	}
 	public void TweenTimeScale(float newScale, float duration)
 	{
@@ -59,5 +64,24 @@ public partial class BgHandler : Node
 		foreach (var shader in Shaders)
 			DirTween.TweenProperty(shader, "TargetDir", newDir, duration);
 
+	}
+	private void UnTweenPrimaryBg()
+	{
+		DistanceTween?.Kill();
+		DistanceTween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+
+		var primaryBg = Shaders.First();
+
+		DistanceTween.TweenProperty(primaryBg, "DistanceThreshold", 1f, 1f);
+	}
+
+	private void TweenPrimaryBg()
+	{
+		DistanceTween?.Kill();
+		DistanceTween = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Expo);
+
+		var primaryBg = Shaders.First();
+
+		DistanceTween.TweenProperty(primaryBg, "DistanceThreshold", 10f, 10f);
 	}
 }

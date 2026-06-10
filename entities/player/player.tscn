@@ -139,6 +139,7 @@ Health = NodePath("Health")
 metadata/_custom_type_script = "uid://dca0h1lx71s7y"
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960]
+process_mode = 3
 top_level = true
 position = Vector2(0, -1.9073486e-06)
 process_callback = 0
