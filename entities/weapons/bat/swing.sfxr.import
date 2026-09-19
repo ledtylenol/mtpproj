@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://u4huutn7gsx6"
+path="res://.godot/imported/swing.sfxr-41508afbdc6ed6bb66bff45f3ac431ae.sample"
+
+[deps]
+
+source_file="res://entities/weapons/bat/swing.sfxr"
+dest_files=["res://.godot/imported/swing.sfxr-41508afbdc6ed6bb66bff45f3ac431ae.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

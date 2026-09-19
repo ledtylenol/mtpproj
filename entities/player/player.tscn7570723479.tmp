@@ -1,0 +1,297 @@
+[gd_scene format=3 uid="uid://b4dsuri8lsncp"]
+
+[ext_resource type="Script" uid="uid://cw5oq13qyltxe" path="res://entities/player/player.gd" id="1_ghoj8"]
+[ext_resource type="Script" uid="uid://3wnfsy0n4ddf" path="res://entities/player/rect_line.gd" id="2_26q78"]
+[ext_resource type="Script" uid="uid://crrqjnqa44e1l" path="res://entities/player/player_camera.gd" id="2_abrql"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="3_sglur"]
+[ext_resource type="Script" uid="uid://jjt6ragm5qu4" path="res://entities/player/states/player_idle.gd" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://c4nw4kwa4828j" path="res://entities/player/states/player_move.gd" id="5_8fjmc"]
+[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="5_fkugw"]
+[ext_resource type="Script" uid="uid://vawed04nq41l" path="res://entities/player/states/player_death.gd" id="6_afbqv"]
+[ext_resource type="Script" uid="uid://bcap7b4qk5oh3" path="res://entities/player/cursor.gd" id="7_qiwj3"]
+[ext_resource type="Resource" uid="uid://dl5se0wnnjk8c" path="res://entities/hit_test/bomb_explosion.tres" id="7_t1t22"]
+[ext_resource type="Resource" uid="uid://bk15rn7npd77e" path="res://entities/player/death_explosion_final.tres" id="8_50fht"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="8_gx6sm"]
+[ext_resource type="Script" uid="uid://dxfvr1ldm2ab3" path="res://components/hurt_box.gd" id="9_bectd"]
+[ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="9_j3ovn"]
+[ext_resource type="Script" uid="uid://dsm2kgityt71j" path="res://entities/player/states/player_dash.gd" id="9_t1t22"]
+[ext_resource type="Script" uid="uid://bf36mncvih10w" path="res://components/ghosts.gd" id="10_t1t22"]
+[ext_resource type="Script" uid="uid://3wu3b4fr5tpx" path="res://components/health.gd" id="10_wvtmh"]
+[ext_resource type="Script" uid="uid://burdacewl3qrk" path="res://components/sounds.gd" id="15_gx6sm"]
+[ext_resource type="Script" uid="uid://kjotk0xxxmvy" path="res://entities/player/sprite_manager.gd" id="15_wq0jh"]
+[ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="16_3wlsy"]
+[ext_resource type="Shader" uid="uid://bqb32ajv0vvre" path="res://special/shaders/fader.gdshader" id="16_24ehl"]
+[ext_resource type="Script" uid="uid://dnabq6faq3xur" path="res://components/fader_rect.gd" id="16_gt4e4"]
+[ext_resource type="AudioStream" uid="uid://7hjocghwsnup" path="res://entities/player/sounds/hit.sfxr" id="17_3wlsy"]
+[ext_resource type="AudioStream" uid="uid://dtob02mdv44op" path="res://entities/bullets/player_bullet/shoot.sfxr" id="19_eyb6c"]
+[ext_resource type="PackedScene" uid="uid://dlgx0vnvtlki3" path="res://entities/bullets/player_bullet/player_bullet.tscn" id="20_mtric"]
+[ext_resource type="Script" uid="uid://c1xbtypehk2d4" path="res://components/player_bullet_shooter.gd" id="21_221hk"]
+[ext_resource type="Script" uid="uid://cuwivxogf1p4c" path="res://components/shake_on_hit.gd" id="23_ghoj8"]
+[ext_resource type="Script" uid="uid://dqt07yv8slv08" path="res://components/weapons/weapon_manager.gd" id="24_wuv6x"]
+[ext_resource type="Script" uid="uid://ctdbmfcf55d0w" path="res://components/warp.gd" id="25_50fht"]
+[ext_resource type="Script" uid="uid://cgn4v8fbt4teh" path="res://components/weapon_acceptor.gd" id="27_qpopc"]
+
+[sub_resource type="Curve" id="Curve_fxsul"]
+_limits = [1.0, 1.2540982, 0.0, 20.0]
+_data = [Vector2(0, 1.2540982), 0.0, 0.0, 0, 0, Vector2(20, 1.0621845), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qpopc"]
+_limits = [0.0, 5.0, 0.0, 100.0]
+_data = [Vector2(19.954853, 0), 0.0, 0.0, 0, 0, Vector2(100, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vewsg"]
+frequency = 0.0037
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bwdx1"]
+noise = SubResource("FastNoiseLite_vewsg")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gt4e4"]
+shader = ExtResource("16_24ehl")
+shader_parameter/noise = SubResource("NoiseTexture2D_bwdx1")
+shader_parameter/dir = Vector2(0, -1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvtmh"]
+radius = 3.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_b2kln"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("16_3wlsy")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_we0b7"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("17_3wlsy")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mtric"]
+random_pitch = 1.4403472
+streams_count = 1
+stream_0/stream = ExtResource("19_eyb6c")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2kln"]
+size = Vector2(10, 6)
+
+[node name="Player" type="CharacterBody2D" unique_id=1452586366 node_paths=PackedStringArray("shake", "sprite", "weapon_manager", "cursor", "warp", "camera", "state_machine", "health")]
+y_sort_enabled = true
+texture_filter = 1
+collision_layer = 4
+collision_priority = 100.0
+motion_mode = 1
+script = ExtResource("1_ghoj8")
+shake = NodePath("ShakeOnHit")
+sprite = NodePath("PlayerSprite")
+weapon_manager = NodePath("WeaponManager")
+cursor = NodePath("Cursor")
+warp = NodePath("Warp")
+camera = NodePath("PlayerCamera")
+move_speed = 100.0
+acceleration = 701.0
+friction = 600.0
+counts_toward_enemies = false
+state_machine = NodePath("StateMachine")
+health = NodePath("Health")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=253649960 node_paths=PackedStringArray("player")]
+process_mode = 3
+top_level = true
+process_callback = 0
+script = ExtResource("2_abrql")
+player = NodePath("..")
+tween_intensity_curve = SubResource("Curve_fxsul")
+lerp_influence_over_dist = SubResource("Curve_qpopc")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1336918116 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_sglur")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=848894305 node_paths=PackedStringArray("player")]
+script = ExtResource("4_bls4j")
+player = NodePath("../..")
+
+[node name="Move" type="Node" parent="StateMachine" unique_id=1648529115 node_paths=PackedStringArray("player")]
+script = ExtResource("5_8fjmc")
+player = NodePath("../..")
+
+[node name="Dead" type="Node" parent="StateMachine" unique_id=680853402 node_paths=PackedStringArray("shaker_node", "player")]
+script = ExtResource("6_afbqv")
+shaker_node = NodePath("../../PlayerSprite/DeathShake")
+explosion_stats = ExtResource("7_t1t22")
+final_explosion_stats = ExtResource("8_50fht")
+explosion_count = 20
+explosion_delay = 0.1
+initial_explosion_delay = 1.0
+player = NodePath("../..")
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=2070047659 node_paths=PackedStringArray("ghosts", "player")]
+script = ExtResource("9_t1t22")
+ghosts = NodePath("Ghosts2")
+dash_speed = 400.0
+dash_distance = 50.0
+player = NodePath("../..")
+
+[node name="Ghosts2" type="Node" parent="StateMachine/Dash" unique_id=116860393 node_paths=PackedStringArray("node_to_copy")]
+script = ExtResource("10_t1t22")
+node_to_copy = NodePath("../../../PlayerSprite")
+spawn_interval = 0.05
+metadata/_custom_type_script = "uid://bf36mncvih10w"
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=860649556]
+z_index = 7
+texture_filter = 1
+position = Vector2(-1.5497208e-06, 3.989786e-06)
+texture = ExtResource("5_fkugw")
+
+[node name="RectLine" type="Node2D" parent="PlayerSprite" unique_id=1659483721]
+show_behind_parent = true
+position = Vector2(0, 3)
+script = ExtResource("2_26q78")
+radius = Vector2(9, 8)
+
+[node name="HitShake" type="Node2D" parent="PlayerSprite" unique_id=264011470]
+script = ExtResource("8_gx6sm")
+duration = 0.25
+fade_in = 1e-05
+shakerPreset = ExtResource("9_j3ovn")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="DeathShake" type="Node2D" parent="PlayerSprite" unique_id=47660079]
+script = ExtResource("8_gx6sm")
+fade_in = 1e-05
+fade_out = 1e-05
+shakerPreset = ExtResource("9_j3ovn")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="SpriteManager" type="Node" parent="PlayerSprite" unique_id=405956153 node_paths=PackedStringArray("shake", "rect")]
+script = ExtResource("15_wq0jh")
+shake = NodePath("../HitShake")
+rect = NodePath("../ColorRect")
+height = null
+spin_speed = -25.136
+start_duration = 1.0
+end_duration = null
+shake_delay = 0.4
+start_ease_type = 1
+start_trans_type = 7
+end_ease_type = null
+end_trans_type = 5
+metadata/_custom_type_script = "uid://kjotk0xxxmvy"
+
+[node name="ColorRect" type="ColorRect" parent="PlayerSprite" unique_id=81515766 node_paths=PackedStringArray("camera")]
+show_behind_parent = true
+top_level = true
+material = SubResource("ShaderMaterial_gt4e4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -144.0
+offset_right = -256.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_gt4e4")
+camera = NodePath("../../PlayerCamera")
+
+[node name="Health" type="Node" parent="." unique_id=1995234817]
+script = ExtResource("10_wvtmh")
+current_health = 5
+max_health = 5
+i_frames = 0.5
+
+[node name="Cursor" type="Node2D" parent="." unique_id=1007855764 node_paths=PackedStringArray("player", "sprite")]
+show_behind_parent = true
+script = ExtResource("7_qiwj3")
+player = NodePath("..")
+sprite = NodePath("../PlayerSprite")
+width = 1.0
+norm_radius = 6.0
+line_length = 16.61
+dash = 1.0
+color = Color(0, 0.54901963, 1, 1)
+shift_speed = 45.0
+shift_power = 0.1
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1372679147 node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("9_bectd")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1849591852]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_wvtmh")
+
+[node name="Sounds" type="Node" parent="." unique_id=567339484 node_paths=PackedStringArray("health", "bullet_shooter", "sounds_on_hit", "sounds_on_death", "sounds_on_shoot")]
+script = ExtResource("15_gx6sm")
+health = NodePath("../Health")
+bullet_shooter = NodePath("../WeaponManager/BulletShooter")
+sounds_on_hit = [NodePath("HitSound")]
+sounds_on_death = [NodePath("HitSound2")]
+sounds_on_shoot = [NodePath("Shoot")]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1876559684]
+stream = SubResource("AudioStreamRandomizer_b2kln")
+pitch_scale = 2.73
+bus = &"Sfx"
+
+[node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1017188884]
+stream = SubResource("AudioStreamRandomizer_we0b7")
+bus = &"Sfx"
+
+[node name="Shoot" type="AudioStreamPlayer" parent="Sounds" unique_id=385203427]
+stream = SubResource("AudioStreamRandomizer_mtric")
+volume_db = -9.837
+pitch_scale = 3.14
+max_polyphony = 12
+bus = &"Sfx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=311667966]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_b2kln")
+
+[node name="ShakeOnHit" type="Node" parent="." unique_id=767152034 node_paths=PackedStringArray("health", "shaker")]
+script = ExtResource("23_ghoj8")
+health = NodePath("../Health")
+shaker = NodePath("../PlayerSprite/HitShake")
+shake_on_death = false
+metadata/_custom_type_script = "uid://cuwivxogf1p4c"
+
+[node name="Warp" type="Node2D" parent="." unique_id=450283545 node_paths=PackedStringArray("entity", "sprite_to_copy")]
+top_level = true
+z_index = -1
+script = ExtResource("25_50fht")
+entity = NodePath("..")
+sprite_to_copy = NodePath("../PlayerSprite")
+initial_lifetime = 1.0
+quant = 15
+metadata/_custom_type_script = "uid://ctdbmfcf55d0w"
+
+[node name="WeaponManager" type="Node2D" parent="." unique_id=876860472]
+script = ExtResource("24_wuv6x")
+metadata/_custom_type_script = "uid://dqt07yv8slv08"
+
+[node name="BulletShooter" type="CharacterBody2D" parent="WeaponManager" unique_id=93104020 node_paths=PackedStringArray("cursor", "entity")]
+script = ExtResource("21_221hk")
+cursor = NodePath("../../Cursor")
+entity = NodePath("../..")
+bullet_scene = ExtResource("20_mtric")
+bullet_count = 2
+separation = 5.0
+range = 70.0
+cooldown = 0.1
+metadata/_custom_type_script = "uid://c1xbtypehk2d4"
+
+[node name="WeaponArea" type="Area2D" parent="." unique_id=2124090859 node_paths=PackedStringArray("weapon_manager")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("27_qpopc")
+weapon_manager = NodePath("../WeaponManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponArea" unique_id=1712520680]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_wvtmh")

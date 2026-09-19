@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bx7ud2opvf7g5"]
+
+[ext_resource type="Script" uid="uid://cckbdr8v5nrnb" path="res://components/spawn_wrapper.gd" id="1_b3vym"]
+
+[node name="PlaceholderWrapper" type="Node2D" unique_id=759597546]
+script = ExtResource("1_b3vym")

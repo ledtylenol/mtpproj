@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cumu2qdyoisuk"]
+
+[ext_resource type="Script" uid="uid://bf8yeyvke1rdg" path="res://special/handlers/sound_handler.gd" id="1_021jf"]
+[ext_resource type="AudioStream" uid="uid://dfqp7hur1la68" path="res://special/sounds/click_003.ogg" id="2_vk7hw"]
+[ext_resource type="AudioStream" uid="uid://dtwk0qurmjyrb" path="res://special/world/Hr_coin.wav" id="3_021jf"]
+[ext_resource type="Script" uid="uid://c17gl0g3gcag5" path="res://special/handlers/shepard_sound.gd" id="3_j7idg"]
+
+[node name="Node" type="Node" unique_id=1085931610 node_paths=PackedStringArray("control_fade_audio", "shepard_sound")]
+script = ExtResource("1_021jf")
+control_fade_audio = NodePath("ControlFadeAudio")
+shepard_sound = NodePath("ShepardSound")
+
+[node name="ControlFadeAudio" type="AudioStreamPlayer" parent="." unique_id=1677124833]
+stream = ExtResource("2_vk7hw")
+volume_db = -10.675
+max_polyphony = 69
+bus = &"Sfx"
+
+[node name="ShepardSound" type="AudioStreamPlayer" parent="." unique_id=1048453873]
+stream = ExtResource("3_021jf")
+volume_db = -8.924
+bus = &"Sfx"
+script = ExtResource("3_j7idg")

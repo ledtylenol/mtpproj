@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://dhahwrwej8hjc"]
+
+[ext_resource type="PackedScene" uid="uid://du08rgyhvsg5q" path="res://entities/warper/warper.tscn" id="1_chnm0"]
+[ext_resource type="Script" uid="uid://o0anx4d0n7ig" path="res://entities/enemy.gd" id="1_w0re7"]
+[ext_resource type="PackedScene" uid="uid://bx7ud2opvf7g5" path="res://special/wrappers/placeholder_wrapper.tscn" id="3_37i87"]
+
+[resource]
+script = ExtResource("1_w0re7")
+scene = ExtResource("1_chnm0")
+spawn_wrapper = ExtResource("3_37i87")
+randomize_position = false
+metadata/_custom_type_script = "uid://o0anx4d0n7ig"

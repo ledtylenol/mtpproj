@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bmsmmlh3km030"]
+
+[ext_resource type="Script" uid="uid://3hhv82i82tkn" path="res://entities/digger/digger.gd" id="1_8t8ka"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="2_imk5f"]
+[ext_resource type="Script" uid="uid://3wu3b4fr5tpx" path="res://components/health.gd" id="3_cmuhm"]
+[ext_resource type="Script" uid="uid://bd35g3cdkq2so" path="res://entities/digger/states/digger_idle.gd" id="3_qnxgl"]
+[ext_resource type="Texture2D" uid="uid://b7flafm3j08h4" path="res://entities/player/player.tres" id="4_cmuhm"]
+[ext_resource type="Script" uid="uid://3wnfsy0n4ddf" path="res://entities/player/rect_line.gd" id="5_367ne"]
+[ext_resource type="Script" uid="uid://7pyldcioa4td" path="res://components/move_to_otherworld.gd" id="6_8t8ka"]
+
+[sub_resource type="Gradient" id="Gradient_eb4yp"]
+offsets = PackedFloat32Array(0.43278086, 0.9429098)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qnxgl"]
+gradient = SubResource("Gradient_eb4yp")
+width = 12
+height = 12
+fill = 2
+fill_from = Vector2(0.45299146, 0.47008547)
+
+[sub_resource type="Gradient" id="Gradient_qnxgl"]
+colors = PackedColorArray(4.165, 4.165, 4.165, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8t8ka"]
+gradient = SubResource("Gradient_qnxgl")
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_8t8ka"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2945892, 0.6673347)
+colors = PackedColorArray(1, 1, 1, 1, 0.62, 0.62, 0.62, 1, 0.13, 0.13, 0.13, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eb4yp"]
+gradient = SubResource("Gradient_8t8ka")
+
+[sub_resource type="Curve" id="Curve_qnxgl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8t8ka"]
+curve = SubResource("Curve_qnxgl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t8ka"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(9, 10, 1)
+angle_min = -108.09999
+angle_max = 147.40001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.32999998
+scale_max = 0.75
+color = Color(0, 0.39999986, 1, 1)
+color_ramp = SubResource("GradientTexture1D_eb4yp")
+color_initial_ramp = SubResource("GradientTexture1D_8t8ka")
+emission_curve = SubResource("CurveTexture_8t8ka")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+
+[node name="Digger" type="CharacterBody2D" unique_id=541829335 node_paths=PackedStringArray("sprite", "state_machine", "health")]
+motion_mode = 1
+script = ExtResource("1_8t8ka")
+sprite = NodePath("TextureRect/Sprite2D")
+state_machine = NodePath("StateMachine")
+health = NodePath("Health")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1141253619 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_imk5f")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1209107108]
+script = ExtResource("3_qnxgl")
+
+[node name="Health" type="Node" parent="." unique_id=968774033]
+script = ExtResource("3_cmuhm")
+current_health = 12
+max_health = 12
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=1741506153]
+clip_children = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -214.0
+offset_right = 120.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="TextureRect" unique_id=940205248]
+position = Vector2(120, 208)
+texture = ExtResource("4_cmuhm")
+
+[node name="RectLine" type="Node2D" parent="." unique_id=1363357688]
+z_index = -1
+script = ExtResource("5_367ne")
+radius = Vector2(9, 9)
+
+[node name="MoveToOtherworld" type="Node" parent="." unique_id=1035155595 node_paths=PackedStringArray("particles", "target")]
+script = ExtResource("6_8t8ka")
+particles = NodePath("../DiggerParticles")
+update_position = true
+target = NodePath("..")
+
+[node name="DiggerParticles" type="GPUParticles2D" parent="." unique_id=380841944]
+amount = 20
+texture = SubResource("GradientTexture2D_qnxgl")
+explosiveness = 0.34
+fixed_fps = 20
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_8t8ka")

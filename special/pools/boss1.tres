@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelPool" format=3 uid="uid://b4t6kqgdceo1i"]
+
+[ext_resource type="Script" uid="uid://o0anx4d0n7ig" path="res://entities/enemy.gd" id="1_ka8r8"]
+[ext_resource type="Resource" uid="uid://dhl0rjsen0ews" path="res://special/enemies/jumper.tres" id="2_qfhch"]
+[ext_resource type="Script" uid="uid://dy57myycuroji" path="res://special/handlers/level_pool.gd" id="2_rf4gh"]
+[ext_resource type="Resource" uid="uid://cs5ny8jfqu0jd" path="res://special/enemies/jumper_boss.tres" id="3_o045r"]
+
+[resource]
+script = ExtResource("2_rf4gh")
+possible_enemies = Array[ExtResource("1_ka8r8")]([ExtResource("2_qfhch"), ExtResource("2_qfhch"), ExtResource("2_qfhch"), ExtResource("3_o045r")])
+minimum_cost = 111.0
+maximum_cost = 1.8
+metadata/_custom_type_script = "uid://dy57myycuroji"

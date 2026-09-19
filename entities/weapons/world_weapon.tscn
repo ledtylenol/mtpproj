@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://14d80q2i2xg8"]
+
+[ext_resource type="Script" uid="uid://c7xbbtwjubxp7" path="res://entities/weapons/world_weapon.gd" id="1_03q3q"]
+[ext_resource type="PackedScene" uid="uid://caygkhu3tx2wy" path="res://entities/weapons/bat/bat.tscn" id="2_6xk4u"]
+[ext_resource type="Script" uid="uid://bf36mncvih10w" path="res://components/ghosts.gd" id="4_44rbc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03q3q"]
+
+[node name="WorldWeapon" type="Area2D" unique_id=1959587 node_paths=PackedStringArray("sprite")]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("1_03q3q")
+scene = ExtResource("2_6xk4u")
+sprite = NodePath("Sprite2D")
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=21983740]
+shape = SubResource("CircleShape2D_03q3q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=621648781]
+
+[node name="Ghosts" type="Node" parent="." unique_id=1601684795 node_paths=PackedStringArray("node_to_copy")]
+script = ExtResource("4_44rbc")
+node_to_copy = NodePath("../Sprite2D")
+spawn_interval = 0.5
+active = true
+spawn_other = true
+metadata/_custom_type_script = "uid://bf36mncvih10w"

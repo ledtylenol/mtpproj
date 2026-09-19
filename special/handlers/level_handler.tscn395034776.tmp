@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://boqrq1lcoyriu"]
+
+[ext_resource type="Script" uid="uid://b1285wki06x4f" path="res://special/handlers/level_handler.gd" id="1_5a6vl"]
+[ext_resource type="Script" uid="uid://dy57myycuroji" path="res://special/handlers/level_pool.gd" id="2_0a677"]
+[ext_resource type="Resource" uid="uid://bp1pijrq6w3cl" path="res://special/pools/normal1.tres" id="3_frlk0"]
+[ext_resource type="Resource" uid="uid://c1kt65tx4qewu" path="res://special/pools/normal2.tres" id="4_g6laa"]
+[ext_resource type="Resource" uid="uid://b4t6kqgdceo1i" path="res://special/pools/boss1.tres" id="5_ap2jc"]
+[ext_resource type="Script" uid="uid://lhloqj3qmjaf" path="res://components/explosion_stats.gd" id="5_y67dr"]
+[ext_resource type="Resource" uid="uid://4ic83m58qedw" path="res://special/pools/boss2.tres" id="6_ap2jc"]
+[ext_resource type="PackedScene" uid="uid://7rannscwaae8" path="res://special/powerups/powerup_count.tscn" id="8_0n3gh"]
+[ext_resource type="PackedScene" uid="uid://df4dmy4tsi6i5" path="res://special/powerups/powerup_range.tscn" id="9_fsskh"]
+[ext_resource type="PackedScene" uid="uid://bhn6lugi8swxm" path="res://special/powerups/powerup_rate.tscn" id="10_r2akb"]
+
+[sub_resource type="Curve" id="Curve_gq4d0"]
+
+[sub_resource type="Curve" id="Curve_sddc6"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.71735245, 20), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_4btlo"]
+script = ExtResource("5_y67dr")
+inner_width_curve = SubResource("Curve_gq4d0")
+outer_width_curve = SubResource("Curve_sddc6")
+init_ease_type = 1
+init_trans_type = 5
+ease_type = 1
+trans_type = 5
+end_radius = 250.0
+duration = 1.0
+metadata/_custom_type_script = "uid://lhloqj3qmjaf"
+
+[node name="LevelHandler" type="Node" unique_id=27431079]
+script = ExtResource("1_5a6vl")
+pools = Array[ExtResource("2_0a677")]([ExtResource("3_frlk0"), ExtResource("4_g6laa")])
+boss_pools = Array[ExtResource("2_0a677")]([ExtResource("5_ap2jc"), ExtResource("6_ap2jc")])
+stats = SubResource("Resource_4btlo")
+powerup_scenes = Array[PackedScene]([ExtResource("8_0n3gh"), ExtResource("9_fsskh"), ExtResource("10_r2akb")])

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelPool" format=3 uid="uid://jqyjhbs0exmn"]
+
+[ext_resource type="Script" uid="uid://o0anx4d0n7ig" path="res://entities/enemy.gd" id="1_sujsm"]
+[ext_resource type="Script" uid="uid://dy57myycuroji" path="res://special/handlers/level_pool.gd" id="2_54rh2"]
+[ext_resource type="Resource" uid="uid://dhahwrwej8hjc" path="res://special/enemies/warper.tres" id="2_ntfjw"]
+
+[resource]
+script = ExtResource("2_54rh2")
+possible_enemies = Array[ExtResource("1_sujsm")]([ExtResource("2_ntfjw")])
+maximum_cost = 111.0
+metadata/_custom_type_script = "uid://dy57myycuroji"

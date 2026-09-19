@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://caygkhu3tx2wy"]
+
+[ext_resource type="Script" uid="uid://b43q0pxf5ipy3" path="res://entities/weapons/bat/bat.gd" id="1_4q4ac"]
+[ext_resource type="Texture2D" uid="uid://dhu1xi2rucduh" path="res://entities/weapons/bat/bat.tres" id="2_thogf"]
+[ext_resource type="Script" uid="uid://bf36mncvih10w" path="res://components/ghosts.gd" id="2_wisq7"]
+[ext_resource type="Script" uid="uid://bit8emm008qmx" path="res://components/hit_box.gd" id="3_va2pr"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="4_du8ow"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_750w0"]
+[ext_resource type="Script" uid="uid://dcmss5xjc7b2o" path="res://entities/weapons/bat/states/left.gd" id="5_w6gxf"]
+[ext_resource type="Script" uid="uid://rfx2tobqua5i" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_8uati"]
+[ext_resource type="Script" uid="uid://cjw6nuyiwev3q" path="res://addons/godot_utils/second_order_dynamics.gd" id="6_ggcf1"]
+[ext_resource type="Script" uid="uid://21muq5xbjbb" path="res://addons/shaker/data/Vector2/ShakerTypeNoiseShake2D.gd" id="7_ujndn"]
+[ext_resource type="Script" uid="uid://lq56oqfax6my" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_gymn8"]
+[ext_resource type="Script" uid="uid://ckgmexcr3u0xj" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_r8up8"]
+[ext_resource type="AudioStream" uid="uid://bljp07pn648h0" path="res://entities/weapons/bat/ding.sfxr" id="13_8uati"]
+[ext_resource type="AudioStream" uid="uid://u4huutn7gsx6" path="res://entities/weapons/bat/swing.sfxr" id="14_ujndn"]
+[ext_resource type="AudioStream" uid="uid://c7rya3twpgjl" path="res://entities/weapons/bat/drone.ogg" id="15_gymn8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(37.77, 76.63)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sn0t7"]
+frequency = 0.0262
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l5ctq"]
+noise = SubResource("FastNoiseLite_sn0t7")
+
+[sub_resource type="Resource" id="Resource_riqys"]
+script = ExtResource("7_ujndn")
+noise_texture = SubResource("NoiseTexture2D_l5ctq")
+amplitude = Vector2(2.3, 2.3)
+metadata/_custom_type_script = "uid://21muq5xbjbb"
+
+[sub_resource type="Resource" id="Resource_bhunq"]
+script = ExtResource("9_r8up8")
+PositionShake = Array[ExtResource("6_8uati")]([SubResource("Resource_riqys")])
+metadata/_custom_type_script = "uid://ckgmexcr3u0xj"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8op"]
+random_pitch = 1.2685379
+streams_count = 1
+stream_0/stream = ExtResource("13_8uati")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gymn8"]
+random_pitch = 1.2685379
+streams_count = 1
+stream_0/stream = ExtResource("14_ujndn")
+
+[node name="Bat" type="CharacterBody2D" unique_id=26147391 node_paths=PackedStringArray("sod", "point_sod", "sprite_sod", "self_sod", "sprite_pos_sod", "rot_point_node", "sprite", "hitbox", "vel_rot", "ghosts", "hit_ghosts", "charge_shaker", "state_machine")]
+script = ExtResource("1_4q4ac")
+sod = NodePath("SecondOrderDynamics")
+point_sod = NodePath("PointSod")
+sprite_sod = NodePath("SpriteSod")
+self_sod = NodePath("SelfSod")
+sprite_pos_sod = NodePath("SpritePosSod")
+rot_point_node = NodePath("VelRot/RotPointNode")
+sprite = NodePath("VelRot/RotPointNode/BatSprite")
+hitbox = NodePath("HitBox")
+vel_rot = NodePath("VelRot")
+ghosts = NodePath("Ghosts")
+hit_ghosts = NodePath("HitGhosts")
+charge_shaker = NodePath("VelRot/RotPointNode/BatSprite/ShakerComponent2D")
+state_machine = NodePath("StateMachine")
+metadata/_custom_type_script = "uid://bibh114pn5wpv"
+
+[node name="HitBox" type="Area2D" parent="." unique_id=66285878]
+position = Vector2(19.999983, -2.6496127e-07)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_va2pr")
+damage = 10
+metadata/_custom_type_script = "uid://bit8emm008qmx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1869568515]
+shape = SubResource("RectangleShape2D_bhunq")
+
+[node name="HitGhosts" type="Node" parent="." unique_id=182323552 node_paths=PackedStringArray("node_to_copy")]
+script = ExtResource("2_wisq7")
+node_to_copy = NodePath("../VelRot/RotPointNode/BatSprite")
+spawn_interval = 0.005
+metadata/_custom_type_script = "uid://bf36mncvih10w"
+
+[node name="Ghosts" type="Node" parent="." unique_id=1137800050 node_paths=PackedStringArray("node_to_copy")]
+script = ExtResource("2_wisq7")
+node_to_copy = NodePath("../VelRot/RotPointNode/BatSprite")
+spawn_interval = 0.05
+metadata/_custom_type_script = "uid://bf36mncvih10w"
+
+[node name="VelRot" type="Node2D" parent="." unique_id=1253977699]
+
+[node name="RotPointNode" type="Node2D" parent="VelRot" unique_id=28706411]
+
+[node name="BatSprite" type="Sprite2D" parent="VelRot/RotPointNode" unique_id=1872750205]
+position = Vector2(19.999983, -2.6496127e-07)
+texture = ExtResource("2_thogf")
+
+[node name="ShakerComponent2D" type="Node2D" parent="VelRot/RotPointNode/BatSprite" unique_id=659491158]
+script = ExtResource("5_750w0")
+fade_in = 1e-05
+fade_out = 1e-05
+shakerPreset = SubResource("Resource_bhunq")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="StateMachine" type="Node" parent="." unique_id=2087794856 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_du8ow")
+initial_state = NodePath("left")
+metadata/_custom_type_script = "uid://dxr5g0mdj7yj8"
+
+[node name="left" type="Node" parent="StateMachine" unique_id=2066025508 node_paths=PackedStringArray("sod", "sprite_pos_sod", "ding", "swing", "drone", "next_state", "hitbox", "sprite")]
+script = ExtResource("5_w6gxf")
+sprite_rot = -6.867
+point_rot = -1.521
+sod = NodePath("../../SecondOrderDynamics")
+sprite_pos_sod = NodePath("../../SpritePosSod")
+ding = NodePath("../../Ding")
+swing = NodePath("../../Swing")
+drone = NodePath("../../Drone")
+next_state = NodePath("../right")
+charge_ding_impulse_sprite = -12.567
+hitbox = NodePath("../../HitBox")
+sprite = NodePath("../../VelRot/RotPointNode/BatSprite")
+metadata/_custom_type_script = "uid://dcmss5xjc7b2o"
+
+[node name="right" type="Node" parent="StateMachine" unique_id=2102970473 node_paths=PackedStringArray("sod", "sprite_pos_sod", "ding", "swing", "drone", "next_state", "hitbox", "sprite")]
+script = ExtResource("5_w6gxf")
+sprite_rot = 6.867
+point_rot = 1.521
+sod = NodePath("../../SecondOrderDynamics")
+sprite_pos_sod = NodePath("../../SpritePosSod")
+ding = NodePath("../../Ding")
+swing = NodePath("../../Swing")
+drone = NodePath("../../Drone")
+next_state = NodePath("../left")
+swing_impulse = -31.416
+charge_ding_impulse_point = 31.416
+charge_ding_impulse_sprite = 12.567
+hitbox = NodePath("../../HitBox")
+sprite = NodePath("../../VelRot/RotPointNode/BatSprite")
+metadata/_custom_type_script = "uid://dcmss5xjc7b2o"
+
+[node name="SecondOrderDynamics" type="Node" parent="." unique_id=1087018769]
+script = ExtResource("6_ggcf1")
+
+[node name="SpritePosSod" type="Node" parent="." unique_id=1656597253]
+script = ExtResource("6_ggcf1")
+
+[node name="PointSod" type="Node" parent="." unique_id=476635482]
+script = ExtResource("6_ggcf1")
+_f = 2.0
+_z = 1.0
+
+[node name="SpriteSod" type="Node" parent="." unique_id=739087603]
+script = ExtResource("6_ggcf1")
+_f = 1.5
+
+[node name="SelfSod" type="Node" parent="." unique_id=1507582324]
+script = ExtResource("6_ggcf1")
+_f = 2.0
+_z = 1.0
+
+[node name="Ding" type="AudioStreamPlayer2D" parent="." unique_id=429996395]
+stream = SubResource("AudioStreamRandomizer_8a8op")
+volume_db = -9.017
+bus = &"Sfx"
+
+[node name="Swing" type="AudioStreamPlayer2D" parent="." unique_id=1296658477]
+stream = SubResource("AudioStreamRandomizer_gymn8")
+volume_db = -9.017
+bus = &"Sfx"
+
+[node name="Drone" type="AudioStreamPlayer2D" parent="." unique_id=895406843]
+stream = ExtResource("15_gymn8")
+volume_db = -9.017
+pitch_scale = 0.59
+bus = &"Sfx"

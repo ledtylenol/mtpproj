@@ -1,0 +1,362 @@
+[gd_scene format=3 uid="uid://du08rgyhvsg5q"]
+
+[ext_resource type="Script" uid="uid://bm71rgfyydxmg" path="res://entities/warper/warper.gd" id="1_odmng"]
+[ext_resource type="PackedScene" uid="uid://disnpcid8oos" path="res://special/particles/hit_4.tscn" id="2_kbwa8"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="2_kpy21"]
+[ext_resource type="Script" uid="uid://lhloqj3qmjaf" path="res://components/explosion_stats.gd" id="3_0rloy"]
+[ext_resource type="Script" uid="uid://3wu3b4fr5tpx" path="res://components/health.gd" id="3_dx0aj"]
+[ext_resource type="Script" uid="uid://yuq2yptsq0mp" path="res://entities/warper/states/idle.gd" id="3_nq1dq"]
+[ext_resource type="Script" uid="uid://bica5nl3d1g4x" path="res://entities/warper/states/warper_first.gd" id="4_4lj3d"]
+[ext_resource type="Texture2D" uid="uid://qj4lf660qeex" path="res://entities/jumper/jumper.tres" id="4_dx0aj"]
+[ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_cpo7r"]
+[ext_resource type="Script" uid="uid://q7bet2v7yf63" path="res://entities/warper/states/warper_second.gd" id="5_o20as"]
+[ext_resource type="Script" uid="uid://ctdbmfcf55d0w" path="res://components/warp.gd" id="5_odmng"]
+[ext_resource type="Script" uid="uid://rfx2tobqua5i" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="6_tx7cl"]
+[ext_resource type="Script" uid="uid://no552qnyqop" path="res://entities/warper/states/cooldown.gd" id="6_wa5xi"]
+[ext_resource type="Script" uid="uid://21muq5xbjbb" path="res://addons/shaker/data/Vector2/ShakerTypeNoiseShake2D.gd" id="7_r7l66"]
+[ext_resource type="Script" uid="uid://lq56oqfax6my" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="8_nq1dq"]
+[ext_resource type="Script" uid="uid://bmn28fwusux5" path="res://entities/warper/states/warper_red.gd" id="9_cgf6v"]
+[ext_resource type="Script" uid="uid://ckgmexcr3u0xj" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="9_t85tc"]
+[ext_resource type="Script" uid="uid://c2hnccxfee28u" path="res://entities/warper/states/bisuqe.gd" id="10_aea4m"]
+[ext_resource type="Script" uid="uid://c6xsk8jqfvx5y" path="res://addons/shaker/data/Vector2/ShakerTypeRandom2D.gd" id="10_r7l66"]
+[ext_resource type="Shader" uid="uid://b34aqpe2g3j5" path="res://entities/warper/warper.gdshader" id="12_b8ct6"]
+[ext_resource type="AudioStream" uid="uid://cv8rvwl0xruw7" path="res://entities/warper/scream.ogg" id="13_t85tc"]
+[ext_resource type="Script" uid="uid://qumch3ubx4hl" path="res://entities/warper/warper_sprite.gd" id="14_aink1"]
+[ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="14_t8yux"]
+[ext_resource type="AudioStream" uid="uid://hjvg332uf1ih" path="res://entities/warper/crack.ogg" id="14_ytxjl"]
+[ext_resource type="AudioStream" uid="uid://behrou3xf611i" path="res://special/songs/EYE_CANDY.ogg" id="16_sc723"]
+[ext_resource type="Script" uid="uid://dxfvr1ldm2ab3" path="res://components/hurt_box.gd" id="18_ebwl6"]
+[ext_resource type="Script" uid="uid://3wnfsy0n4ddf" path="res://entities/player/rect_line.gd" id="18_vn8lk"]
+[ext_resource type="Script" uid="uid://cuwivxogf1p4c" path="res://components/shake_on_hit.gd" id="19_mvu4m"]
+[ext_resource type="Script" uid="uid://dg8h83cqswfgm" path="res://components/points.gd" id="21_3voxc"]
+[ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="22_3trar"]
+[ext_resource type="Script" uid="uid://bex5h6egby1jd" path="res://components/erase_on_death.gd" id="23_3trar"]
+[ext_resource type="Script" uid="uid://burdacewl3qrk" path="res://components/sounds.gd" id="24_o2nmb"]
+[ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="25_wa5xi"]
+[ext_resource type="AudioStream" uid="uid://b21spux31h0js" path="res://entities/death.sfxr" id="26_kbwa8"]
+[ext_resource type="Script" uid="uid://bit8emm008qmx" path="res://components/hit_box.gd" id="33_emlyg"]
+
+[sub_resource type="Curve" id="Curve_gq4d0"]
+
+[sub_resource type="Curve" id="Curve_sddc6"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.71735245, 20), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_vn8lk"]
+script = ExtResource("3_0rloy")
+inner_width_curve = SubResource("Curve_gq4d0")
+outer_width_curve = SubResource("Curve_sddc6")
+init_ease_type = 1
+init_trans_type = 5
+ease_type = 1
+trans_type = 5
+end_radius = 250.0
+duration = 1.0
+metadata/_custom_type_script = "uid://lhloqj3qmjaf"
+
+[sub_resource type="Curve" id="Curve_vn8lk"]
+_limits = [0.0, 50.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.63253015, 0), 0.0, 0.0, 0, 0, Vector2(0.8493976, 8.139534), 116.98381, 116.98381, 0, 0, Vector2(1, 22.480621), 148.2643, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aink1"]
+noise_type = 2
+frequency = 0.004
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b8ct6"]
+noise = SubResource("FastNoiseLite_aink1")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emlyg"]
+shader = ExtResource("12_b8ct6")
+shader_parameter/noise = SubResource("NoiseTexture2D_b8ct6")
+shader_parameter/quant = 10.0
+shader_parameter/displace_power = 0.135
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s3i1h"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ytxjl"]
+noise = SubResource("FastNoiseLite_s3i1h")
+
+[sub_resource type="Resource" id="Resource_k6i0e"]
+script = ExtResource("7_r7l66")
+noise_texture = SubResource("NoiseTexture2D_ytxjl")
+amplitude = Vector2(10, 10)
+metadata/_custom_type_script = "uid://21muq5xbjbb"
+
+[sub_resource type="Resource" id="Resource_3hy3n"]
+script = ExtResource("9_t85tc")
+PositionShake = Array[ExtResource("6_tx7cl")]([SubResource("Resource_k6i0e")])
+metadata/_custom_type_script = "uid://ckgmexcr3u0xj"
+
+[sub_resource type="Resource" id="Resource_r7l66"]
+script = ExtResource("10_r7l66")
+metadata/_custom_type_script = "uid://c6xsk8jqfvx5y"
+
+[sub_resource type="Resource" id="Resource_tx7cl"]
+script = ExtResource("9_t85tc")
+PositionShake = Array[ExtResource("6_tx7cl")]([SubResource("Resource_r7l66")])
+metadata/_custom_type_script = "uid://ckgmexcr3u0xj"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebwl6"]
+radius = 11.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0rloy"]
+playback_mode = 1
+random_pitch = 1.2086668
+streams_count = 1
+stream_0/stream = ExtResource("25_wa5xi")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn8lk"]
+random_pitch = 1.1764989
+streams_count = 1
+stream_0/stream = ExtResource("26_kbwa8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_emlyg"]
+radius = 5.9
+
+[node name="Warper" type="CharacterBody2D" unique_id=455106863 node_paths=PackedStringArray("blink_sound", "warp", "music", "state_machine", "health")]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_odmng")
+blink_sound = NodePath("Crack")
+warp = NodePath("Warp")
+hit_scene = ExtResource("2_kbwa8")
+music = NodePath("Music")
+expl_stats = SubResource("Resource_vn8lk")
+friction = 750.0
+state_machine = NodePath("StateMachine")
+health = NodePath("Health")
+metadata/_custom_type_script = "uid://bibh114pn5wpv"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1121669043 node_paths=PackedStringArray("initial_state", "current_state")]
+script = ExtResource("2_kpy21")
+initial_state = NodePath("Idle")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://dxr5g0mdj7yj8"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=236613323 node_paths=PackedStringArray("shaker", "warp")]
+script = ExtResource("3_nq1dq")
+shaker = NodePath("../../WarperSprite/StrongShake")
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://yuq2yptsq0mp"
+
+[node name="First" type="Node" parent="StateMachine" unique_id=1335544406 node_paths=PackedStringArray("shaker", "timer", "crack", "health", "health_to_copy", "music", "hurtbox", "warp")]
+script = ExtResource("4_4lj3d")
+shaker = NodePath("../../WarperSprite/StrongShake")
+timer = NodePath("../../CrackTimer")
+crack = NodePath("../../Crack")
+health = NodePath("../../Health")
+health_to_copy = NodePath("../../SecondHealth")
+music = NodePath("../../Music")
+hurtbox = NodePath("../../HurtBox")
+teleport_intensity_curve = SubResource("Curve_vn8lk")
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://bica5nl3d1g4x"
+
+[node name="Second" type="Node" parent="StateMachine" unique_id=624433371 node_paths=PackedStringArray("shaker", "timer", "crack", "hitbox", "warp")]
+script = ExtResource("5_o20as")
+shaker = NodePath("../../WarperSprite/StrongShake")
+timer = NodePath("../../CrackTimer2")
+crack = NodePath("../../Crack")
+hitbox = NodePath("../../HitBox")
+tps_count = 10
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://q7bet2v7yf63"
+
+[node name="Cooldown" type="Node" parent="StateMachine" unique_id=143074709 node_paths=PackedStringArray("timer", "sprite", "hitbox", "warp")]
+script = ExtResource("6_wa5xi")
+timer = NodePath("../../CrackTimer3")
+sprite = NodePath("../../WarperSprite")
+hitbox = NodePath("../../HitBox")
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://no552qnyqop"
+
+[node name="Red" type="Node" parent="StateMachine" unique_id=1866485158 node_paths=PackedStringArray("shaker", "timer", "crack", "health", "hitbox", "warp")]
+script = ExtResource("9_cgf6v")
+shaker = NodePath("../../WarperSprite/StrongShake")
+timer = NodePath("RedTimer")
+crack = NodePath("../../Crack")
+health = NodePath("../../Health")
+tps_count = 7
+hitbox = NodePath("../../HitBox")
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://bmn28fwusux5"
+
+[node name="RedTimer" type="Timer" parent="StateMachine/Red" unique_id=1906287335]
+wait_time = 0.3
+one_shot = true
+
+[node name="Bisque" type="Node" parent="StateMachine" unique_id=1285859420 node_paths=PackedStringArray("shaker", "timer", "crack", "hitbox", "health", "warp")]
+script = ExtResource("10_aea4m")
+shaker = NodePath("../../WarperSprite/StrongShake")
+timer = NodePath("../../CrackTimer2")
+crack = NodePath("../../Crack")
+tps_count = 13
+hitbox = NodePath("../../HitBox")
+health = NodePath("../../Health")
+warp = NodePath("../../Warp")
+metadata/_custom_type_script = "uid://c2hnccxfee28u"
+
+[node name="Health" type="Node" parent="." unique_id=406751524]
+script = ExtResource("3_dx0aj")
+current_health = 190
+max_health = 190
+metadata/_custom_type_script = "uid://3wu3b4fr5tpx"
+
+[node name="SecondHealth" type="Node" parent="." unique_id=562148925]
+script = ExtResource("3_dx0aj")
+current_health = 190
+max_health = 190
+metadata/_custom_type_script = "uid://3wu3b4fr5tpx"
+
+[node name="WarperSprite" type="Sprite2D" parent="." unique_id=888925013]
+visibility_layer = 3
+material = SubResource("ShaderMaterial_emlyg")
+instance_shader_parameters/time = 23.965
+texture = ExtResource("4_dx0aj")
+script = ExtResource("14_aink1")
+
+[node name="PermShake" type="Node2D" parent="WarperSprite" unique_id=1264169412]
+script = ExtResource("5_cpo7r")
+AutoPlay = true
+intensity = 0.316
+duration = 1.0
+fade_in = 1e-05
+shakerPreset = SubResource("Resource_3hy3n")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="StrongShake" type="Node2D" parent="WarperSprite" unique_id=985456344]
+script = ExtResource("5_cpo7r")
+AutoPlay = true
+intensity = 0.0
+fade_in = 1e-05
+fade_out = 9.251221e-05
+shakerPreset = SubResource("Resource_tx7cl")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="HitShake" type="Node2D" parent="WarperSprite" unique_id=1507604222]
+script = ExtResource("5_cpo7r")
+duration = 0.25
+fade_in = 1e-05
+shakerPreset = ExtResource("14_t8yux")
+metadata/_custom_type_script = "uid://gt23yxfcsi7h"
+
+[node name="RectLine" type="Node2D" parent="WarperSprite" unique_id=852855725]
+show_behind_parent = true
+position = Vector2(0, 3)
+script = ExtResource("18_vn8lk")
+radius = Vector2(9, 9)
+metadata/_custom_type_script = "uid://3wnfsy0n4ddf"
+
+[node name="Warp" type="Node2D" parent="." unique_id=1023712937 node_paths=PackedStringArray("entity", "sprite_to_copy")]
+show_behind_parent = true
+top_level = true
+script = ExtResource("5_odmng")
+entity = NodePath("..")
+sprite_to_copy = NodePath("../WarperSprite")
+initial_lifetime = 8.0
+total_ghost_time = 0.5
+color = Color(2.7075353, 2.7075353, 2.7075353, 0.50980395)
+metadata/_custom_type_script = "uid://ctdbmfcf55d0w"
+
+[node name="Scream" type="AudioStreamPlayer" parent="." unique_id=1980695082]
+stream = ExtResource("13_t85tc")
+volume_db = -8.842
+pitch_scale = 1.64
+autoplay = true
+bus = &"Sfx"
+parameters/looping = true
+
+[node name="Crack" type="AudioStreamPlayer" parent="." unique_id=1835795500]
+stream = ExtResource("14_ytxjl")
+volume_db = -1.778
+max_polyphony = 114
+bus = &"Sfx"
+
+[node name="CrackTimer" type="Timer" parent="." unique_id=1651322686]
+wait_time = 2.0
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1375715445]
+stream = ExtResource("16_sc723")
+volume_db = -10.583
+bus = &"Music"
+parameters/looping = true
+
+[node name="CrackTimer2" type="Timer" parent="." unique_id=62646183]
+wait_time = 0.1
+one_shot = true
+
+[node name="CrackTimer3" type="Timer" parent="." unique_id=899024121]
+wait_time = 1.5
+one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=310962468 node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("18_ebwl6")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://dxfvr1ldm2ab3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1061604116]
+visible = false
+shape = SubResource("CircleShape2D_ebwl6")
+
+[node name="ShakeOnHit" type="Node" parent="." unique_id=1196240350 node_paths=PackedStringArray("health", "shaker")]
+script = ExtResource("19_mvu4m")
+health = NodePath("../Health")
+shaker = NodePath("../WarperSprite/HitShake")
+metadata/_custom_type_script = "uid://cuwivxogf1p4c"
+
+[node name="Points" type="Node" parent="." unique_id=428678600 node_paths=PackedStringArray("health")]
+script = ExtResource("21_3voxc")
+point_count = 30000
+health = NodePath("../Health")
+point_scene = ExtResource("22_3trar")
+metadata/_custom_type_script = "uid://dg8h83cqswfgm"
+
+[node name="EraseOnDeath" type="Node" parent="." unique_id=1285378530 node_paths=PackedStringArray("health")]
+script = ExtResource("23_3trar")
+health = NodePath("../Health")
+
+[node name="Sounds" type="Node" parent="." unique_id=16432852 node_paths=PackedStringArray("health", "sounds_on_hit", "sounds_on_death")]
+script = ExtResource("24_o2nmb")
+health = NodePath("../Health")
+sounds_on_hit = [NodePath("HitSound")]
+sounds_on_death = [NodePath("HitSound2")]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=625115235]
+stream = SubResource("AudioStreamRandomizer_0rloy")
+pitch_scale = 1.33
+bus = &"Sfx"
+
+[node name="HitSound2" type="AudioStreamPlayer" parent="Sounds" unique_id=1307058889]
+stream = SubResource("AudioStreamRandomizer_vn8lk")
+bus = &"Sfx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511315330]
+visible = false
+shape = SubResource("RectangleShape2D_bhunq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=988882661]
+visible = false
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1708627909 node_paths=PackedStringArray("entity")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("33_emlyg")
+entity = NodePath("..")
+pierce = true
+active = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=917574253]
+visible = false
+shape = SubResource("CircleShape2D_emlyg")

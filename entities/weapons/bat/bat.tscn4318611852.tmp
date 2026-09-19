@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://caygkhu3tx2wy"]
+
+[ext_resource type="Script" uid="uid://b43q0pxf5ipy3" path="res://entities/weapons/bat/bat.gd" id="1_4q4ac"]
+[ext_resource type="Texture2D" uid="uid://dhu1xi2rucduh" path="res://entities/weapons/bat/bat.tres" id="2_thogf"]
+[ext_resource type="Script" uid="uid://bit8emm008qmx" path="res://components/hit_box.gd" id="3_va2pr"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="4_du8ow"]
+[ext_resource type="Script" uid="uid://dcmss5xjc7b2o" path="res://entities/weapons/bat/states/left.gd" id="5_w6gxf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(8.11, 22.225)
+
+[node name="Bat" type="CharacterBody2D" unique_id=26147391 node_paths=PackedStringArray("rot_node", "rot_point_node", "sprite", "hitbox", "timer", "state_machine")]
+script = ExtResource("1_4q4ac")
+rot_node = NodePath("PointRot/Node2D")
+rot_point_node = NodePath("PointRot")
+sprite = NodePath("PointRot/Node2D/BatSprite")
+hitbox = NodePath("PointRot/Node2D/BatSprite/HitBox")
+timer = NodePath("Timer")
+state_machine = NodePath("StateMachine")
+metadata/_custom_type_script = "uid://bibh114pn5wpv"
+
+[node name="PointRot" type="Node2D" parent="." unique_id=1867521305]
+
+[node name="Node2D" type="Node2D" parent="PointRot" unique_id=1289262065]
+
+[node name="BatSprite" type="Sprite2D" parent="PointRot/Node2D" unique_id=1872750205]
+position = Vector2(0, 20.5)
+texture = ExtResource("2_thogf")
+
+[node name="HitBox" type="Area2D" parent="PointRot/Node2D/BatSprite" unique_id=66285878]
+script = ExtResource("3_va2pr")
+metadata/_custom_type_script = "uid://bit8emm008qmx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointRot/Node2D/BatSprite/HitBox" unique_id=1869568515]
+shape = SubResource("RectangleShape2D_bhunq")
+
+[node name="Timer" type="Timer" parent="." unique_id=1612698848]
+wait_time = 0.3
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=2087794856 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_du8ow")
+initial_state = NodePath("left")
+metadata/_custom_type_script = "uid://dxr5g0mdj7yj8"
+
+[node name="left" type="Node" parent="StateMachine" unique_id=2066025508]
+script = ExtResource("5_w6gxf")
+metadata/_custom_type_script = "uid://dcmss5xjc7b2o"
