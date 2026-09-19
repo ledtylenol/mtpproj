@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://co34voc1mf6qs"]
 
-[ext_resource type="Script" uid="uid://dn6lcxh3fi87n" path="res://special/ui/health_visuals/HealthIcon.cs" id="1_kclt2"]
+[ext_resource type="Script" uid="uid://rjmhmmny6xkc" path="res://special/ui/health_visuals/health_icon.gd" id="1_kclt2"]
 [ext_resource type="Texture2D" uid="uid://bkphpcbrd5ovd" path="res://special/ui/health_visuals/filled_heart.tres" id="2_r7v1c"]
 [ext_resource type="Script" uid="uid://c1ptbeantuu7h" path="res://addons/shaker/src/shaker_component.gd" id="3_aslea"]
 [ext_resource type="Texture2D" uid="uid://biy7njoj24m53" path="res://special/ui/health_visuals/empty_heart.tres" id="3_vubx5"]
@@ -19,7 +19,7 @@ property_name = "offset_transform_position"
 shake_type = SubResource("Resource_vubx5")
 metadata/_custom_type_script = "uid://du1yew8fxqf7c"
 
-[node name="HealthIcon" type="MarginContainer" unique_id=92897280 node_paths=PackedStringArray("Shaker", "Icon")]
+[node name="HealthIcon" type="MarginContainer" unique_id=92897280 node_paths=PackedStringArray("shaker", "icon")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 0
@@ -27,11 +27,11 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 script = ExtResource("1_kclt2")
-Shaker = NodePath("TextureRect/ShakerComponent")
-Filled = false
-Icon = NodePath("TextureRect")
-ShownTexture = ExtResource("2_r7v1c")
-HideTexture = ExtResource("3_vubx5")
+shaker = NodePath("TextureRect/ShakerComponent")
+filled = false
+icon = NodePath("TextureRect")
+shown_texture = ExtResource("2_r7v1c")
+hide_texture = ExtResource("3_vubx5")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=815073918]
 layout_mode = 2

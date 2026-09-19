@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://gthaec8e15lp"]
 
-[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_v3iwk"]
+[ext_resource type="Texture2D" uid="uid://drf8teqnp5sfq" path="res://special/particles/hit-21.png" id="1_e5ny1"]
+[ext_resource type="Script" uid="uid://ci7mba6hgatop" path="res://components/erase_on_particle_finish.gd" id="1_v3iwk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ypsrj"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_v3iwk"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.29540917, 0.6666667)
-colors = PackedColorArray(0.64, 0.64, 0.64, 1, 0.14, 0.14, 0.14, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.31863728, 0.58316636, 0.83767533)
+colors = PackedColorArray(0.64, 0.64, 0.64, 1, 0.14, 0.14, 0.14, 0.4627451, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_e5ny1"]
 gradient = SubResource("Gradient_v3iwk")
@@ -21,11 +27,11 @@ curve = SubResource("Curve_qcurg")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_66xag"]
 resource_local_to_scene = true
 particle_flag_align_y = true
-particle_flag_rotate_y = true
 particle_flag_disable_z = true
+emission_shape_offset = Vector3(7, 0, 0)
 emission_shape = 3
 emission_box_extents = Vector3(14, 14, 1)
-spread = 80.735
+spread = 31.284
 initial_velocity_min = 137.3
 initial_velocity_max = 208.73
 gravity = Vector3(0, 0, 0)
@@ -34,9 +40,10 @@ tangential_accel_max = 99.99999
 tangential_accel_curve = SubResource("CurveTexture_bohes")
 damping_min = 450.00003
 damping_max = 500.00003
-scale_max = 3.0
-color = Color(1, 1, 1, 0.5176471)
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_e5ny1")
 color_initial_ramp = SubResource("GradientTexture1D_e5ny1")
+anim_offset_max = 1.0
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
@@ -44,16 +51,18 @@ collision_use_scale = true
 
 [node name="Hit2" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
-visibility_layer = 2
+texture_repeat = 1
+material = SubResource("CanvasItemMaterial_ypsrj")
 emitting = false
-amount = 40
-lifetime = 0.25
+amount = 7
+texture = ExtResource("1_e5ny1")
+lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
-fixed_fps = 18
+randomness = 1.0
+fixed_fps = 36
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_66xag")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
 script = ExtResource("1_v3iwk")
-metadata/_custom_type_script = "uid://u3do6jythrh3"

@@ -1,35 +1,11 @@
 [gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://cfetke37trxj6"]
 
 [ext_resource type="PackedScene" uid="uid://br6k6p3o6jflv" path="res://entities/jumper_boss/jumper_boss.tscn" id="1_ajmty"]
-[ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="2_63eln"]
-[ext_resource type="Script" uid="uid://wi785ap1xqd8" path="res://entities/Enemy.cs" id="3_aym73"]
-
-[sub_resource type="Curve" id="Curve_kfsws"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_mhttw"]
-_limits = [0.0, 20.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
-point_count = 3
-
-[sub_resource type="Resource" id="Resource_ha5dm"]
-script = ExtResource("2_63eln")
-InnerWidthCurve = SubResource("Curve_kfsws")
-OuterWidthCurve = SubResource("Curve_mhttw")
-InitEaseType = 1
-InitTransType = 7
-EaseType = 1
-TransType = 5
-EndRadius = 150.0
-InitDuration = 1.5
-Duration = 4.0
-metadata/_custom_type_script = "uid://da00nqce8xth4"
+[ext_resource type="Script" uid="uid://o0anx4d0n7ig" path="res://entities/enemy.gd" id="1_jwoni"]
+[ext_resource type="PackedScene" uid="uid://bx7ud2opvf7g5" path="res://special/wrappers/placeholder_wrapper.tscn" id="3_63eln"]
 
 [resource]
-script = ExtResource("3_aym73")
-Scene = ExtResource("1_ajmty")
-SpawnExplosionStats = SubResource("Resource_ha5dm")
-Cost = 15.0
-metadata/_custom_type_script = "uid://wi785ap1xqd8"
+script = ExtResource("1_jwoni")
+scene = ExtResource("1_ajmty")
+spawn_wrapper = ExtResource("3_63eln")
+metadata/_custom_type_script = "uid://o0anx4d0n7ig"

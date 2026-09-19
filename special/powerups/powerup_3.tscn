@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccslqa8gk6x0w"]
 
-[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_6p4q1"]
+[ext_resource type="Script" uid="uid://ci7mba6hgatop" path="res://components/erase_on_particle_finish.gd" id="1_6p4q1"]
 
 [sub_resource type="Gradient" id="Gradient_6p4q1"]
 interpolation_mode = 1
@@ -43,7 +43,6 @@ collision_use_scale = true
 [node name="Powerup3" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
 visibility_layer = 2
-emitting = false
 amount = 160
 one_shot = true
 explosiveness = 1.0
@@ -53,4 +52,3 @@ process_material = SubResource("ParticleProcessMaterial_lbswa")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
 script = ExtResource("1_6p4q1")
-metadata/_custom_type_script = "uid://u3do6jythrh3"

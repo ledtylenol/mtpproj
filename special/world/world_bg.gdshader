@@ -11,7 +11,7 @@ instance uniform vec2 flow_dir = vec2(1.0, 0.0);
 
 uniform float warp_closeness : hint_range(0.01, 10.0) = 2.0;
 uniform float warp_intensity : hint_range(0.0, 1.5)  = 0.12;
-instance uniform vec3 color: source_color;
+instance uniform vec4 color: source_color;
 instance uniform float distance_threshold = 0.0;
 void vertex() {
 	
@@ -34,5 +34,6 @@ void fragment() {
 	float x = smoothstep(step_start , step_start + step_offset, col.r * dist);
 	COLOR.a = step(0.5, x * dist);
 	if (COLOR.a < 0.5) discard;
-	COLOR.rgb = color;
+	COLOR.rgb = color.rgb;
+	COLOR.a *= color.a;
 }

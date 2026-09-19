@@ -1,34 +1,34 @@
 [gd_scene format=3 uid="uid://bpc1rbd1p4jlm"]
 
-[ext_resource type="Script" uid="uid://drqpn84f3eusu" path="res://entities/duplicator/Duplicator.cs" id="1_mjgw3"]
-[ext_resource type="Script" uid="uid://yttbfrfstie3" path="res://components/StateMachine.cs" id="2_kx440"]
-[ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="3_kx440"]
-[ext_resource type="Script" uid="uid://bfik6b621j4oo" path="res://entities/duplicator/states/DuplicatorIdle.cs" id="3_xxtar"]
-[ext_resource type="Script" uid="uid://cj3ug7hpv8isx" path="res://entities/duplicator/states/DuplicatorFollow.cs" id="4_8cvvw"]
-[ext_resource type="Script" uid="uid://de4cuwdt8o0fd" path="res://entities/duplicator/states/DuplicatorDuplicate.cs" id="6_j0p8d"]
-[ext_resource type="Script" uid="uid://dcsnu12pfq43c" path="res://entities/player/RectLine.cs" id="7_0p2r7"]
-[ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="7_8cvvw"]
-[ext_resource type="Script" uid="uid://hlnq34q2p817" path="res://entities/duplicator/states/DuplicatorEnraged.cs" id="7_lss1b"]
+[ext_resource type="Script" uid="uid://bsnpmdfspy52c" path="res://entities/duplicator/duplicator.gd" id="1_mjgw3"]
+[ext_resource type="Script" uid="uid://dxr5g0mdj7yj8" path="res://components/state_machine.gd" id="2_kx440"]
+[ext_resource type="Script" uid="uid://3wu3b4fr5tpx" path="res://components/health.gd" id="3_kx440"]
+[ext_resource type="Script" uid="uid://bh10gk2lghqhv" path="res://entities/duplicator/states/duplicator_idle.gd" id="4_7fi3x"]
+[ext_resource type="Script" uid="uid://dqvhkaobx378i" path="res://entities/duplicator/states/duplicator_follow.gd" id="5_v64bk"]
+[ext_resource type="Script" uid="uid://dbsm8x4dy71ft" path="res://entities/duplicator/states/duplicator_duplicate.gd" id="6_v64bk"]
+[ext_resource type="Script" uid="uid://3wnfsy0n4ddf" path="res://entities/player/rect_line.gd" id="7_0p2r7"]
+[ext_resource type="Script" uid="uid://dxfvr1ldm2ab3" path="res://components/hurt_box.gd" id="7_8cvvw"]
+[ext_resource type="Script" uid="uid://cvaute4qxjfr8" path="res://entities/duplicator/states/duplicator_enraged.gd" id="7_v64bk"]
 [ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="8_fw75c"]
-[ext_resource type="Script" uid="uid://dcwj18nq52c3s" path="res://components/Ghosts.cs" id="8_ipbjq"]
-[ext_resource type="Script" uid="uid://cvv4y2g4bk42n" path="res://components/HitBox.cs" id="9_h0ykt"]
+[ext_resource type="Script" uid="uid://bf36mncvih10w" path="res://components/ghosts.gd" id="8_v64bk"]
+[ext_resource type="Script" uid="uid://bit8emm008qmx" path="res://components/hit_box.gd" id="9_h0ykt"]
 [ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="9_ldkev"]
-[ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="10_08hf4"]
+[ext_resource type="Script" uid="uid://cuwivxogf1p4c" path="res://components/shake_on_hit.gd" id="10_08hf4"]
 [ext_resource type="Texture2D" uid="uid://dwhrqos1c1eeh" path="res://entities/duplicator/duplicator.tres" id="10_v64bk"]
-[ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="13_5qif0"]
+[ext_resource type="Script" uid="uid://lv6bhbarlyev" path="res://components/spawn_particles_on_hit.gd" id="13_5qif0"]
 [ext_resource type="PackedScene" uid="uid://gthaec8e15lp" path="res://special/particles/hit_2.tscn" id="14_qrmfp"]
-[ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="15_c211r"]
+[ext_resource type="Script" uid="uid://burdacewl3qrk" path="res://components/sounds.gd" id="15_c211r"]
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="16_op7a3"]
 [ext_resource type="AudioStream" uid="uid://d2ukjdkj5nlq1" path="res://entities/death.sfxr" id="17_jjid5"]
-[ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="18_jjid5"]
+[ext_resource type="Script" uid="uid://dg8h83cqswfgm" path="res://components/points.gd" id="18_jjid5"]
 [ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="19_n81xb"]
-[ext_resource type="Script" uid="uid://b5llka3uw30s0" path="res://components/EraseOnDeath.cs" id="20_n81xb"]
+[ext_resource type="Script" uid="uid://bex5h6egby1jd" path="res://components/erase_on_death.gd" id="20_n81xb"]
 [ext_resource type="AudioStream" uid="uid://dufu5iqu72ohw" path="res://entities/duplicator/windup.sfxr" id="24_035rb"]
 [ext_resource type="AudioStream" uid="uid://6g8w8okiwfpw" path="res://entities/duplicator/launch.sfxr" id="24_e8jpo"]
 [ext_resource type="AudioStream" uid="uid://dgfqe8ixs68wy" path="res://entities/duplicator/bong_001.ogg" id="24_v64bk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v64bk"]
+size = Vector2(16, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0p2r7"]
 size = Vector2(10, 12)
@@ -60,84 +60,76 @@ random_pitch = 1.6754903
 streams_count = 1
 stream_0/stream = ExtResource("24_e8jpo")
 
-[node name="Duplicator" type="CharacterBody2D" unique_id=1072277101 node_paths=PackedStringArray("DuplicateSound", "Sprite", "StateMachine", "Health")]
+[node name="Duplicator" type="CharacterBody2D" unique_id=1072277101 node_paths=PackedStringArray("duplicate_sound", "sprite", "state_machine", "health")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_mjgw3")
-DuplicateSound = NodePath("Duplicate")
-Sprite = NodePath("Sprite2D")
-DuplicateString = "uid://bpc1rbd1p4jlm"
-MoveSpeed = 100.0
-Acceleration = 5.0
-Friction = 5.0
-StateMachine = NodePath("StateMachine")
-Health = NodePath("Health")
-metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+duplicate_sound = NodePath("Duplicate")
+sprite = NodePath("Sprite2D")
+duplicate_string = "uid://bpc1rbd1p4jlm"
+move_speed = 100.0
+acceleration = 5.0
+friction = 5.0
+state_machine = NodePath("StateMachine")
+health = NodePath("Health")
 
 [node name="RectLine" type="Node2D" parent="." unique_id=204571138]
 show_behind_parent = true
 z_index = -1
 position = Vector2(0, 3)
 script = ExtResource("7_0p2r7")
-Radius = Vector2(9, 9)
-metadata/_custom_type_script = "uid://dcsnu12pfq43c"
+radius = Vector2(9, 9)
 
-[node name="StateMachine" type="Node" parent="." unique_id=820743726 node_paths=PackedStringArray("InitialState")]
+[node name="StateMachine" type="Node" parent="." unique_id=820743726 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_kx440")
-InitialState = NodePath("Idle")
-metadata/_custom_type_script = "uid://yttbfrfstie3"
+initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=429662431 node_paths=PackedStringArray("Duplicator", "FollowTimer")]
-script = ExtResource("3_xxtar")
-Duplicator = NodePath("../..")
-FollowTimer = NodePath("FollowTimer")
-metadata/_custom_type_script = "uid://bfik6b621j4oo"
+[node name="Idle" type="Node" parent="StateMachine" unique_id=313873575 node_paths=PackedStringArray("duplicator", "follow_timer")]
+script = ExtResource("4_7fi3x")
+duplicator = NodePath("../..")
+follow_timer = NodePath("FollowTimer")
 
 [node name="FollowTimer" type="Timer" parent="StateMachine/Idle" unique_id=1305591459]
 one_shot = true
 
-[node name="Follow" type="Node" parent="StateMachine" unique_id=1278091052 node_paths=PackedStringArray("Duplicator", "PlayerDetection", "DashTimer", "DuplicateTimer")]
-script = ExtResource("4_8cvvw")
-Duplicator = NodePath("../..")
-PlayerDetection = NodePath("../../PlayerDetectionArea")
-DashTimer = NodePath("DashTimer")
-DuplicateTimer = NodePath("../Duplicate/DupTimer")
-metadata/_custom_type_script = "uid://cj3ug7hpv8isx"
+[node name="Follow" type="Node" parent="StateMachine" unique_id=1278091052 node_paths=PackedStringArray("duplicator", "player_detection", "dash_timer", "duplicate_timer")]
+script = ExtResource("5_v64bk")
+duplicator = NodePath("../..")
+player_detection = NodePath("../../PlayerDetectionArea")
+dash_timer = NodePath("DashTimer")
+duplicate_timer = NodePath("../Duplicate/DupTimer")
 
 [node name="DashTimer" type="Timer" parent="StateMachine/Follow" unique_id=1039097914]
 one_shot = true
 
-[node name="Duplicate" type="Node" parent="StateMachine" unique_id=326959903 node_paths=PackedStringArray("Duplicator", "DuplicateTimer")]
-script = ExtResource("6_j0p8d")
-Duplicator = NodePath("../..")
-DuplicateTimer = NodePath("DupTimer")
-metadata/_custom_type_script = "uid://de4cuwdt8o0fd"
+[node name="Duplicate" type="Node" parent="StateMachine" unique_id=326959903 node_paths=PackedStringArray("duplicator", "duplicate_timer")]
+script = ExtResource("6_v64bk")
+duplicator = NodePath("../..")
+duplicate_timer = NodePath("DupTimer")
 
 [node name="DupTimer" type="Timer" parent="StateMachine/Duplicate" unique_id=661345768]
 one_shot = true
 
-[node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("Duplicator", "Ghosts", "Sprite", "Shaker", "HitBox", "Windup", "Dash")]
-script = ExtResource("7_lss1b")
-Duplicator = NodePath("../..")
-Ghosts = NodePath("Ghosts")
-Sprite = NodePath("../../Sprite2D")
-Shaker = NodePath("../../Sprite2D/Shaker")
-HitBox = NodePath("../../HitBox")
-Windup = NodePath("../../Windup")
-Dash = NodePath("../../Dash")
-metadata/_custom_type_script = "uid://hlnq34q2p817"
+[node name="Enraged" type="Node" parent="StateMachine" unique_id=1669166109 node_paths=PackedStringArray("duplicator", "ghosts", "sprite", "shaker", "hit_box", "windup", "dash")]
+script = ExtResource("7_v64bk")
+duplicator = NodePath("../..")
+ghosts = NodePath("Ghosts")
+sprite = NodePath("../../Sprite2D")
+shaker = NodePath("../../Sprite2D/Shaker")
+hit_box = NodePath("../../HitBox")
+windup = NodePath("../../Windup")
+dash = NodePath("../../Dash")
 
-[node name="Ghosts" type="Node" parent="StateMachine/Enraged" unique_id=1645122620 node_paths=PackedStringArray("NodeToCopy")]
-script = ExtResource("8_ipbjq")
-NodeToCopy = NodePath("../../../Sprite2D")
-SpawnInterval = 0.05
-metadata/_custom_type_script = "uid://dcwj18nq52c3s"
+[node name="Ghosts" type="Node" parent="StateMachine/Enraged" unique_id=1638259363 node_paths=PackedStringArray("node_to_copy")]
+script = ExtResource("8_v64bk")
+node_to_copy = NodePath("../../../Sprite2D")
+spawn_interval = 0.05
+metadata/_custom_type_script = "uid://bf36mncvih10w"
 
 [node name="Health" type="Node" parent="." unique_id=1183197299]
 script = ExtResource("3_kx440")
-CurrentHealth = 14
-MaxHealth = 14
-metadata/_custom_type_script = "uid://iv5wxd01vyqv"
+current_health = 14
+max_health = 14
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=502823133]
 modulate = Color(1, 0.90000004, 0, 1)
@@ -159,50 +151,44 @@ fade_out = 8.936089e-05
 shakerPreset = ExtResource("9_ldkev")
 metadata/_custom_type_script = "uid://gt23yxfcsi7h"
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=2144862820 node_paths=PackedStringArray("Health")]
+[node name="HurtBox" type="Area2D" parent="." unique_id=2144862820 node_paths=PackedStringArray("health")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("7_8cvvw")
-Health = NodePath("../Health")
-metadata/_custom_type_script = "uid://djd2q55i8737w"
+health = NodePath("../Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1292054232]
-shape = SubResource("CircleShape2D_bhunq")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox" unique_id=1544020392]
+shape = SubResource("RectangleShape2D_v64bk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1525994598]
 shape = SubResource("RectangleShape2D_0p2r7")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=2147280666 node_paths=PackedStringArray("Entity")]
+[node name="HitBox" type="Area2D" parent="." unique_id=2147280666 node_paths=PackedStringArray("entity")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("9_h0ykt")
-Entity = NodePath("..")
+entity = NodePath("..")
 Pierce = true
-Active = false
-metadata/_custom_type_script = "uid://cvv4y2g4bk42n"
+active = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=669684144]
 shape = SubResource("CircleShape2D_h0ykt")
 
-[node name="ShakeOnHit" type="Node" parent="." unique_id=511838293 node_paths=PackedStringArray("Health", "Shaker")]
+[node name="ShakeOnHit" type="Node" parent="." unique_id=511838293 node_paths=PackedStringArray("health", "shaker")]
 script = ExtResource("10_08hf4")
-Health = NodePath("../Health")
-Shaker = NodePath("../Sprite2D/HitShake")
-metadata/_custom_type_script = "uid://b03wlp2uu4sal"
+health = NodePath("../Health")
+shaker = NodePath("../Sprite2D/HitShake")
 
-[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1193451887 node_paths=PackedStringArray("Health")]
+[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1193451887 node_paths=PackedStringArray("health")]
 script = ExtResource("13_5qif0")
-Particles = ExtResource("14_qrmfp")
-Health = NodePath("../Health")
-metadata/_custom_type_script = "uid://bka021k5m4tk3"
+particles = ExtResource("14_qrmfp")
+health = NodePath("../Health")
 
-[node name="Sounds" type="Node" parent="." unique_id=119961742 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath", "SoundsOnShoot")]
+[node name="Sounds" type="Node" parent="." unique_id=119961742 node_paths=PackedStringArray("health", "sounds_on_hit", "sounds_on_death")]
 script = ExtResource("15_c211r")
-Health = NodePath("../Health")
-SoundsOnHit = [NodePath("HitSound")]
-SoundsOnDeath = [NodePath("HitSound2")]
-SoundsOnShoot = []
-metadata/_custom_type_script = "uid://c8eybkhh1ct04"
+health = NodePath("../Health")
+sounds_on_hit = [NodePath("HitSound")]
+sounds_on_death = [NodePath("HitSound2")]
 
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=182949136]
 stream = SubResource("AudioStreamRandomizer_n81xb")
@@ -213,17 +199,15 @@ bus = &"Sfx"
 stream = SubResource("AudioStreamRandomizer_j0p8d")
 bus = &"Sfx"
 
-[node name="Points" type="Node" parent="." unique_id=2080865032 node_paths=PackedStringArray("Health")]
+[node name="Points" type="Node" parent="." unique_id=2080865032 node_paths=PackedStringArray("health")]
 script = ExtResource("18_jjid5")
-PointCount = 100
-Health = NodePath("../Health")
-PointScene = ExtResource("19_n81xb")
-metadata/_custom_type_script = "uid://dcyoc4cxwcoq"
+point_count = 100
+health = NodePath("../Health")
+point_scene = ExtResource("19_n81xb")
 
-[node name="EraseOnDeath" type="Node" parent="." unique_id=1738556776 node_paths=PackedStringArray("Health")]
+[node name="EraseOnDeath" type="Node" parent="." unique_id=1738556776 node_paths=PackedStringArray("health")]
 script = ExtResource("20_n81xb")
-Health = NodePath("../Health")
-metadata/_custom_type_script = "uid://b5llka3uw30s0"
+health = NodePath("../Health")
 
 [node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=2035963417]
 collision_layer = 0

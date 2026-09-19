@@ -1,340 +1,29 @@
 [gd_scene format=3 uid="uid://cfluv02nb8mov"]
 
-[ext_resource type="Script" uid="uid://cf7vmc4ae5sv3" path="res://special/world/World2d.cs" id="1_ubau6"]
-[ext_resource type="Shader" uid="uid://dm7dw4t0r5kfv" path="res://special/world/world_bg.gdshader" id="2_4e7d3"]
-[ext_resource type="Script" uid="uid://ddwjfwvr4g4xu" path="res://special/world/BgShader.cs" id="3_hp72y"]
-[ext_resource type="Environment" uid="uid://ckr8f7m5q6xgs" path="res://env.tres" id="4_hrv0m"]
+[ext_resource type="Script" uid="uid://b1tkw2qr0ugmj" path="res://special/world/world.gd" id="1_r2b5k"]
+[ext_resource type="PackedScene" uid="uid://7fihccimt1fl" path="res://special/world/fight_world.tscn" id="2_sqfkn"]
 [ext_resource type="PackedScene" uid="uid://b4dsuri8lsncp" path="res://entities/player/player.tscn" id="5_earyr"]
-[ext_resource type="Script" uid="uid://csw41l2t5uqs2" path="res://special/world/borders/WorldBorder.cs" id="6_4e7d3"]
-[ext_resource type="Script" uid="uid://b8k53ugxx3xhh" path="res://special/handlers/BgHandler.cs" id="9_n7shi"]
-[ext_resource type="Script" uid="uid://dff1gt3wl1n6u" path="res://special/world/borders/Borders.cs" id="11_ubau6"]
-[ext_resource type="Script" uid="uid://bwo5uh80p5kbr" path="res://special/world/ProceedLabel.cs" id="12_xuavk"]
-[ext_resource type="Script" uid="uid://6oi13pqrxooe" path="res://special/world/OtherWorld.cs" id="13_ttqxl"]
 [ext_resource type="Theme" uid="uid://cr0fsad13irxf" path="res://special/ui/theme.tres" id="14_uj1fh"]
 [ext_resource type="AudioStream" uid="uid://dtwk0qurmjyrb" path="res://special/world/Hr_coin.wav" id="15_f540n"]
-[ext_resource type="Script" uid="uid://2uachmum50fp" path="res://components/HealthDisplay.cs" id="15_hp72y"]
-[ext_resource type="Script" uid="uid://bvgrv70bx2vc6" path="res://special/world/point/ShepardSound.cs" id="16_3p4e6"]
-[ext_resource type="PackedScene" uid="uid://co34voc1mf6qs" path="res://special/ui/health_visuals/health_icon.tscn" id="16_hp72y"]
-[ext_resource type="Script" uid="uid://do7xvweawh1k2" path="res://special/ui/SettingsUi.cs" id="16_ubau6"]
-[ext_resource type="Script" uid="uid://klo6cdxb265p" path="res://special/ui/Leaderboard.cs" id="17_4e7d3"]
-[ext_resource type="PackedScene" uid="uid://ghuxq5b2a5ef" path="res://special/ui/leaderboard_entry.tscn" id="18_hp72y"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hiqwa"]
-noise_type = 2
-frequency = 0.182
-fractal_type = 0
-cellular_jitter = -3.845
-cellular_return_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hiqwa"]
-noise = SubResource("FastNoiseLite_hiqwa")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u3nc"]
-shader = ExtResource("2_4e7d3")
-shader_parameter/noise1 = SubResource("NoiseTexture2D_hiqwa")
-shader_parameter/step_start = 0.88
-shader_parameter/step_offset = 0.0
-shader_parameter/warp_speed = 2.0
-shader_parameter/warp_closeness = 2.0
-shader_parameter/warp_intensity = 0.12
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkrmk"]
-size = Vector2(20, 500)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7shi"]
-size = Vector2(20, 501)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubau6"]
-size = Vector2(500, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e7d3"]
-size = Vector2(500, 20)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bhunq"]
-polygon = PackedVector2Array(-124, -143, -124, 144, -126, 144.00002, -126, -143, -126, -145, -124, -145)
-
-[sub_resource type="LabelSettings" id="LabelSettings_hiqwa"]
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_tlwt5"]
-font_size = 28
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Script" uid="uid://sucph3e4bl6j" path="res://special/ui/settings_ui.gd" id="16_hrv0m"]
 
 [node name="World" type="Node" unique_id=499391976]
+script = ExtResource("1_r2b5k")
+start_scene = ExtResource("2_sqfkn")
 
-[node name="World2D" type="Node2D" parent="." unique_id=1774144915 node_paths=PackedStringArray("Label", "SpawnSlot")]
-y_sort_enabled = true
-script = ExtResource("1_ubau6")
-Size = Vector2(250, 288)
-Color = Color(0, 0.5333333, 1, 1)
-Label = NodePath("../UI/MarginContainer/VBoxContainer/HBoxContainer/Label")
-SpawnSlot = NodePath("SpawnSlot")
-
-[node name="BgShader" type="ColorRect" parent="World2D" unique_id=619111321 node_paths=PackedStringArray("World")]
-z_index = -7
-material = SubResource("ShaderMaterial_2u3nc")
-instance_shader_parameters/color = Color(1, 1, 1, 1)
-instance_shader_parameters/distance_threshold = 1.0
-instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 288.6695
-instance_shader_parameters/uv_scale = 1.18
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -144.0
-offset_right = 125.0
-offset_bottom = 144.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-script = ExtResource("3_hp72y")
-World = NodePath("..")
-TimeScale = 0.2
-TweenDuration = 3.5
-EaseType = 2
-TransType = 5
-
-[node name="BgShader2" type="ColorRect" parent="World2D" unique_id=387959515 node_paths=PackedStringArray("World")]
-z_index = -8
-material = SubResource("ShaderMaterial_2u3nc")
-instance_shader_parameters/color = Color(1, 1, 1, 1)
-instance_shader_parameters/distance_threshold = 1.0
-instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 288.6695
-instance_shader_parameters/uv_scale = -1.0
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -144.0
-offset_right = 125.0
-offset_bottom = 144.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-script = ExtResource("3_hp72y")
-World = NodePath("..")
-TimeScale = 0.2
-TweenDuration = 4.5
-EaseType = 2
-TransType = 5
-
-[node name="Env" type="WorldEnvironment" parent="World2D" unique_id=349935157]
-environment = ExtResource("4_hrv0m")
-
-[node name="Entity" parent="World2D" unique_id=1452586366 instance=ExtResource("5_earyr")]
-
-[node name="WorldBorder" type="StaticBody2D" parent="World2D" unique_id=134723482 node_paths=PackedStringArray("World", "Left", "Right", "Up", "Down")]
-collision_priority = 100.0
-script = ExtResource("6_4e7d3")
-Separation = 10.0
-World = NodePath("..")
-Left = NodePath("Left")
-Right = NodePath("Right")
-Up = NodePath("Up")
-Down = NodePath("Down")
-
-[node name="Left" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=344285944]
-shape = SubResource("RectangleShape2D_bkrmk")
-one_way_collision_direction = Vector2(1, 0)
-
-[node name="Right" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=894328809]
-shape = SubResource("RectangleShape2D_n7shi")
-one_way_collision_direction = Vector2(-1, 0)
-
-[node name="Down" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=533127162]
-shape = SubResource("RectangleShape2D_ubau6")
-one_way_collision_direction = Vector2(0, -1)
-
-[node name="Up" type="CollisionShape2D" parent="World2D/WorldBorder" unique_id=1130717722]
-shape = SubResource("RectangleShape2D_4e7d3")
-
-[node name="Borders" type="Node2D" parent="World2D" unique_id=198662441 node_paths=PackedStringArray("World")]
-z_index = 4
-script = ExtResource("11_ubau6")
-World = NodePath("..")
-metadata/_custom_type_script = "uid://dff1gt3wl1n6u"
-
-[node name="SpawnSlot" type="Node2D" parent="World2D" unique_id=214075037]
-y_sort_enabled = true
-
-[node name="ProceedLabel" type="RichTextLabel" parent="World2D" unique_id=77434158]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -20.0
-offset_right = 125.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-bbcode_enabled = true
-text = "[font_size=40][center][TAB]
-[shake]PROCEED"
-fit_content = true
-script = ExtResource("12_xuavk")
-InitialSpacing = 10.0
-
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="World2D" unique_id=2078871021]
-position = Vector2(0, -19)
-rotation = 1.5707964
-occluder = SubResource("OccluderPolygon2D_bhunq")
-
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="World2D" unique_id=305954143]
-position = Vector2(0, 270)
-rotation = 1.5707964
-occluder = SubResource("OccluderPolygon2D_bhunq")
-
-[node name="BgHandler" type="Node" parent="World2D" unique_id=321989157 node_paths=PackedStringArray("Shaders")]
-process_mode = 3
-script = ExtResource("9_n7shi")
-Shaders = [NodePath("../BgShader"), NodePath("../BgShader2")]
-metadata/_custom_type_script = "uid://b8k53ugxx3xhh"
-
-[node name="DrawWorld2d" type="SubViewportContainer" parent="." unique_id=306470106 node_paths=PackedStringArray("Root", "Viewport")]
-visibility_layer = 2
-z_index = -4
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -167.0
-offset_top = -144.0
-offset_right = -345.0
-offset_bottom = -144.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-script = ExtResource("13_ttqxl")
-Root = NodePath("SubViewport/Root")
-Viewport = NodePath("SubViewport")
-
-[node name="SubViewport" type="SubViewport" parent="DrawWorld2d" unique_id=1074518260]
-disable_3d = true
-transparent_bg = true
-handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-canvas_item_default_texture_filter = 0
-gui_disable_input = true
-canvas_cull_mask = 4293918722
-oversampling = false
-size = Vector2i(334, 288)
-render_target_clear_mode = 2
-render_target_update_mode = 4
-
-[node name="BgShader" type="ColorRect" parent="DrawWorld2d/SubViewport" unique_id=672492793 node_paths=PackedStringArray("World")]
-visible = false
-visibility_layer = 2
-material = SubResource("ShaderMaterial_2u3nc")
-instance_shader_parameters/color = Color(0, 0, 0, 1)
-instance_shader_parameters/distance_threshold = 1.0
-instance_shader_parameters/flow_dir = Vector2(0, 0)
-instance_shader_parameters/time = 288.6695
-instance_shader_parameters/uv_scale = 0.085
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -144.0
-offset_right = 125.0
-offset_bottom = 144.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-script = ExtResource("3_hp72y")
-World = NodePath("../../../World2D")
-TimeScale = 0.2
-TweenDuration = 1.0
-EaseType = 1
-TransType = 5
-
-[node name="Env" type="WorldEnvironment" parent="DrawWorld2d/SubViewport" unique_id=1299417203]
-environment = ExtResource("4_hrv0m")
-
-[node name="Camera2D" type="Camera2D" parent="DrawWorld2d/SubViewport" unique_id=402984710]
-
-[node name="Root" type="Node2D" parent="DrawWorld2d/SubViewport" unique_id=1458987256]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DrawWorld2d/SubViewport" unique_id=362689365]
-
-[node name="ColorRect" type="ColorRect" parent="DrawWorld2d/SubViewport/CanvasLayer" unique_id=1750999764]
-visible = false
-visibility_layer = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="DrawWorld2d/SubViewport/CanvasLayer" unique_id=472298878]
-visibility_layer = 2
-offset_left = 9.0
-offset_top = 9.0
-offset_right = 81.0
-offset_bottom = 25.0
-text = "GOOD DONE"
-label_settings = SubResource("LabelSettings_hiqwa")
-
-[node name="UI" type="Control" parent="." unique_id=455808819]
-layout_mode = 3
-anchor_left = -0.5019531
-anchor_top = -0.5
-anchor_right = -0.24414063
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("14_uj1fh")
-metadata/_edit_use_anchors_ = true
-
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1794936921]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1645529886]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=797975768]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1495614928]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1274"
-label_settings = SubResource("LabelSettings_tlwt5")
-
-[node name="HealthDisplay" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1271256852]
-layout_mode = 2
-script = ExtResource("15_hp72y")
-HealthIconScene = ExtResource("16_hp72y")
-InitialDelay = 0.25
-DelayPerIcon = 0.15
-metadata/_custom_type_script = "uid://2uachmum50fp"
+[node name="Entity" parent="." unique_id=1452586366 instance=ExtResource("5_earyr")]
 
 [node name="Coin" type="AudioStreamPlayer" parent="." unique_id=563499818]
 stream = ExtResource("15_f540n")
 volume_db = -8.924
-script = ExtResource("16_3p4e6")
+bus = &"Sfx"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2123837178]
 offset = Vector2(255, -150)
 transform = Transform2D(1, 0, 0, 1, 255, -150)
 follow_viewport_enabled = true
 
-[node name="Settings" type="Control" parent="CanvasLayer" unique_id=14311772 node_paths=PackedStringArray("SfxSlider", "SfxLabel", "SfxContainer", "MusicSlider", "MusicLabel", "MusicContainer")]
+[node name="Settings" type="Control" parent="CanvasLayer" unique_id=14311772 node_paths=PackedStringArray("sfx_slider", "sfx_label", "sfx_container", "music_slider", "music_label", "music_container")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -343,13 +32,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("14_uj1fh")
-script = ExtResource("16_ubau6")
-SfxSlider = NodePath("MarginContainer/VBoxContainer/SfxContainer/SfxSlider")
-SfxLabel = NodePath("MarginContainer/VBoxContainer/SfxContainer/Sfx")
-SfxContainer = NodePath("MarginContainer/VBoxContainer/SfxContainer")
-MusicSlider = NodePath("MarginContainer/VBoxContainer/MusicContainer/MusicSlider")
-MusicLabel = NodePath("MarginContainer/VBoxContainer/MusicContainer/Music")
-MusicContainer = NodePath("MarginContainer/VBoxContainer/MusicContainer")
+script = ExtResource("16_hrv0m")
+sfx_slider = NodePath("MarginContainer/VBoxContainer/SfxContainer/SfxSlider")
+sfx_label = NodePath("MarginContainer/VBoxContainer/SfxContainer/Sfx")
+sfx_container = NodePath("MarginContainer/VBoxContainer/SfxContainer")
+music_slider = NodePath("MarginContainer/VBoxContainer/MusicContainer/MusicSlider")
+music_label = NodePath("MarginContainer/VBoxContainer/MusicContainer/Music")
+music_container = NodePath("MarginContainer/VBoxContainer/MusicContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings" unique_id=1899254077]
 layout_mode = 1
@@ -411,27 +100,4 @@ text = "Music"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeaderboardCanvas" type="CanvasLayer" parent="." unique_id=836980293]
-follow_viewport_enabled = true
-
-[node name="Leaderboard" type="MarginContainer" parent="LeaderboardCanvas" unique_id=222429707 node_paths=PackedStringArray("Container")]
-anchors_preset = -1
-anchor_left = 0.24414063
-anchor_top = -0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("14_uj1fh")
-script = ExtResource("17_4e7d3")
-Container = NodePath("ScrollContainer/VBoxContainer")
-LeaderboardEntry = ExtResource("18_hp72y")
-metadata/_edit_use_anchors_ = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="LeaderboardCanvas/Leaderboard" unique_id=339061388]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LeaderboardCanvas/Leaderboard/ScrollContainer" unique_id=1392947385]
-layout_mode = 2
-
-[editable path="World2D/Entity"]
+[editable path="Entity"]

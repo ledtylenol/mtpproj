@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://dqq2xf2or3lx5"]
 
-[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_3uh3p"]
+[ext_resource type="Script" uid="uid://ci7mba6hgatop" path="res://components/erase_on_particle_finish.gd" id="1_3uh3p"]
+[ext_resource type="Texture2D" uid="uid://dk85sa7mqf0fx" path="res://entities.png" id="1_to6kl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uh3p"]
+atlas = ExtResource("1_to6kl")
+region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_wyl5g"]
 interpolation_mode = 1
@@ -32,7 +37,7 @@ tangential_accel_max = 49.999996
 tangential_accel_curve = SubResource("CurveTexture_wyl5g")
 damping_min = 450.00003
 damping_max = 700.00006
-scale_max = 3.0
+scale_min = 0.32999998
 color = Color(1, 1, 1, 0.5176471)
 color_initial_ramp = SubResource("GradientTexture1D_h7vvg")
 collision_mode = 1
@@ -43,8 +48,8 @@ collision_use_scale = true
 [node name="Powerup1" type="GPUParticles2D" unique_id=1274422209]
 top_level = true
 visibility_layer = 2
-emitting = false
 amount = 160
+texture = SubResource("AtlasTexture_3uh3p")
 one_shot = true
 explosiveness = 1.0
 randomness = 0.59
@@ -53,4 +58,3 @@ process_material = SubResource("ParticleProcessMaterial_ewhrj")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
 script = ExtResource("1_3uh3p")
-metadata/_custom_type_script = "uid://u3do6jythrh3"

@@ -1,44 +1,44 @@
 [gd_scene format=3 uid="uid://bm83tuyw8vstd"]
 
-[ext_resource type="Script" uid="uid://bxb70q1r336l3" path="res://entities/hit_test/HitTest.cs" id="1_krqq1"]
-[ext_resource type="Script" uid="uid://da00nqce8xth4" path="res://components/ExplosionStats.cs" id="2_73dq7"]
-[ext_resource type="Script" uid="uid://iv5wxd01vyqv" path="res://components/Health.cs" id="2_h3ctb"]
-[ext_resource type="Script" uid="uid://djd2q55i8737w" path="res://components/HurtBox.cs" id="3_w6fno"]
+[ext_resource type="Script" uid="uid://cev0msh57cwjj" path="res://entities/hit_test/hit_test.gd" id="1_krqq1"]
+[ext_resource type="Script" uid="uid://lhloqj3qmjaf" path="res://components/explosion_stats.gd" id="2_fxsul"]
+[ext_resource type="Script" uid="uid://3wu3b4fr5tpx" path="res://components/health.gd" id="2_h3ctb"]
+[ext_resource type="Script" uid="uid://dxfvr1ldm2ab3" path="res://components/hurt_box.gd" id="3_w6fno"]
 [ext_resource type="Texture2D" uid="uid://qhismdg0c8e6" path="res://entities/hit_test/bomber.tres" id="5_fxsul"]
 [ext_resource type="Script" uid="uid://gt23yxfcsi7h" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="5_krqq1"]
-[ext_resource type="Script" uid="uid://bka021k5m4tk3" path="res://components/SpawnParticlesOnHit.cs" id="5_w6fno"]
+[ext_resource type="Script" uid="uid://lv6bhbarlyev" path="res://components/spawn_particles_on_hit.gd" id="5_w6fno"]
 [ext_resource type="PackedScene" uid="uid://c1hissncyu37h" path="res://special/particles/hit_1.tscn" id="6_8fpis"]
 [ext_resource type="Resource" uid="uid://biieqvgq6odk2" path="res://entities/hit_shake.tres" id="6_ihgl1"]
-[ext_resource type="Script" uid="uid://b03wlp2uu4sal" path="res://components/ShakeOnHit.cs" id="9_8wdjs"]
-[ext_resource type="Script" uid="uid://c8eybkhh1ct04" path="res://components/Sounds.cs" id="10_berey"]
+[ext_resource type="Script" uid="uid://cuwivxogf1p4c" path="res://components/shake_on_hit.gd" id="9_8wdjs"]
+[ext_resource type="Script" uid="uid://burdacewl3qrk" path="res://components/sounds.gd" id="10_berey"]
 [ext_resource type="AudioStream" uid="uid://brp0mdldf8rdf" path="res://entities/player/sounds/big_hit.sfxr" id="11_rjj6u"]
-[ext_resource type="Script" uid="uid://dcyoc4cxwcoq" path="res://components/Points.cs" id="12_berey"]
+[ext_resource type="Script" uid="uid://dg8h83cqswfgm" path="res://components/points.gd" id="12_berey"]
 [ext_resource type="AudioStream" uid="uid://d2ukjdkj5nlq1" path="res://entities/death.sfxr" id="13_fxsul"]
 [ext_resource type="PackedScene" uid="uid://b5ipesonwjqlx" path="res://special/world/point/point.tscn" id="13_rjj6u"]
 
-[sub_resource type="Curve" id="Curve_73dq7"]
+[sub_resource type="Curve" id="Curve_221hk"]
 _limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 5.7841873, 0, 1, Vector2(0.53710246, 3.1067014), 5.7841873, -6.7114234, 1, 1, Vector2(1, 0), -6.7114234, 9.139298, 1, 0]
+_data = [Vector2(0, 0), 0.0, 5.714631, 0, 1, Vector2(0.50570345, 2.8899088), 5.714631, -5.846508, 1, 1, Vector2(1, 0), -5.846508, 0.0, 1, 0]
 point_count = 3
 
-[sub_resource type="Curve" id="Curve_fxsul"]
+[sub_resource type="Curve" id="Curve_7tayx"]
 _limits = [0.0, 20.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 11.047494, 0, 1, Vector2(0.7385159, 8.158751), 11.047494, -31.202906, 1, 1, Vector2(0.99999, 0), -31.202906, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 10.297996, 0, 1, Vector2(0.76615965, 7.889909), 10.297996, -33.74058, 1, 1, Vector2(1, 0), -33.74058, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Resource" id="Resource_fci5t"]
-script = ExtResource("2_73dq7")
-InnerWidthCurve = SubResource("Curve_73dq7")
-OuterWidthCurve = SubResource("Curve_fxsul")
-InitEaseType = 1
-InitTransType = 7
-EaseType = 1
-TransType = 5
-EndRadius = 60.0
-InitDuration = 1.0
-Duration = 0.5
-Damage = 1
-metadata/_custom_type_script = "uid://da00nqce8xth4"
+script = ExtResource("2_fxsul")
+inner_width_curve = SubResource("Curve_221hk")
+outer_width_curve = SubResource("Curve_7tayx")
+init_ease_type = 1
+init_trans_type = 7
+ease_type = 1
+trans_type = 5
+end_radius = 60.0
+init_duration = 1.0
+duration = 0.5
+damage = 5
+metadata/_custom_type_script = "uid://lhloqj3qmjaf"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2baf"]
 
@@ -53,25 +53,23 @@ random_pitch = 1.1764989
 streams_count = 1
 stream_0/stream = ExtResource("13_fxsul")
 
-[node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("Health")]
+[node name="HitTest" type="CharacterBody2D" unique_id=333776931 node_paths=PackedStringArray("health")]
 y_sort_enabled = true
+motion_mode = 1
 script = ExtResource("1_krqq1")
-ExplosionStats = SubResource("Resource_fci5t")
-Health = NodePath("Health")
-metadata/_custom_type_script = "uid://dca0h1lx71s7y"
+explosion_stats = SubResource("Resource_fci5t")
+health = NodePath("Health")
 
 [node name="Health" type="Node" parent="." unique_id=681163245]
 script = ExtResource("2_h3ctb")
-CurrentHealth = 10
-MaxHealth = 10
-metadata/_custom_type_script = "uid://iv5wxd01vyqv"
+current_health = 12
+max_health = 12
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=2045123575 node_paths=PackedStringArray("Health")]
+[node name="HurtBox" type="Area2D" parent="." unique_id=2045123575 node_paths=PackedStringArray("health")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("3_w6fno")
-Health = NodePath("../Health")
-metadata/_custom_type_script = "uid://djd2q55i8737w"
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=535412033]
 shape = SubResource("CircleShape2D_h2baf")
@@ -88,25 +86,21 @@ fade_in = 1e-05
 shakerPreset = ExtResource("6_ihgl1")
 metadata/_custom_type_script = "uid://gt23yxfcsi7h"
 
-[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1024272573 node_paths=PackedStringArray("Health")]
+[node name="SpawnParticlesOnHit" type="Node" parent="." unique_id=1024272573 node_paths=PackedStringArray("health")]
 script = ExtResource("5_w6fno")
-Particles = ExtResource("6_8fpis")
-Health = NodePath("../Health")
-metadata/_custom_type_script = "uid://bka021k5m4tk3"
+particles = ExtResource("6_8fpis")
+health = NodePath("../Health")
 
-[node name="ShakeOnHit" type="Node" parent="." unique_id=610787719 node_paths=PackedStringArray("Health", "Shaker")]
+[node name="ShakeOnHit" type="Node" parent="." unique_id=610787719 node_paths=PackedStringArray("health", "shaker")]
 script = ExtResource("9_8wdjs")
-Health = NodePath("../Health")
-Shaker = NodePath("../Sprite2D/HitShake")
-metadata/_custom_type_script = "uid://b03wlp2uu4sal"
+health = NodePath("../Health")
+shaker = NodePath("../Sprite2D/HitShake")
 
-[node name="Sounds" type="Node" parent="." unique_id=1373571216 node_paths=PackedStringArray("Health", "SoundsOnHit", "SoundsOnDeath", "SoundsOnShoot")]
+[node name="Sounds" type="Node" parent="." unique_id=1373571216 node_paths=PackedStringArray("health", "sounds_on_hit", "sounds_on_death")]
 script = ExtResource("10_berey")
-Health = NodePath("../Health")
-SoundsOnHit = [NodePath("HitSound")]
-SoundsOnDeath = [NodePath("HitSound3")]
-SoundsOnShoot = []
-metadata/_custom_type_script = "uid://c8eybkhh1ct04"
+health = NodePath("../Health")
+sounds_on_hit = [NodePath("HitSound")]
+sounds_on_death = [NodePath("HitSound3")]
 
 [node name="HitSound" type="AudioStreamPlayer" parent="Sounds" unique_id=1417630162]
 stream = SubResource("AudioStreamRandomizer_fxsul")
@@ -118,9 +112,8 @@ stream = SubResource("AudioStreamRandomizer_fci5t")
 pitch_scale = 0.64
 bus = &"Sfx"
 
-[node name="Points" type="Node" parent="." unique_id=2093432625 node_paths=PackedStringArray("Health")]
+[node name="Points" type="Node" parent="." unique_id=2093432625 node_paths=PackedStringArray("health")]
 script = ExtResource("12_berey")
-PointCount = 400
-Health = NodePath("../Health")
-PointScene = ExtResource("13_rjj6u")
-metadata/_custom_type_script = "uid://dcyoc4cxwcoq"
+point_count = 500
+health = NodePath("../Health")
+point_scene = ExtResource("13_rjj6u")

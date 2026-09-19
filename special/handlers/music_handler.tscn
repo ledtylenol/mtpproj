@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgc4ktn8g5wrx"]
 
-[ext_resource type="Script" uid="uid://ck8i0fnppmoxx" path="res://special/handlers/MusicHandler.cs" id="1_267rj"]
+[ext_resource type="Script" uid="uid://ito4htjd0ced" path="res://special/handlers/music_handler.gd" id="1_56lrb"]
 [ext_resource type="AudioStream" uid="uid://dquoq30jck6bp" path="res://special/songs/Arcadeez.ogg" id="2_bq4h8"]
 [ext_resource type="AudioStream" uid="uid://bk03g18ts0w3x" path="res://special/songs/GO CRAZY.ogg" id="3_wd5w1"]
 [ext_resource type="AudioStream" uid="uid://post8ik8ehrb" path="res://special/songs/jingle1.ogg" id="4_b01mb"]
@@ -23,18 +23,17 @@ streams_count = 2
 stream_0/stream = ExtResource("5_vx5ni")
 stream_1/stream = ExtResource("6_e4rls")
 
-[node name="Music" type="Node" unique_id=1622549719 node_paths=PackedStringArray("FightPlayer", "IdlePlayer", "PausePlayer", "FightJingle", "IdleJingle", "BossJingle", "FightTimer", "IdleTimer")]
+[node name="Music" type="Node" unique_id=1622549719 node_paths=PackedStringArray("fight_player", "idle_player", "pause_player", "fight_jingle", "idle_jingle", "boss_jingle", "fight_timer", "idle_timer")]
 process_mode = 3
-script = ExtResource("1_267rj")
-FightPlayer = NodePath("Fight")
-IdlePlayer = NodePath("Idle")
-PausePlayer = NodePath("PauseMusic")
-FightJingle = NodePath("FightJingle")
-IdleJingle = NodePath("IdleJingle")
-BossJingle = NodePath("BossJingle")
-FightTimer = NodePath("FightTimer")
-IdleTimer = NodePath("IdleTimer")
-metadata/_custom_type_script = "uid://ck8i0fnppmoxx"
+script = ExtResource("1_56lrb")
+fight_player = NodePath("Fight")
+idle_player = NodePath("Idle")
+pause_player = NodePath("PauseMusic")
+fight_jingle = NodePath("FightJingle")
+idle_jingle = NodePath("IdleJingle")
+boss_jingle = NodePath("BossJingle")
+fight_timer = NodePath("FightTimer")
+idle_timer = NodePath("IdleTimer")
 
 [node name="Fight" type="AudioStreamPlayer" parent="." unique_id=642536605]
 process_mode = 1

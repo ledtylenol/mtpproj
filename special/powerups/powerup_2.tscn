@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfralsbax6s8n"]
 
-[ext_resource type="Script" uid="uid://u3do6jythrh3" path="res://components/EraseOnParticleFinish.cs" id="1_y1efm"]
+[ext_resource type="Script" uid="uid://ci7mba6hgatop" path="res://components/erase_on_particle_finish.gd" id="1_y1efm"]
 
 [sub_resource type="Gradient" id="Gradient_wyl5g"]
 interpolation_mode = 1
@@ -53,4 +53,3 @@ process_material = SubResource("ParticleProcessMaterial_ewhrj")
 
 [node name="EraseOnParticleFinish" type="Node" parent="." unique_id=2107428184]
 script = ExtResource("1_y1efm")
-metadata/_custom_type_script = "uid://u3do6jythrh3"

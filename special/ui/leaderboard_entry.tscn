@@ -1,144 +1,144 @@
 [gd_scene format=3 uid="uid://ghuxq5b2a5ef"]
 
-[ext_resource type="Script" uid="uid://bl5j067uwr2j8" path="res://special/ui/LeaderboardEntry.cs" id="1_g6qor"]
-[ext_resource type="Script" uid="uid://jpr8wu3lrnre" path="res://special/ui/ItemHolder.cs" id="1_mh1vw"]
+[ext_resource type="Script" uid="uid://cyr21jpweyb7u" path="res://special/ui/leaderboard_entry.gd" id="1_mh1vw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mh1vw"]
 
-[node name="LeaderboardEntry" type="MarginContainer" unique_id=2098867756 node_paths=PackedStringArray("TimeLabel", "ScoreLabel")]
-anchors_preset = 15
+[node name="LeaderboardEntry" type="MarginContainer" unique_id=2098867756 node_paths=PackedStringArray("time_label", "score_label", "notifier")]
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -186.0
+anchor_bottom = 0.35416666
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_g6qor")
-ColorRects = Dictionary[String, Array]({
-"count": [NodePath("VBoxContainer2/VBoxContainer/GridContainer/ItemHolder"), NodePath("VBoxContainer2/VBoxContainer/GridContainer/ItemHolder2")],
-"range": [NodePath("VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder"), NodePath("VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder3"), NodePath("VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder4"), NodePath("VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder2")],
-"rate": [NodePath("VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder"), NodePath("VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder3"), NodePath("VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder4"), NodePath("VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder2")]
+offset_transform_enabled = true
+offset_transform_position = Vector2(-200, 0)
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_mh1vw")
+color_rects = Dictionary[String, Array]({
+"count": [NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer/ItemHolder"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer/ItemHolder2")],
+"range": [NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder3"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder4"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2/ItemHolder2")],
+"rate": [NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder3"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder4"), NodePath("PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3/ItemHolder2")]
 })
-TimeLabel = NodePath("VBoxContainer2/HBoxContainer/Label")
-ScoreLabel = NodePath("VBoxContainer2/HBoxContainer/Label2")
+time_label = NodePath("PanelContainer/VBoxContainer2/HBoxContainer/Label")
+score_label = NodePath("PanelContainer/VBoxContainer2/HBoxContainer/Label2")
+notifier = NodePath("Notifier")
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer2" type="GridContainer" parent="." unique_id=643995473]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1134147371]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="GridContainer" parent="PanelContainer" unique_id=643995473]
 layout_mode = 2
 columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=656202598]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2" unique_id=656202598]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer2/VBoxContainer" unique_id=1867635879]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=1867635879]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="ItemHolder" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer" unique_id=757966183]
+[node name="ItemHolder" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer" unique_id=757966183]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.8000002, 0, 1, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder2" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer" unique_id=2082014868]
+[node name="ItemHolder2" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer" unique_id=2082014868]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.8000002, 0, 1, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="GridContainer2" type="GridContainer" parent="VBoxContainer2/VBoxContainer" unique_id=538009676]
+[node name="GridContainer2" type="GridContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=538009676]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="ItemHolder" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1188079905]
+[node name="ItemHolder" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1188079905]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 1, 0.20000005, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder3" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer2" unique_id=933128226]
+[node name="ItemHolder3" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2" unique_id=933128226]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 1, 0.20000005, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder4" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1040232783]
+[node name="ItemHolder4" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1040232783]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 1, 0.20000005, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder2" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1357754289]
+[node name="ItemHolder2" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer2" unique_id=1357754289]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 1, 0.20000005, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="GridContainer3" type="GridContainer" parent="VBoxContainer2/VBoxContainer" unique_id=680394000]
+[node name="GridContainer3" type="GridContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer" unique_id=680394000]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="ItemHolder" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer3" unique_id=196672297]
+[node name="ItemHolder" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3" unique_id=196672297]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0, 0.016666412, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder3" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer3" unique_id=815145857]
+[node name="ItemHolder3" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3" unique_id=815145857]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0, 0.016666412, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder4" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer3" unique_id=1933652665]
+[node name="ItemHolder4" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3" unique_id=1933652665]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0, 0.016666412, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="ItemHolder2" type="ColorRect" parent="VBoxContainer2/VBoxContainer/GridContainer3" unique_id=402239442]
+[node name="ItemHolder2" type="ColorRect" parent="PanelContainer/VBoxContainer2/VBoxContainer/GridContainer3" unique_id=402239442]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0, 0.016666412, 1)
-script = ExtResource("1_mh1vw")
 metadata/_custom_type_script = "uid://jpr8wu3lrnre"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=1585490649]
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2" unique_id=1585490649]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer" unique_id=500154108]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/HBoxContainer" unique_id=500154108]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Time: "
 label_settings = SubResource("LabelSettings_mh1vw")
 
-[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer" unique_id=1691422927]
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer2/HBoxContainer" unique_id=1691422927]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Score:"
 label_settings = SubResource("LabelSettings_mh1vw")
+
+[node name="Notifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=1566479767]
+rect = Rect2(0, 0, 20, 20)
